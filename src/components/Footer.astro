@@ -1,0 +1,14 @@
+---
+import { site } from '../lib/site';
+
+interface Props {
+  hideCta?: boolean;
+}
+const { hideCta: _hideCta = false } = Astro.props;
+---
+
+<footer class="mt-16 border-t border-line md:mt-24">
+  <div class="mx-auto max-w-6xl px-6 py-10 text-center text-sm text-muted">
+    <p>© {new Date().getFullYear()} {site.name}</p>
+  </div>
+</footer>

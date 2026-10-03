@@ -1,0 +1,15 @@
+location        = "eastus2"
+subscription_id = "bf40ce12-d60e-4d58-8954-9f43445ca2af"
+custom_domain   = ""
+
+# Azure-generated SWA hostname is registered automatically.
+additional_auth_hostnames = []
+
+github_owner     = "jefftindall"
+github_owner_id  = "10339968"
+github_repo      = "educator-portfolio"
+github_repo_id   = "1350927100"
+github_branch    = "main"
+
+# Requires: export GH_TOKEN="$(gh auth token)"
+manage_github_actions = true
