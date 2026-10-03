@@ -9,12 +9,22 @@ import { join } from "node:path";
 const root = process.cwd();
 let failed = false;
 
+/** Placeholder only for `terraform validate` (real ID goes in terraform.tfvars). */
+const validateSubscriptionId =
+  process.env.TF_VAR_subscription_id ?? "11111111-1111-1111-1111-111111111111";
+
+const terraformEnv = {
+  ...process.env,
+  TF_VAR_subscription_id: validateSubscriptionId,
+};
+
 function run(label, command, args, cwd = root) {
   console.log(`\n==> ${label}`);
   const result = spawnSync(command, args, {
     stdio: "inherit",
     shell: process.platform === "win32",
     cwd,
+    env: terraformEnv,
   });
   if (result.status !== 0) {
     failed = true;

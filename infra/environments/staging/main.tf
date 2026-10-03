@@ -20,9 +20,8 @@ terraform {
     }
   }
 
-  # Backend blocks cannot use variables; keep this in sync with var.subscription_id.
+  # Backend subscription comes from `az login` / ARM_SUBSCRIPTION_ID at init (Tiffany's subscription).
   backend "azurerm" {
-    subscription_id      = "bf40ce12-d60e-4d58-8954-9f43445ca2af"
     resource_group_name  = "rg-tiffany-tfstate"
     storage_account_name = "sttiffanytfstateeu2"
     container_name       = "tfstate"

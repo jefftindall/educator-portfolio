@@ -14,7 +14,7 @@
 #   Shared ACS:        acs-tiffany-shared + email-tiffany-shared (one MailFrom / SMS number)
 #   Subscription budget: budget-tiffany-portfolio-monthly (ceil(expected×1.25), currently $34/mo; ALERT-EMAIL at 80%/100%)
 #   Region:            eastus2
-#   Subscription:      bf40ce12-d60e-4d58-8954-9f43445ca2af
+#   Subscription:      set in terraform.tfvars (Tiffany's — not Jacob's)
 #   Entra app:         tiffany-portfolio-gha-terraform (OIDC for plan/apply)
 #   Repo variables:    AZURE_TF_CLIENT_ID, AZURE_TF_TENANT_ID, AZURE_TF_SUBSCRIPTION_ID,
 #                      AZURE_SHARED_KEY_VAULT_NAME

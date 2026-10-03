@@ -1,14 +1,12 @@
-location = "eastus2"
-
-# Copy to terraform.tfvars (gitignored). Use Tiffany's Azure subscription — not Jacob's.
+# Copy to terraform.tfvars (gitignored) before bootstrap apply.
+# Use Tiffany's Azure subscription — not Jacob's family subscription.
 subscription_id = "00000000-0000-0000-0000-000000000000"
 
-custom_domain = ""
+location = "eastus2"
 
 github_owner     = "jefftindall"
 github_owner_id  = "10339968"
 github_repo      = "educator-portfolio"
 github_repo_id   = "1350927100"
-github_branch    = "main"
 
 manage_github_actions = true

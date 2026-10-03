@@ -1,6 +1,6 @@
 # Initial setup
 
-Local development first. **Do not run `terraform apply` unless Jeff asks.** Staging and prod Azure use the same subscription pattern as Jacob’s site; custom domain cutover is [`runbooks/custom-domain.md`](runbooks/custom-domain.md).
+Local development first. **Do not run `terraform apply` unless Jeff asks.** Custom domain cutover is [`runbooks/custom-domain.md`](runbooks/custom-domain.md).
 
 ## Local (Tiffany + Jeff)
 
@@ -17,7 +17,7 @@ npm install
 npm run dev
 ```
 
-Site: [http://localhost:4321](http://localhost:4321) — phase 1 shows **Hello, world** only.
+Site: [http://localhost:4321](http://localhost:4321) — phase 1 shows **hello world** only (`public/index.html`).
 
 ```bash
 npm run lint
@@ -28,7 +28,7 @@ Work on a branch. Jeff reviews `main`.
 
 ## Azure later (Jeff only)
 
-Same subscription and region as Jacob’s site (`eastus2`), **separate** resource names and tfstate:
+Use **Tiffany’s own Azure subscription** — do not reuse Jacob’s or Elyse’s subscriptions. Region default is `eastus2`. **Separate** resource names and tfstate from other family sites:
 
 | Piece | Tiffany name |
 |-------|----------------|
@@ -39,13 +39,15 @@ Same subscription and region as Jacob’s site (`eastus2`), **separate** resourc
 | SWA | `swa-tiffany-portfolio-staging`, `swa-tiffany-portfolio-prod` |
 | GitHub repo | `jefftindall/educator-portfolio` (numeric id `1350927100`) |
 
+Copy `terraform.tfvars.example` → `terraform.tfvars` in each stack and set `subscription_id` to Tiffany’s subscription GUID.
+
 When Jeff is ready:
 
-1. `az login` and set the subscription
-2. `cd infra/bootstrap` → `terraform init` / `plan` / `apply` (local state — back it up; it is gitignored)
-3. Apply `infra/environments/staging`, then `prod`
+1. `az login` and select **Tiffany’s** subscription
+2. `cd infra/bootstrap` → copy `terraform.tfvars.example` → `terraform.tfvars` → `terraform init` / `plan` / `apply`
+3. Apply `infra/environments/staging`, then `prod` (each with its own `terraform.tfvars`)
 4. Put `SITE-CONTACT-EMAIL` in `kv-tiffany-shared` (not in git)
 5. Production custom domain (`tifftindall.com`): follow [`docs/runbooks/custom-domain.md`](runbooks/custom-domain.md) **before** merging a `custom_domain` change to `main`
 6. CD workflow (`.github/workflows/cd-main.yml`) deploys on merge to `main`
 
-Do not point this repo at Jacob’s or Elyse’s tfstate accounts or Key Vaults.
+Do not point this repo at Jacob’s or Elyse’s tfstate accounts, subscriptions, or Key Vaults.

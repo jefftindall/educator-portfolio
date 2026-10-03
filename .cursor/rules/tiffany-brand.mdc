@@ -5,16 +5,16 @@ alwaysApply: true
 
 # Tiffany’s brand
 
-Tiffany Tindall’s site is an **educator portfolio** at `tifftindall.com`. Phase 1 is platform-only (hello world); content ships in a later phase.
+Tiffany Tindall’s site is an **educator portfolio** at `tifftindall.com`. Phase 1 is platform-only (plain-text hello world); content and visual design ship in a later phase.
 
 ## Do
 
-- Keep the shared portfolio visual system (navy, seafoam, sand) in `src/styles/global.css`
-- Mirror Jacob’s platform quality: lint, Terraform, CD, and Playwright gates
+- Mirror Jacob’s **platform** quality: lint, Terraform, CD, and Playwright gates
+- Use Tiffany’s **own** Azure subscription and branding (not Jacob’s style guide or ocean/music theme)
 - Mark placeholder copy clearly until Tiffany adds real content
 
 ## Do not
 
 - Copy Elyse’s theatre, lessons, casting, resume, or Broadway framing
-- Copy Jacob’s conservation/music content structure until the content phase is planned
+- Copy Jacob’s conservation/music content or Jacob’s visual style guide
 - Invent credentials, employers, or quotes
