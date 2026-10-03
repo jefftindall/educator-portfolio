@@ -2,7 +2,7 @@
 
 Personal site for **Tiffany Tindall** (`tifftindall.com`). Built with Astro on the same platform as [Jacob’s portfolio](https://github.com/jefftindall/jacobs-portfolio): Azure Static Web Apps, Terraform, GitHub Actions, and Playwright post-deploy checks.
 
-**Phase 1 (this repo):** infrastructure and a minimal **Hello, world** home page. **Phase 2:** educator content, navigation, and media.
+**Phase 1 (this repo):** infrastructure and a plain-text home page (`public/index.html` → `hello world`). **Phase 2:** educator content, navigation, and Astro pages.
 
 ## Quick start
 

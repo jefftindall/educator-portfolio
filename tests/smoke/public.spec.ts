@@ -1,12 +1,10 @@
 import { expect, test } from '@playwright/test';
-import { BRAND } from '../helpers/content';
-import { isStaticWebAppHost, waitForOk, waitForRequestOk } from '../helpers/propagation';
+import { isStaticWebAppHost, waitForRequestOk } from '../helpers/propagation';
 
 test.describe('public smoke', () => {
-  test('home shows brand and hello world', async ({ page }) => {
-    await waitForOk(page, '/');
-    await expect(page.getByRole('heading', { name: BRAND, level: 1 })).toBeVisible();
-    await expect(page.getByText('Hello, world.')).toBeVisible();
+  test('home is plain text hello world', async ({ request }) => {
+    const home = await waitForRequestOk(request, '/');
+    expect((await home.text()).trim()).toBe('hello world');
   });
 
   test('robots.txt and sitemap are served', async ({ request }) => {
