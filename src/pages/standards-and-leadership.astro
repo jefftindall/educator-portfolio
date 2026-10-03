@@ -1,0 +1,62 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import Prose from '../components/Prose.astro';
+import {
+  artisticProcesses,
+  assessmentPhilosophy,
+  standardsWriting,
+  technologyStatement,
+  whyServe,
+} from '../lib/content/standards';
+---
+
+<BaseLayout
+  title="Standards & leadership"
+  description="Georgia dance standards writing, classroom alignment with NCAS artistic processes, and leadership in standards-based dance education."
+  canonicalPath="/standards-and-leadership"
+>
+  <PageHeader
+    title="Standards & leadership"
+    lede="Standards written from the classroom up — and taught every day in an inclusive high-school dance program."
+  />
+
+  <Prose>
+    <h2 class="text-xl font-semibold text-gray-900">Standards-writing experience</h2>
+    <p class="leading-relaxed">{standardsWriting}</p>
+
+    <h2 class="text-xl font-semibold text-gray-900">Artistic processes in my classroom</h2>
+    <p class="text-sm text-gray-600">Aligned to the National Core Arts Standards anchor processes.</p>
+    <div class="overflow-x-auto">
+      <table class="mt-4 w-full min-w-[32rem] border-collapse text-left text-sm">
+        <thead>
+          <tr class="border-b border-gray-200">
+            <th class="py-2 pr-4 font-semibold text-gray-900">Process</th>
+            <th class="py-2 pr-4 font-semibold text-gray-900">In class</th>
+            <th class="py-2 font-semibold text-gray-900">Evidence</th>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            artisticProcesses.map((row) => (
+              <tr class="border-b border-gray-100 align-top">
+                <td class="py-3 pr-4 font-medium text-gray-900">{row.process}</td>
+                <td class="py-3 pr-4">{row.classroom}</td>
+                <td class="py-3 text-gray-600">{row.artifact}</td>
+              </tr>
+            ))
+          }
+        </tbody>
+      </table>
+    </div>
+
+    <h2 class="text-xl font-semibold text-gray-900">Assessment philosophy</h2>
+    <p class="leading-relaxed">{assessmentPhilosophy}</p>
+
+    <h2 class="text-xl font-semibold text-gray-900">Technology & artistic literacy</h2>
+    <p class="leading-relaxed">{technologyStatement}</p>
+
+    <h2 class="text-xl font-semibold text-gray-900">Why I want to serve</h2>
+    <p class="leading-relaxed">{whyServe}</p>
+  </Prose>
+</BaseLayout>

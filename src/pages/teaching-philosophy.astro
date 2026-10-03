@@ -1,0 +1,34 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import Prose from '../components/Prose.astro';
+import { philosophyPrinciples, philosophyStatement } from '../lib/content/philosophy';
+---
+
+<BaseLayout
+  title="Teaching philosophy"
+  description="Teaching philosophy and lessons learned from 25+ years in K–12 dance education."
+  canonicalPath="/teaching-philosophy"
+>
+  <PageHeader
+    title="Teaching philosophy"
+    lede="Warm, practical, and grounded in what happens in the studio — not abstractions."
+  />
+
+  <Prose>
+    {
+      philosophyStatement.split('\n\n').map((paragraph) => (
+        <p class="leading-relaxed">{paragraph}</p>
+      ))
+    }
+
+    <h2 class="text-xl font-semibold text-gray-900">Lessons learned as an educator</h2>
+    <ol class="list-decimal space-y-3 pl-5">
+      {
+        philosophyPrinciples.map((principle) => (
+          <li class="leading-relaxed">{principle}</li>
+        ))
+      }
+    </ol>
+  </Prose>
+</BaseLayout>

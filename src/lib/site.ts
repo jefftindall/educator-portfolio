@@ -15,13 +15,21 @@ function siteUrl(): string {
 
 export const site = {
   name: 'Tiffany Tindall',
-  tagline: 'Educator portfolio',
-  jobTitle: 'Educator',
+  tagline: 'Dance educator',
+  jobTitle: 'Dance Director & Fine Arts Department Lead',
   url: siteUrl(),
   email: requiredSiteEnv('SITE_CONTACT_EMAIL', import.meta.env.SITE_CONTACT_EMAIL),
-  shortBio: 'Tiffany Tindall’s educator portfolio — content coming in a later phase.',
-  description: 'Tiffany Tindall’s educator portfolio at tifftindall.com.',
-  knowsAbout: ['Education'],
+  shortBio:
+    'K–12 dance educator and school leader — Georgia standards writer, inclusive practice, and Connected Arts Network action research.',
+  description:
+    'Tiffany Tindall, Ed.S., dance educator at Woodland High School: standards-based inclusive dance, NDEO presenter, and Georgia dance standards writing committee (2008).',
+  knowsAbout: [
+    'Dance education',
+    'National Core Arts Standards',
+    'Inclusive education',
+    'Georgia Standards of Excellence',
+    'Arts leadership',
+  ],
   sameAs: [] as string[],
 };
 

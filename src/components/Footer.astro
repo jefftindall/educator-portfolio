@@ -4,11 +4,23 @@ import { site } from '../lib/site';
 interface Props {
   hideCta?: boolean;
 }
-const { hideCta: _hideCta = false } = Astro.props;
+const { hideCta = false } = Astro.props;
 ---
 
 <footer class="mt-16 border-t border-gray-200 md:mt-24">
   <div class="mx-auto max-w-6xl px-6 py-10 text-center text-sm text-gray-600">
+    {
+      !hideCta && (
+        <p class="mb-4">
+          <a
+            href={`mailto:${site.email}`}
+            class="font-medium text-accent-700 underline-offset-2 hover:underline"
+          >
+            Email Tiffany
+          </a>
+        </p>
+      )
+    }
     <p>© {new Date().getFullYear()} {site.name}</p>
   </div>
 </footer>

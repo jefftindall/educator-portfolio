@@ -1,10 +1,22 @@
 import { expect, test } from '@playwright/test';
+import { BRAND, HERO_HEADLINE_PHRASE, PUBLIC_ROUTES } from '../helpers/content';
 import { isStaticWebAppHost, waitForRequestOk } from '../helpers/propagation';
 
 test.describe('public smoke', () => {
-  test('home is plain text hello world', async ({ request }) => {
+  test('home shows brand and hero headline', async ({ request }) => {
     const home = await waitForRequestOk(request, '/');
-    expect((await home.text()).trim()).toBe('hello world');
+    const html = await home.text();
+    expect(html).toContain(BRAND);
+    expect(html).toContain(HERO_HEADLINE_PHRASE);
+  });
+
+  test('priority V1 routes respond', async ({ request }) => {
+    for (const path of PUBLIC_ROUTES) {
+      const response = await waitForRequestOk(request, path);
+      expect(response.ok()).toBeTruthy();
+      const body = await response.text();
+      expect(body).toContain(BRAND);
+    }
   });
 
   test('robots.txt and sitemap are served', async ({ request }) => {
@@ -16,6 +28,12 @@ test.describe('public smoke', () => {
     expect(sitemap.headers()['content-type'] ?? '').toMatch(/xml/i);
     const sitemapText = await sitemap.text();
     expect(sitemapText).toMatch(/sitemap/i);
+  });
+
+  test('contact page has mailto link', async ({ request }) => {
+    const contact = await waitForRequestOk(request, '/contact');
+    const html = await contact.text();
+    expect(html).toMatch(/href="mailto:/);
   });
 
   test('API health stub responds', async ({ request }) => {
