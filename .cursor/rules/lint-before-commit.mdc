@@ -11,7 +11,7 @@ Before creating a git commit (or opening/updating a PR with code changes), alway
 npm run lint
 ```
 
-That runs Terraform fmt/TFLint/validate, `astro check`, API `node --check`, and Actions secret-safety (same gates as `.github/workflows/static-analysis.yml`, which runs on pull requests to `main` only).
+That runs Terraform fmt/TFLint/validate, `astro check`, API `node --check`, and Actions secret-safety (same gates as `.github/workflows/ci-static-analysis.yml`, which runs on pull requests to `main` only).
 
 ## Rules
 

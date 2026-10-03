@@ -49,7 +49,7 @@ jobs:
               - 'tests/**'
               - 'playwright.smoke.config.ts'
               - 'playwright.journey.config.ts'
-              - '.github/workflows/azure-static-web-apps.yml'
+              - '.github/workflows/cd-main.yml'
       - id: outputs
         run: |
           ON_MAIN=false

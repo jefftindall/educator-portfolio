@@ -19,7 +19,7 @@ Node >= 22.12 is required. Cloud agent runtime is [`.cursor/environment.json`](.
 npm run lint
 ```
 
-This mirrors [`.github/workflows/static-analysis.yml`](.github/workflows/static-analysis.yml) (PR merge gate only):
+This mirrors [`.github/workflows/ci-static-analysis.yml`](.github/workflows/ci-static-analysis.yml) (PR merge gate only):
 
 | Check | Local command |
 |-------|----------------|

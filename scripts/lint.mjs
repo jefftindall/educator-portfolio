@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Local static analysis entrypoint (mirrors .github/workflows/static-analysis.yml).
+ * Local static analysis entrypoint (mirrors .github/workflows/ci-static-analysis.yml).
  * Agents and humans should run `npm run lint` before committing.
  */
 import { spawnSync } from "node:child_process";

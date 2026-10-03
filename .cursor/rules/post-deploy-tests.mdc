@@ -1,6 +1,6 @@
 ---
 description: Keep post-deploy Playwright smoke and journeys in sync with public pages
-globs: src/pages/**,src/content/**,src/lib/nav.ts,src/components/Nav.astro,src/components/Footer.astro,tests/**,playwright.*.ts,.github/workflows/azure-static-web-apps.yml
+globs: src/pages/**,src/content/**,src/lib/nav.ts,src/components/Nav.astro,src/components/Footer.astro,tests/**,playwright.*.ts,.github/workflows/cd-main.yml
 alwaysApply: true
 ---
 

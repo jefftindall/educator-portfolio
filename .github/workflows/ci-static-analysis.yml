@@ -124,7 +124,7 @@ jobs:
           filters: |
             infra:
               - 'infra/**'
-              - '.github/workflows/static-analysis.yml'
+              - '.github/workflows/ci-static-analysis.yml'
 
   plan:
     name: Plan ${{ matrix.environment }}

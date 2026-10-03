@@ -27,10 +27,10 @@ Rules:
 
 | File | Display `name:` | Trigger |
 |------|-----------------|---------|
-| [`static-analysis.yml`](../../.github/workflows/static-analysis.yml) | `CI: static analysis` | **pull_request to `main` only** (merge gate) |
-| [`azure-static-web-apps.yml`](../../.github/workflows/azure-static-web-apps.yml) | `CD: main` | push `main` + dispatch; Terraform apply only when `infra/**` changed; **Verify Staging** (smoke + journeys) gates prod; **Smoke Production** after prod deploy |
+| [`ci-static-analysis.yml`](../../.github/workflows/ci-static-analysis.yml) | `CI: static analysis` | **pull_request to `main` only** (merge gate) |
+| [`cd-main.yml`](../../.github/workflows/cd-main.yml) | `CD: main` | push `main` + dispatch; Terraform apply only when `infra/**` changed; **Verify Staging** (smoke + journeys) gates prod; **Smoke Production** after prod deploy |
 
-Filenames are legacy (same as the sister repo). Rename later if needed; GitHub treats a file rename as a new workflow.
+GitHub treats a workflow file rename as a new workflow; retire duplicate runs in the Actions tab after merge if old filenames still appear.
 
 ## Protect main
 

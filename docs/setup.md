@@ -46,6 +46,6 @@ When Jeff is ready:
 3. Apply `infra/environments/staging`, then `prod`
 4. Put `SITE-CONTACT-EMAIL` in `kv-tiffany-shared` (not in git)
 5. Production custom domain (`tifftindall.com`): follow [`docs/runbooks/custom-domain.md`](runbooks/custom-domain.md) **before** merging a `custom_domain` change to `main`
-6. CD workflow (`.github/workflows/azure-static-web-apps.yml`) deploys on merge to `main`
+6. CD workflow (`.github/workflows/cd-main.yml`) deploys on merge to `main`
 
 Do not point this repo at Jacob’s or Elyse’s tfstate accounts or Key Vaults.
