@@ -1,0 +1,487 @@
+name: "CD: main"
+
+# Deploy on merge to main (or manual dispatch) when app or infra paths change.
+# PRs run CI: static analysis only — the Protect main ruleset is the merge gate.
+# After Deploy Staging: Verify Staging (smoke + journeys) must pass before prod.
+# After Deploy Production: Smoke Production confirms major landings on the public host.
+# Terraform apply runs only when infra/** changed; otherwise skipped.
+# Build once per release; staging and prod deploy the same artifact.
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+concurrency:
+  group: portfolio-cd
+  cancel-in-progress: false
+
+permissions:
+  id-token: write
+  contents: read
+  actions: write
+
+jobs:
+  changes:
+    name: Detect changes
+    runs-on: ubuntu-latest
+    outputs:
+      infra: ${{ steps.outputs.outputs.infra }}
+      release: ${{ steps.outputs.outputs.release }}
+      prod: ${{ steps.outputs.outputs.prod }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: dorny/paths-filter@v4
+        id: filter
+        with:
+          filters: |
+            infra:
+              - 'infra/**'
+            app:
+              - 'src/**'
+              - 'public/**'
+              - 'api/**'
+              - 'package.json'
+              - 'package-lock.json'
+              - 'astro.config.mjs'
+              - 'staticwebapp.config.json'
+              - 'tsconfig.json'
+              - 'tests/**'
+              - 'playwright.smoke.config.ts'
+              - 'playwright.journey.config.ts'
+              - '.github/workflows/azure-static-web-apps.yml'
+      - id: outputs
+        run: |
+          ON_MAIN=false
+          if [ "${{ github.ref }}" = "refs/heads/main" ]; then
+            ON_MAIN=true
+          fi
+
+          INFRA="${{ steps.filter.outputs.infra }}"
+          APP="${{ steps.filter.outputs.app }}"
+
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "infra=true" >> "$GITHUB_OUTPUT"
+            echo "release=true" >> "$GITHUB_OUTPUT"
+            if [ "$ON_MAIN" = "true" ]; then
+              echo "prod=true" >> "$GITHUB_OUTPUT"
+              echo "Manual dispatch on main — running full CD including Terraform."
+            else
+              echo "prod=false" >> "$GITHUB_OUTPUT"
+              echo "Manual dispatch not on main — production stages skipped."
+            fi
+            exit 0
+          fi
+
+          echo "infra=$INFRA" >> "$GITHUB_OUTPUT"
+
+          if [ "$INFRA" = "true" ] || [ "$APP" = "true" ]; then
+            echo "release=true" >> "$GITHUB_OUTPUT"
+            echo "prod=true" >> "$GITHUB_OUTPUT"
+            echo "App or infra changes — CD will deploy. Terraform: $INFRA"
+          else
+            echo "release=false" >> "$GITHUB_OUTPUT"
+            echo "prod=false" >> "$GITHUB_OUTPUT"
+            echo "No app or infra changes — skipping CD jobs."
+          fi
+
+  terraform_staging:
+    name: Terraform Apply Staging
+    needs: changes
+    if: needs.changes.outputs.infra == 'true'
+    runs-on: ubuntu-latest
+    environment: staging
+    defaults:
+      run:
+        working-directory: infra/environments/staging
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v4
+        with:
+          terraform_wrapper: false
+
+      - name: Azure login (Terraform OIDC)
+        uses: azure/login@v3
+        with:
+          client-id: ${{ vars.AZURE_TF_CLIENT_ID }}
+          tenant-id: ${{ vars.AZURE_TF_TENANT_ID }}
+          subscription-id: ${{ vars.AZURE_TF_SUBSCRIPTION_ID }}
+
+      - name: Require TF_GITHUB_TOKEN
+        env:
+          TF_GITHUB_TOKEN: ${{ secrets.TF_GITHUB_TOKEN }}
+        run: |
+          if [ -z "$TF_GITHUB_TOKEN" ]; then
+            echo "::error::Add repository secret TF_GITHUB_TOKEN."
+            exit 1
+          fi
+
+      - name: Terraform init
+        env:
+          GITHUB_TOKEN: ${{ secrets.TF_GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.TF_GITHUB_TOKEN }}
+        run: terraform init -input=false
+
+      - name: Terraform plan
+        env:
+          GITHUB_TOKEN: ${{ secrets.TF_GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.TF_GITHUB_TOKEN }}
+        run: terraform plan -input=false -out=tfplan
+
+      - name: Terraform apply
+        env:
+          GITHUB_TOKEN: ${{ secrets.TF_GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.TF_GITHUB_TOKEN }}
+        run: terraform apply -input=false tfplan
+
+  build_release:
+    name: Build release
+    needs: changes
+    if: needs.changes.outputs.release == 'true'
+    runs-on: ubuntu-latest
+    environment: prod
+    env:
+      # Prod env var is set by Terraform when custom_domain is bound; fallback keeps the first deploy correct.
+      SITE_URL: ${{ vars.SITE_URL || 'https://tiffanytindall.com' }}
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Setup Node
+        uses: actions/setup-node@v7
+        with:
+          node-version: "22"
+          cache: npm
+
+      - name: Azure login (OIDC)
+        uses: azure/login@v3
+        with:
+          client-id: ${{ vars.AZURE_CLIENT_ID }}
+          tenant-id: ${{ vars.AZURE_TENANT_ID }}
+          subscription-id: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+
+      - name: Fetch contact email from shared Key Vault
+        env:
+          AZURE_SHARED_KEY_VAULT_NAME: ${{ vars.AZURE_SHARED_KEY_VAULT_NAME }}
+        run: |
+          set -euo pipefail
+          EMAIL=$(az keyvault secret show --vault-name "$AZURE_SHARED_KEY_VAULT_NAME" --name SITE-CONTACT-EMAIL --query value -o tsv)
+          echo "::add-mask::$EMAIL"
+          echo "SITE_CONTACT_EMAIL=$EMAIL" >> "$GITHUB_ENV"
+
+      - name: Install and build
+        run: |
+          npm ci
+          npm run build
+
+      - name: Install API dependencies
+        run: npm ci --prefix api
+
+      - name: Upload release artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: release-${{ github.sha }}
+          path: |
+            dist
+            api
+          retention-days: 1
+          if-no-files-found: error
+
+  deploy_staging:
+    name: Deploy Staging
+    needs: [changes, terraform_staging, build_release]
+    if: |
+      always() &&
+      needs.changes.result == 'success' &&
+      needs.changes.outputs.release == 'true' &&
+      needs.build_release.result == 'success' &&
+      (needs.terraform_staging.result == 'success' || needs.terraform_staging.result == 'skipped')
+    runs-on: ubuntu-latest
+    environment: staging
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Download release artifact
+        uses: actions/download-artifact@v8
+        with:
+          name: release-${{ github.sha }}
+
+      - name: Azure login (OIDC)
+        uses: azure/login@v3
+        with:
+          client-id: ${{ vars.AZURE_CLIENT_ID }}
+          tenant-id: ${{ vars.AZURE_TENANT_ID }}
+          subscription-id: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+
+      - name: Resolve Static Web Apps deploy token
+        id: swa
+        run: |
+          TOKEN=$(az staticwebapp secrets list \
+            --name "${{ vars.AZURE_STATIC_WEB_APP_NAME }}" \
+            --resource-group "${{ vars.AZURE_RESOURCE_GROUP }}" \
+            --query "properties.apiKey" -o tsv)
+          echo "::add-mask::$TOKEN"
+          echo "api_key=$TOKEN" >> "$GITHUB_OUTPUT"
+
+      - name: Deploy to staging
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          azure_static_web_apps_api_token: ${{ steps.swa.outputs.api_key }}
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          action: upload
+          app_location: "dist"
+          api_location: "api"
+          skip_app_build: true
+
+  verify_staging:
+    name: Verify Staging
+    needs: [changes, deploy_staging]
+    # always(): deploy_staging can succeed while terraform_staging is skipped; without
+    # always(), GitHub skips this job (and prod) for the whole dependency chain.
+    if: |
+      always() &&
+      !cancelled() &&
+      needs.changes.result == 'success' &&
+      needs.deploy_staging.result == 'success'
+    runs-on: ubuntu-latest
+    environment: staging
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Setup Node
+        uses: actions/setup-node@v7
+        with:
+          node-version: "22"
+          cache: npm
+
+      - name: Azure login (OIDC)
+        uses: azure/login@v3
+        with:
+          client-id: ${{ vars.AZURE_CLIENT_ID }}
+          tenant-id: ${{ vars.AZURE_TENANT_ID }}
+          subscription-id: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+
+      - name: Resolve staging hostname
+        id: host
+        run: |
+          HOST=$(az staticwebapp show \
+            --name "${{ vars.AZURE_STATIC_WEB_APP_NAME }}" \
+            --resource-group "${{ vars.AZURE_RESOURCE_GROUP }}" \
+            --query defaultHostname -o tsv)
+          if [ -z "$HOST" ]; then
+            echo "::error::Could not resolve staging Static Web App hostname"
+            exit 1
+          fi
+          echo "hostname=$HOST" >> "$GITHUB_OUTPUT"
+          echo "Staging URL: https://$HOST"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Run staging smoke (desktop + mobile)
+        env:
+          BASE_URL: https://${{ steps.host.outputs.hostname }}
+          CI: true
+        run: npm run test:smoke
+
+      - name: Run staging journeys (desktop + mobile)
+        env:
+          BASE_URL: https://${{ steps.host.outputs.hostname }}
+          CI: true
+        run: npm run test:journey
+
+      - name: Upload verify traces (failure)
+        if: failure()
+        uses: actions/upload-artifact@v7
+        with:
+          name: verify-staging-playwright
+          path: test-results
+          retention-days: 7
+          if-no-files-found: ignore
+
+  terraform_prod:
+    name: Terraform Apply Production
+    needs: [changes, deploy_staging, verify_staging]
+    if: |
+      always() &&
+      !cancelled() &&
+      needs.changes.outputs.prod == 'true' &&
+      needs.changes.outputs.release == 'true' &&
+      needs.changes.outputs.infra == 'true' &&
+      needs.deploy_staging.result == 'success' &&
+      needs.verify_staging.result == 'success'
+    runs-on: ubuntu-latest
+    environment: prod
+    defaults:
+      run:
+        working-directory: infra/environments/prod
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v4
+        with:
+          terraform_wrapper: false
+
+      - name: Azure login (Terraform OIDC)
+        uses: azure/login@v3
+        with:
+          client-id: ${{ vars.AZURE_TF_CLIENT_ID }}
+          tenant-id: ${{ vars.AZURE_TF_TENANT_ID }}
+          subscription-id: ${{ vars.AZURE_TF_SUBSCRIPTION_ID }}
+
+      - name: Require TF_GITHUB_TOKEN
+        env:
+          TF_GITHUB_TOKEN: ${{ secrets.TF_GITHUB_TOKEN }}
+        run: |
+          if [ -z "$TF_GITHUB_TOKEN" ]; then
+            echo "::error::Add repository secret TF_GITHUB_TOKEN."
+            exit 1
+          fi
+
+      - name: Terraform init
+        env:
+          GITHUB_TOKEN: ${{ secrets.TF_GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.TF_GITHUB_TOKEN }}
+        run: terraform init -input=false
+
+      - name: Terraform apply
+        env:
+          GITHUB_TOKEN: ${{ secrets.TF_GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.TF_GITHUB_TOKEN }}
+        run: |
+          terraform plan -input=false -out=tfplan
+          terraform apply -input=false tfplan
+
+  deploy_prod:
+    name: Deploy Production
+    needs: [changes, build_release, terraform_prod, deploy_staging, verify_staging]
+    if: |
+      always() &&
+      !cancelled() &&
+      needs.changes.outputs.prod == 'true' &&
+      needs.deploy_staging.result == 'success' &&
+      needs.verify_staging.result == 'success' &&
+      needs.build_release.result == 'success' &&
+      (needs.terraform_prod.result == 'success' || needs.terraform_prod.result == 'skipped')
+    runs-on: ubuntu-latest
+    environment: prod
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Download release artifact
+        uses: actions/download-artifact@v8
+        with:
+          name: release-${{ github.sha }}
+
+      - name: Azure login (OIDC)
+        uses: azure/login@v3
+        with:
+          client-id: ${{ vars.AZURE_CLIENT_ID }}
+          tenant-id: ${{ vars.AZURE_TENANT_ID }}
+          subscription-id: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+
+      - name: Resolve Static Web Apps deploy token
+        id: swa
+        run: |
+          TOKEN=$(az staticwebapp secrets list \
+            --name "${{ vars.AZURE_STATIC_WEB_APP_NAME }}" \
+            --resource-group "${{ vars.AZURE_RESOURCE_GROUP }}" \
+            --query "properties.apiKey" -o tsv)
+          echo "::add-mask::$TOKEN"
+          echo "api_key=$TOKEN" >> "$GITHUB_OUTPUT"
+
+      - name: Deploy to production
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          azure_static_web_apps_api_token: ${{ steps.swa.outputs.api_key }}
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          action: upload
+          app_location: "dist"
+          api_location: "api"
+          skip_app_build: true
+
+  smoke_prod:
+    name: Smoke Production
+    needs: [deploy_prod]
+    if: always() && !cancelled() && needs.deploy_prod.result == 'success'
+    runs-on: ubuntu-latest
+    environment: prod
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Setup Node
+        uses: actions/setup-node@v7
+        with:
+          node-version: "22"
+          cache: npm
+
+      - name: Azure login (OIDC)
+        uses: azure/login@v3
+        with:
+          client-id: ${{ vars.AZURE_CLIENT_ID }}
+          tenant-id: ${{ vars.AZURE_TENANT_ID }}
+          subscription-id: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+
+      - name: Resolve production hostname
+        id: host
+        run: |
+          # Prefer the Portal "default" custom domain (apex). When a custom domain is
+          # set as default, the *.azurestaticapps.net host 301s to it.
+          # Note: JMESPath forbids ".(a || b)" after a dot (az --query fails to parse);
+          # pick with jq so flat CLI and nested ARM shapes both work.
+          SWA_NAME="${{ vars.AZURE_STATIC_WEB_APP_NAME }}"
+          SWA_RG="${{ vars.AZURE_RESOURCE_GROUP }}"
+          DEFAULT=$(az staticwebapp show \
+            --name "$SWA_NAME" \
+            --resource-group "$SWA_RG" \
+            --query defaultHostname -o tsv)
+          CUSTOM=$(az staticwebapp hostname list \
+            --name "$SWA_NAME" \
+            --resource-group "$SWA_RG" \
+            -o json | jq -r '
+              def domain: .domainName // .name // .properties.domainName // empty;
+              def ready_status: .status // .properties.status // empty;
+              def is_default: (.isDefault // .properties.isDefault // false) == true;
+              [ .[] | select(ready_status == "Ready") ] as $ready
+              | ($ready | map(select(is_default)) | .[0])
+                // ($ready | map(select((domain | ascii_downcase | startswith("www.") | not))) | .[0])
+                // $ready[0]
+                // empty
+              | if . == null then empty else domain end
+            ')
+          if [ "$CUSTOM" = "null" ] || [ "$CUSTOM" = "None" ]; then
+            CUSTOM=
+          fi
+          HOST=${CUSTOM:-$DEFAULT}
+          if [ -z "$HOST" ]; then
+            echo "::error::Could not resolve production Static Web App hostname"
+            exit 1
+          fi
+          echo "hostname=$HOST" >> "$GITHUB_OUTPUT"
+          echo "Production URL: https://$HOST (defaultHostname=$DEFAULT)"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Run production smoke (desktop + mobile)
+        env:
+          BASE_URL: https://${{ steps.host.outputs.hostname }}
+          CI: true
+        run: npm run test:smoke
+
+      - name: Upload smoke traces (failure)
+        if: failure()
+        uses: actions/upload-artifact@v7
+        with:
+          name: smoke-prod-playwright
+          path: test-results
+          retention-days: 7
+          if-no-files-found: ignore

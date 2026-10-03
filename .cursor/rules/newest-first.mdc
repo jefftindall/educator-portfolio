@@ -1,0 +1,16 @@
+---
+description: Newest content first on public lists (future content phase)
+alwaysApply: true
+---
+
+# Newest first (content phase)
+
+When markdown collections land, public lists (news, teaching notes, gallery, and so on) sort **newest `date:` first**.
+
+## Rules (when collections exist)
+
+- Every list-backed markdown file has a `date:` (the event or publish day, `YYYY-MM-DD`).
+- Index pages use a shared sort helper (for example `src/lib/contentSort.ts` with `newestFirst()`).
+- Playwright helpers read the same content sources as the site — do not hard-code titles in specs.
+
+Foundational phase: no collections yet. Apply these rules when the content milestone adds `src/content/`.

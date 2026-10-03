@@ -1,0 +1,29 @@
+---
+description: Privacy rules for Tiffany's public educator site
+alwaysApply: true
+---
+
+# Site privacy (always)
+
+This public site must stay free of sensitive personal details beyond the approved brand name **Tiffany Tindall**.
+
+## Never add to the site, git, or commit messages
+
+- Home address, neighborhood, or exact location
+- Personal phone numbers or private family emails
+- Student names, grades, or identifiable classroom photos without consent
+- Unpublished employer internal details (staff-only emails, private Slack, and so on)
+- Travel plans, "I will be at…", or live location
+
+## Do not add these features unless Jeff explicitly asks
+
+- Comment systems, chat, user accounts, or visitor sign-in
+- Contact forms that store submissions
+- Analytics, ads, or tracking pixels
+- Maps that pin a home or school
+
+Contact stays `SITE_CONTACT_EMAIL` from `.env`. Never commit the real email.
+
+## Photos
+
+Only images Tiffany approves for the public brand, under `public/images/` when that folder is in use.

@@ -1,0 +1,28 @@
+---
+description: Keep post-deploy Playwright smoke and journeys in sync with public pages
+globs: src/pages/**,src/content/**,src/lib/nav.ts,tests/**,playwright.*.ts,.github/workflows/azure-static-web-apps.yml
+alwaysApply: true
+---
+
+# Post-deploy tests
+
+Public UX is gated after deploy, not in `npm run lint`. When you add, rename, or remove a visitor-facing page or flow, update the Playwright suites in the same change.
+
+## What runs where
+
+| After | Job | Command | Coverage |
+|-------|-----|---------|----------|
+| Staging deploy | **Verify Staging** | `test:smoke` then `test:journey` | Homepage + journeys (blocks prod) |
+| Prod deploy | **Smoke Production** | `test:smoke` | Homepage, robots/sitemap, API health |
+
+CI (`CI: static analysis`) stays the PR merge gate. Do not add Playwright to `npm run lint`.
+
+## Keep in sync
+
+- New public route → smoke landing assertion in `tests/smoke/public.spec.ts`. If it is a real user flow, add a journey in `tests/journeys/`.
+- Nav label/href change → update journey specs when nav exists (future content phase).
+- Removed URL → 301 in both `staticwebapp.config.json` files, then drop or redirect the test.
+- Do not assert `SITE_CONTACT_EMAIL` or other secrets in tests.
+- Privacy: no student-identifying details in fixtures or assertions.
+
+Local: `$env:BASE_URL="http://localhost:4321"; npm run test:smoke` (with `npm run preview`). `/api/health` is skipped off Azure.

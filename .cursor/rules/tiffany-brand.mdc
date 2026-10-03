@@ -1,0 +1,23 @@
+---
+description: Tiffany Tindall brand — educator personal site, not theatre or kid portfolio
+alwaysApply: true
+---
+
+# Tiffany's brand
+
+Tiffany Tindall's site is an **educator personal brand** — teaching, learning, and professional portfolio content.
+
+## Do
+
+- Keep copy professional, warm, and accurate
+- Mark placeholder or draft content clearly until Tiffany approves it
+- Follow privacy rules in `.cursor/rules/site-privacy.mdc`
+
+## Do not
+
+- Copy Elyse's theatre, lessons, casting, or Broadway framing
+- Copy Jacob's conservation or music framing
+- Invent credentials, employers, degrees, or awards
+- Add booking flows, paid-lesson checkout, or casting materials unless Tiffany asks
+
+Foundational phase: only `src/pages/index.astro` is live. Do not add styled layouts or content collections unless the task is explicitly the content phase.
