@@ -1,0 +1,20 @@
+---
+description: Tiffany Tindall educator portfolio — phase 1 scaffold
+alwaysApply: true
+---
+
+# Tiffany’s brand
+
+Tiffany Tindall’s site is an **educator portfolio** at `tifftindall.com`. Phase 1 is platform-only (plain-text hello world); content and visual design ship in a later phase.
+
+## Do
+
+- Mirror Jacob’s **platform** quality: lint, Terraform, CD, and Playwright gates
+- Use Tiffany’s **own** Azure subscription and branding (not Jacob’s style guide or ocean/music theme)
+- Mark placeholder copy clearly until Tiffany adds real content
+
+## Do not
+
+- Copy Elyse’s theatre, lessons, casting, resume, or Broadway framing
+- Copy Jacob’s conservation/music content or Jacob’s visual style guide
+- Invent credentials, employers, or quotes

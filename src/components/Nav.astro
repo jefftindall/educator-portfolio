@@ -1,0 +1,61 @@
+---
+import { nav, site } from '../lib/site';
+const pathname = Astro.url.pathname;
+---
+
+<header class="sticky top-0 z-40 border-b border-gray-200 bg-white/90 backdrop-blur-md">
+  <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-6 py-4">
+    <a
+      href="/"
+      class="text-2xl font-semibold tracking-tight text-gray-900 md:text-3xl"
+    >
+      {site.name}
+    </a>
+    {
+      nav.length > 0 && (
+    <nav class="hidden items-center gap-6 md:flex" aria-label="Primary">
+      {
+        nav.map((item) => {
+          const active = pathname === item.href || pathname.startsWith(item.href + '/');
+          return (
+            <a
+              href={item.href}
+              class:list={[
+                'text-sm transition',
+                active ? 'font-medium text-gray-900' : 'text-gray-600 hover:text-gray-900',
+              ]}
+              aria-current={active ? 'page' : undefined}
+            >
+              {item.label}
+            </a>
+          );
+        })
+      }
+    </nav>
+      )
+    }
+    {
+      nav.length > 0 && (
+    <details class="relative md:hidden">
+      <summary
+        class="min-h-11 cursor-pointer list-none rounded border border-gray-200 px-3 py-2 text-sm text-gray-900"
+      >
+        Menu
+      </summary>
+      <div class="absolute right-0 mt-2 w-52 rounded border border-gray-200 bg-white p-2 shadow-lg">
+        {
+          nav.map((item) => (
+            <a
+              href={item.href}
+              class="block min-h-11 rounded px-3 py-2 text-sm text-gray-600 hover:bg-gray-50 hover:text-gray-900"
+            >
+              {item.label}
+            </a>
+          ))
+        }
+      </div>
+    </details>
+      )
+    }
+  </div>
+</header>

@@ -1,0 +1,33 @@
+{
+  "name": "tiffany-tindall-portfolio",
+  "type": "module",
+  "version": "1.0.0",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "check": "astro check",
+    "lint": "node scripts/lint.mjs",
+    "lint:api": "node scripts/lint-api.mjs",
+    "lint:actions-secrets": "node scripts/check-actions-secret-safety.mjs",
+    "lint:terraform": "node scripts/lint-terraform.mjs",
+    "test:smoke": "playwright test --config=playwright.smoke.config.ts",
+    "test:journey": "playwright test --config=playwright.journey.config.ts"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.7.3",
+    "@tailwindcss/vite": "^4.3.3",
+    "astro": "^7.1.3",
+    "tailwindcss": "^4.3.3"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.4",
+    "@playwright/test": "^1.62.1",
+    "typescript": "^5.9.2",
+    "zod": "^4.4.3"
+  }
+}
