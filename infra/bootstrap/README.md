@@ -27,8 +27,11 @@
 # Officer on the shared + app resource groups only (never subscription scope), plus
 # Storage Blob Data Contributor on the tfstate account. Bootstrap also registers the
 # resource providers env stacks need, because the RG-scoped SP cannot.
-# Add repo secret TF_GITHUB_TOKEN (PAT with environment variable access) for the
-# GitHub provider in CI.
+# CI/CD's Terraform GitHub provider uses a GitHub App, not a PAT: run
+# `node scripts/create-github-app.mjs` once (stores the key in kv-tifftindall-shared/
+# TERRAFORM-GITHUB-APP-KEY), set github_app_id / github_app_installation_id in
+# terraform.tfvars, and re-apply to publish TF_GITHUB_APP_ID / _INSTALLATION_ID.
+# Bootstrap state is local (infra/bootstrap/terraform.tfstate): keep a secure backup.
 #
 # Staging/prod backends are preconfigured to use this account with distinct state keys.
 # Apply bootstrap first (it does not require env GitHub Actions apps). Then apply

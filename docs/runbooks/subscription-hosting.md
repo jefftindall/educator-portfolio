@@ -149,13 +149,21 @@ Remove-Item $tmp
 
 At minimum: `SITE-CONTACT-EMAIL`, and `ALERT-EMAIL` so alert action groups get a receiver. Leave the others as `REPLACE_ME` until the features that use them ship.
 
-### 4. GitHub secret for the Terraform GitHub provider
+### 4. GitHub App for CI/CD Terraform (no GitHub secrets)
 
-If the repo secret `TF_GITHUB_TOKEN` is missing, add it (the prompt hides input):
+CI/CD runs Terraform as the bootstrap Terraform identity via Azure OIDC. The env stacks also manage GitHub environments and their variables, and GitHub's API can't accept an Azure token. So each job downloads the private key of a dedicated GitHub App (`tifftindall-portfolio-terraform`) from `kv-tifftindall-shared/TERRAFORM-GITHUB-APP-KEY` into a `0600` temp file, then [`scripts/github-app-token.mjs`](../../scripts/github-app-token.mjs) mints a 1-hour installation token limited to this repo and deletes the file. The repo has **no** stored GitHub secrets.
+
+Terraform cannot create GitHub Apps, so a helper uses GitHub's manifest flow (two browser clicks: **Create GitHub App**, then **Install** on only `educator-portfolio`):
 
 ```powershell
-gh secret set TF_GITHUB_TOKEN --repo jefftindall/educator-portfolio
+node scripts/create-github-app.mjs
 ```
+
+It writes the key straight into Key Vault (never printed, never in Terraform state) and prints the App ID and installation ID. Put both in `infra/bootstrap/terraform.tfvars` as `github_app_id` / `github_app_installation_id` and re-apply bootstrap. That publishes the repo variables `TF_GITHUB_APP_ID` and `TF_GITHUB_APP_INSTALLATION_ID`.
+
+App permissions: Administration (write, to create environments), Environments (write, for environment variables), Metadata (read). To rotate the key, generate a new one in the App settings, store it with `az keyvault secret set --file`, delete the temp file, then delete the old key in GitHub.
+
+Current app: ID `5189225`, installation `167927312`.
 
 ### 5. Staging, then prod
 

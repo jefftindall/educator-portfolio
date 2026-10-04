@@ -17,3 +17,8 @@ github_repo      = "educator-portfolio"
 github_repo_id   = "1350927100"
 
 manage_github_actions = true
+
+# GitHub App for CI/CD Terraform. Fill from `node scripts/create-github-app.mjs`
+# output, then re-apply bootstrap. Not secrets; the key lives only in Key Vault.
+github_app_id              = "5189225"
+github_app_installation_id = "167927312"

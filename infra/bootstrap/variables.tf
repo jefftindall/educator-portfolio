@@ -89,6 +89,18 @@ variable "github_repo_id" {
   default     = "1350927100"
 }
 
+variable "github_app_id" {
+  type        = string
+  description = "GitHub App used by CI/CD Terraform for the GitHub provider (from scripts/create-github-app.mjs). Empty until created."
+  default     = ""
+}
+
+variable "github_app_installation_id" {
+  type        = string
+  description = "Installation ID of that GitHub App on the repo (from scripts/create-github-app.mjs)."
+  default     = ""
+}
+
 variable "manage_github_actions" {
   type        = bool
   description = "When true, set repo-level AZURE_TF_* Actions variables (requires GH_TOKEN)"

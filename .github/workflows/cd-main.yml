@@ -111,31 +111,40 @@ jobs:
           tenant-id: ${{ vars.AZURE_TF_TENANT_ID }}
           subscription-id: ${{ vars.AZURE_TF_SUBSCRIPTION_ID }}
 
-      - name: Require TF_GITHUB_TOKEN
+      - name: GitHub App token (via Azure OIDC + Key Vault)
+        working-directory: ${{ github.workspace }}
         env:
-          TF_GITHUB_TOKEN: ${{ secrets.TF_GITHUB_TOKEN }}
+          AZURE_SHARED_KEY_VAULT_NAME: ${{ vars.AZURE_SHARED_KEY_VAULT_NAME }}
+          GITHUB_APP_ID: ${{ vars.TF_GITHUB_APP_ID }}
+          GITHUB_APP_INSTALLATION_ID: ${{ vars.TF_GITHUB_APP_INSTALLATION_ID }}
+          GITHUB_APP_REPOSITORY: ${{ github.event.repository.name }}
         run: |
-          if [ -z "$TF_GITHUB_TOKEN" ]; then
-            echo "::error::Add repository secret TF_GITHUB_TOKEN."
+          set -euo pipefail
+          if [ -z "$GITHUB_APP_ID" ] || [ -z "$GITHUB_APP_INSTALLATION_ID" ]; then
+            echo "::error::TF_GITHUB_APP_* repo variables missing. Run scripts/create-github-app.mjs and re-apply infra/bootstrap."
             exit 1
           fi
+          umask 077
+          az keyvault secret download --vault-name "$AZURE_SHARED_KEY_VAULT_NAME" \
+            --name TERRAFORM-GITHUB-APP-KEY --file "$RUNNER_TEMP/tf-github-app.pem" --only-show-errors
+          GITHUB_APP_PEM_PATH="$RUNNER_TEMP/tf-github-app.pem" node scripts/github-app-token.mjs
 
       - name: Terraform init
         env:
-          GITHUB_TOKEN: ${{ secrets.TF_GITHUB_TOKEN }}
-          GH_TOKEN: ${{ secrets.TF_GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ env.TF_GITHUB_TOKEN }}
+          GH_TOKEN: ${{ env.TF_GITHUB_TOKEN }}
         run: terraform init -input=false
 
       - name: Terraform plan
         env:
-          GITHUB_TOKEN: ${{ secrets.TF_GITHUB_TOKEN }}
-          GH_TOKEN: ${{ secrets.TF_GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ env.TF_GITHUB_TOKEN }}
+          GH_TOKEN: ${{ env.TF_GITHUB_TOKEN }}
         run: terraform plan -input=false -out=tfplan
 
       - name: Terraform apply
         env:
-          GITHUB_TOKEN: ${{ secrets.TF_GITHUB_TOKEN }}
-          GH_TOKEN: ${{ secrets.TF_GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ env.TF_GITHUB_TOKEN }}
+          GH_TOKEN: ${{ env.TF_GITHUB_TOKEN }}
         run: terraform apply -input=false tfplan
 
   build_release:
@@ -338,25 +347,34 @@ jobs:
           tenant-id: ${{ vars.AZURE_TF_TENANT_ID }}
           subscription-id: ${{ vars.AZURE_TF_SUBSCRIPTION_ID }}
 
-      - name: Require TF_GITHUB_TOKEN
+      - name: GitHub App token (via Azure OIDC + Key Vault)
+        working-directory: ${{ github.workspace }}
         env:
-          TF_GITHUB_TOKEN: ${{ secrets.TF_GITHUB_TOKEN }}
+          AZURE_SHARED_KEY_VAULT_NAME: ${{ vars.AZURE_SHARED_KEY_VAULT_NAME }}
+          GITHUB_APP_ID: ${{ vars.TF_GITHUB_APP_ID }}
+          GITHUB_APP_INSTALLATION_ID: ${{ vars.TF_GITHUB_APP_INSTALLATION_ID }}
+          GITHUB_APP_REPOSITORY: ${{ github.event.repository.name }}
         run: |
-          if [ -z "$TF_GITHUB_TOKEN" ]; then
-            echo "::error::Add repository secret TF_GITHUB_TOKEN."
+          set -euo pipefail
+          if [ -z "$GITHUB_APP_ID" ] || [ -z "$GITHUB_APP_INSTALLATION_ID" ]; then
+            echo "::error::TF_GITHUB_APP_* repo variables missing. Run scripts/create-github-app.mjs and re-apply infra/bootstrap."
             exit 1
           fi
+          umask 077
+          az keyvault secret download --vault-name "$AZURE_SHARED_KEY_VAULT_NAME" \
+            --name TERRAFORM-GITHUB-APP-KEY --file "$RUNNER_TEMP/tf-github-app.pem" --only-show-errors
+          GITHUB_APP_PEM_PATH="$RUNNER_TEMP/tf-github-app.pem" node scripts/github-app-token.mjs
 
       - name: Terraform init
         env:
-          GITHUB_TOKEN: ${{ secrets.TF_GITHUB_TOKEN }}
-          GH_TOKEN: ${{ secrets.TF_GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ env.TF_GITHUB_TOKEN }}
+          GH_TOKEN: ${{ env.TF_GITHUB_TOKEN }}
         run: terraform init -input=false
 
       - name: Terraform apply
         env:
-          GITHUB_TOKEN: ${{ secrets.TF_GITHUB_TOKEN }}
-          GH_TOKEN: ${{ secrets.TF_GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ env.TF_GITHUB_TOKEN }}
+          GH_TOKEN: ${{ env.TF_GITHUB_TOKEN }}
         run: |
           terraform plan -input=false -out=tfplan
           terraform apply -input=false tfplan

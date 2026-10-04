@@ -1,5 +1,7 @@
 # GitHub Actions environments + OIDC variables (managed when var.manage_github_actions is true).
 # Requires the root module to configure the integrations/github provider (GITHUB_TOKEN / GH_TOKEN).
+# CI/CD supplies a GitHub App installation token minted via Azure OIDC + Key Vault
+# (scripts/github-app-token.mjs); local applies use `gh auth token`.
 # The GitHub App used by Studio is created once in the GitHub UI — Terraform cannot create Apps.
 
 resource "github_repository_environment" "this" {

@@ -49,7 +49,7 @@ resource "azurerm_key_vault_secret" "site_contact_email" {
   depends_on   = [azurerm_role_assignment.shared_kv_admin]
 
   lifecycle {
-    ignore_changes = [value]
+    ignore_changes = [value, tags]
   }
 }
 
@@ -60,7 +60,7 @@ resource "azurerm_key_vault_secret" "site_contact_phone" {
   depends_on   = [azurerm_role_assignment.shared_kv_admin]
 
   lifecycle {
-    ignore_changes = [value]
+    ignore_changes = [value, tags]
   }
 }
 
@@ -71,7 +71,7 @@ resource "azurerm_key_vault_secret" "site_date_of_birth" {
   depends_on   = [azurerm_role_assignment.shared_kv_admin]
 
   lifecycle {
-    ignore_changes = [value]
+    ignore_changes = [value, tags]
   }
 }
 
@@ -82,7 +82,7 @@ resource "azurerm_key_vault_secret" "turnstile_site_key" {
   depends_on   = [azurerm_role_assignment.shared_kv_admin]
 
   lifecycle {
-    ignore_changes = [value]
+    ignore_changes = [value, tags]
   }
 }
 
@@ -93,7 +93,7 @@ resource "azurerm_key_vault_secret" "turnstile_secret_key" {
   depends_on   = [azurerm_role_assignment.shared_kv_admin]
 
   lifecycle {
-    ignore_changes = [value]
+    ignore_changes = [value, tags]
   }
 }
 
@@ -106,7 +106,7 @@ resource "azurerm_key_vault_secret" "alert_email" {
   depends_on   = [azurerm_role_assignment.shared_kv_admin]
 
   lifecycle {
-    ignore_changes = [value]
+    ignore_changes = [value, tags]
   }
 }
 
@@ -117,7 +117,7 @@ resource "azurerm_key_vault_secret" "alert_sms_phone" {
   depends_on   = [azurerm_role_assignment.shared_kv_admin]
 
   lifecycle {
-    ignore_changes = [value]
+    ignore_changes = [value, tags]
   }
 }
 
@@ -128,7 +128,7 @@ resource "azurerm_key_vault_secret" "alert_voice_phone" {
   depends_on   = [azurerm_role_assignment.shared_kv_admin]
 
   lifecycle {
-    ignore_changes = [value]
+    ignore_changes = [value, tags]
   }
 }
 

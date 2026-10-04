@@ -111,3 +111,21 @@ resource "github_actions_variable" "azure_tf_subscription_id" {
   variable_name = "AZURE_TF_SUBSCRIPTION_ID"
   value         = data.azurerm_client_config.current.subscription_id
 }
+
+# CI/CD Terraform mints a 1-hour GitHub App installation token for the GitHub provider:
+# Azure OIDC login -> read TERRAFORM-GITHUB-APP-KEY from the shared vault -> mint.
+# The key is written by scripts/create-github-app.mjs and is deliberately not a
+# Terraform resource, so it never lands in state. No GitHub PAT/secret exists.
+resource "github_actions_variable" "tf_github_app_id" {
+  count         = var.manage_github_actions && var.github_app_id != "" ? 1 : 0
+  repository    = var.github_repo
+  variable_name = "TF_GITHUB_APP_ID"
+  value         = var.github_app_id
+}
+
+resource "github_actions_variable" "tf_github_app_installation_id" {
+  count         = var.manage_github_actions && var.github_app_installation_id != "" ? 1 : 0
+  repository    = var.github_repo
+  variable_name = "TF_GITHUB_APP_INSTALLATION_ID"
+  value         = var.github_app_installation_id
+}
