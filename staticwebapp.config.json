@@ -13,6 +13,12 @@
       }
     },
     {
+      "route": "/media/*",
+      "headers": {
+        "Cache-Control": "public, max-age=604800"
+      }
+    },
+    {
       "route": "/api/*",
       "headers": {
         "Cache-Control": "private, no-store"

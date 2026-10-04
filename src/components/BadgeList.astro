@@ -1,0 +1,18 @@
+---
+interface Props {
+  items: readonly string[];
+}
+const { items } = Astro.props;
+---
+
+<ul class="flex flex-wrap justify-center gap-2 md:gap-3" role="list">
+  {
+    items.map((item) => (
+      <li
+        class="rounded-full border border-accent-200 bg-white px-3 py-1.5 text-xs font-medium text-accent-900 md:text-sm"
+      >
+        {item}
+      </li>
+    ))
+  }
+</ul>

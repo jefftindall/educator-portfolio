@@ -3,6 +3,10 @@
 /* Minimal base styles — Tiffany branding comes in a later phase (not Jacob's palette). */
 @theme {
   --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --color-accent-50: #f4f7f2;
+  --color-accent-200: #c5d4bc;
+  --color-accent-700: #3d5c34;
+  --color-accent-900: #1f3319;
 }
 
 html {
