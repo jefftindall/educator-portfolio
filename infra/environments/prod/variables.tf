@@ -15,8 +15,8 @@ variable "subscription_id" {
 
 variable "custom_domain" {
   type        = string
-  description = "Production custom domain (apex). Merging to main applies this via CD."
-  default     = "tifftindall.com"
+  description = "Production custom domain (apex). Empty until DNS cutover; setting it and merging to main binds it via CD (docs/runbooks/custom-domain.md)."
+  default     = ""
 }
 
 variable "additional_auth_hostnames" {

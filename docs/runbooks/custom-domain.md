@@ -2,7 +2,9 @@
 
 Bind the public site to **https://tifftindall.com** (apex). `www.tifftindall.com` should 301 to the apex.
 
-Do **not** `terraform apply` from a laptop unless Jeff asks. Merging `custom_domain` to `main` runs **CD: main → Terraform Apply Production**.
+Do **not** `terraform apply` from a laptop unless Jeff asks. Prod `custom_domain` defaults to `""` (not bound). Setting it to `tifftindall.com` in `infra/environments/prod/variables.tf` and merging to `main` runs **CD: main → Terraform Apply Production**.
+
+**Known blocker (shared subscription):** Azure polls `Microsoft.Web/locations/staticSitesOperationStatuses/read` at **subscription** scope while it binds a domain. The prod Terraform identity has only resource-group roles (subscription-scope roles are not allowed in shared mode), so the apply fails with `403 AuthorizationFailed` even though Azure creates the hostname. Do the cutover after the dedicated-subscription move, or bind the hostnames as Jeff with `az staticwebapp hostname set` and then `terraform import` them.
 
 ## Azure target
 
@@ -34,7 +36,7 @@ The `www` CNAME must exist **before** Terraform creates `www.tifftindall.com` (`
 ## Cutover order
 
 1. Add the `www` CNAME. Wait until it resolves (`Resolve-DnsName www.tifftindall.com`).
-2. Merge this change to `main` (or apply prod Terraform if Jeff is doing it locally). CD will:
+2. Set prod `custom_domain = "tifftindall.com"` and merge to `main` (or apply prod Terraform if Jeff is doing it locally). CD will:
    - Bind `tifftindall.com` (TXT validation) and `www.tifftindall.com` (CNAME)
    - Register Entra redirect URIs for both hosts
    - Set prod GitHub env var `SITE_URL=https://tifftindall.com`

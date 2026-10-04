@@ -3,9 +3,9 @@
 # Today: shared company subscription (docs/runbooks/subscription-hosting.md).
 subscription_id = "a558cbbf-b396-4d5f-b9ee-4ec191bc732b"
 
-custom_domain = "tifftindall.com"
+# Empty until cutover. Set to "tifftindall.com" only after DNS: docs/runbooks/custom-domain.md
+custom_domain = ""
 
-# Apex + www bind on apply. Complete DNS first: docs/runbooks/custom-domain.md
 additional_auth_hostnames = []
 
 github_owner     = "jefftindall"
