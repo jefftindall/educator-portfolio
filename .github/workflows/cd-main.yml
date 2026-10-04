@@ -147,14 +147,16 @@ jobs:
           GH_TOKEN: ${{ env.TF_GITHUB_TOKEN }}
         run: terraform apply -input=false tfplan
 
+  # No `environment:` — the build is identical for staging and prod. It signs in as the
+  # bootstrap build identity (OIDC subject ref:refs/heads/main), which can only read
+  # the SITE-* secrets, so a fresh setup builds before either env stack is applied.
+  # Manual dispatch from a branch other than main cannot sign in.
   build_release:
     name: Build release
     needs: changes
     if: needs.changes.outputs.release == 'true'
     runs-on: ubuntu-latest
-    environment: prod
     env:
-      # Prod env var is set by Terraform when custom_domain is bound; fallback keeps the first deploy correct.
       SITE_URL: ${{ vars.SITE_URL || 'https://tifftindall.com' }}
     steps:
       - uses: actions/checkout@v7
@@ -165,12 +167,12 @@ jobs:
           node-version: "22"
           cache: npm
 
-      - name: Azure login (OIDC)
+      - name: Azure login (build OIDC)
         uses: azure/login@v3
         with:
-          client-id: ${{ vars.AZURE_CLIENT_ID }}
-          tenant-id: ${{ vars.AZURE_TENANT_ID }}
-          subscription-id: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+          client-id: ${{ vars.AZURE_BUILD_CLIENT_ID }}
+          tenant-id: ${{ vars.AZURE_BUILD_TENANT_ID }}
+          allow-no-subscriptions: true
 
       - name: Fetch contact email from shared Key Vault
         env:
@@ -180,6 +182,10 @@ jobs:
           EMAIL=$(az keyvault secret show --vault-name "$AZURE_SHARED_KEY_VAULT_NAME" --name SITE-CONTACT-EMAIL --query value -o tsv)
           echo "::add-mask::$EMAIL"
           echo "SITE_CONTACT_EMAIL=$EMAIL" >> "$GITHUB_ENV"
+
+      # npm install scripts run next; do not leave an Azure session on the runner.
+      - name: Azure logout
+        run: az logout
 
       - name: Install and build
         run: |

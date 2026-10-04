@@ -89,6 +89,12 @@ variable "github_repo_id" {
   default     = "1350927100"
 }
 
+variable "github_branch" {
+  type        = string
+  description = "Branch whose pushes run CD's Build release (OIDC ref subject for the build identity)"
+  default     = "main"
+}
+
 variable "github_app_id" {
   type        = string
   description = "GitHub App used by CI/CD Terraform for the GitHub provider (from scripts/create-github-app.mjs). Empty until created."
