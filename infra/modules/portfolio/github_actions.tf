@@ -74,7 +74,7 @@ resource "github_actions_environment_variable" "site_url" {
   environment   = github_repository_environment.this[0].environment
   repository    = var.github_repo
   variable_name = "SITE_URL"
-  value         = "https://${var.custom_domain}"
+  value         = "https://www.${var.custom_domain}"
 }
 
 # Deploy jobs read env-scoped API secrets from this vault (Gemini, GitHub App, etc.).
