@@ -6,7 +6,7 @@ locals {
   law_name  = "law-tifftindall-${local.name_suffix}"
   appi_name = "appi-tifftindall-portfolio-${local.name_suffix}"
 
-  availability_url = var.custom_domain != "" ? "https://${var.custom_domain}/" : "https://${azurerm_static_web_app.main.default_host_name}/"
+  availability_url = var.custom_domain != "" ? "https://www.${var.custom_domain}/" : "https://${azurerm_static_web_app.main.default_host_name}/"
   materials_base   = trimsuffix(local.availability_url, "/")
   conservation_url = "${local.materials_base}/conservation"
   music_url        = "${local.materials_base}/music"
