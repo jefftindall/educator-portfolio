@@ -157,7 +157,7 @@ jobs:
     if: needs.changes.outputs.release == 'true'
     runs-on: ubuntu-latest
     env:
-      SITE_URL: ${{ vars.SITE_URL || 'https://tifftindall.com' }}
+      SITE_URL: ${{ vars.SITE_URL || 'https://www.tifftindall.com' }}
     steps:
       - uses: actions/checkout@v7
 
@@ -458,8 +458,9 @@ jobs:
       - name: Resolve production hostname
         id: host
         run: |
-          # Prefer the Portal "default" custom domain (apex). When a custom domain is
-          # set as default, the *.azurestaticapps.net host 301s to it.
+          # Prefer the Ready www custom domain (canonical). The apex is only a
+          # registrar forward that redirects "/" and 404s every other path, so it
+          # must not be the smoke target even if it shows Ready / default.
           # Note: JMESPath forbids ".(a || b)" after a dot (az --query fails to parse);
           # pick with jq so flat CLI and nested ARM shapes both work.
           SWA_NAME="${{ vars.AZURE_STATIC_WEB_APP_NAME }}"
@@ -476,8 +477,8 @@ jobs:
               def ready_status: .status // .properties.status // empty;
               def is_default: (.isDefault // .properties.isDefault // false) == true;
               [ .[] | select(ready_status == "Ready") ] as $ready
-              | ($ready | map(select(is_default)) | .[0])
-                // ($ready | map(select((domain | ascii_downcase | startswith("www.") | not))) | .[0])
+              | ($ready | map(select(domain | ascii_downcase | startswith("www."))) | .[0])
+                // ($ready | map(select(is_default)) | .[0])
                 // $ready[0]
                 // empty
               | if . == null then empty else domain end
