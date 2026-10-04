@@ -26,6 +26,8 @@ terraform {
     storage_account_name = "sttifftindalltfstateeu2"
     container_name       = "tfstate"
     key                  = "educator-portfolio/staging.tfstate"
+    # Data-plane auth: the RG-scoped Terraform SP has blob access, not listKeys.
+    use_azuread_auth = true
   }
 }
 

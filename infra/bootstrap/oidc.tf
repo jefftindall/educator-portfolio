@@ -53,6 +53,18 @@ resource "azurerm_role_assignment" "terraform_tfstate_blob" {
   principal_id         = azuread_service_principal.terraform.object_id
 }
 
+# Owner is control-plane only; the human who applies bootstrap also needs blob
+# data access to run env stacks locally (backend uses use_azuread_auth).
+resource "azurerm_role_assignment" "applier_tfstate_blob" {
+  scope                = azurerm_storage_account.tfstate.id
+  role_definition_name = "Storage Blob Data Contributor"
+  principal_id         = data.azurerm_client_config.current.object_id
+
+  lifecycle {
+    ignore_changes = [principal_id]
+  }
+}
+
 # Env stacks create resources and assign RBAC inside Tiffany's resource groups only —
 # never at subscription scope, so the SP cannot touch other workloads in a shared
 # subscription. Key Vault uses data-plane RBAC; Contributor does not grant getSecret.
