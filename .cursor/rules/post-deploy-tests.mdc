@@ -13,7 +13,7 @@ Public UX is gated after deploy, not in `npm run lint`. When you add, rename, or
 | After | Job | Command | Coverage |
 |-------|-----|---------|----------|
 | Staging deploy | **Verify Staging** | `test:smoke` then `test:journey` | Landings plus full visitor journeys (blocks prod) |
-| Prod deploy | **Smoke Production** | `test:smoke` | Home hello world, robots/sitemap, API health on SWA |
+| Prod deploy | **Smoke Production** | `test:smoke` | Home hero, V1 routes, media, robots/sitemap, contact mailto, API health on SWA |
 
 CI (`CI: static analysis`) stays the PR merge gate. Do not add Playwright to `npm run lint`.
 

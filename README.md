@@ -2,7 +2,7 @@
 
 Personal site for **Tiffany Tindall** (`tifftindall.com`). Built with Astro on the same platform as [Jacob’s portfolio](https://github.com/jefftindall/jacobs-portfolio): Azure Static Web Apps, Terraform, GitHub Actions, and Playwright post-deploy checks.
 
-**Phase 1 (this repo):** infrastructure and a plain-text home page (`public/index.html` → `hello world`). **Phase 2:** educator content, navigation, and Astro pages.
+The site supports Tiffany’s NCAS National Arts Standards (Dance) application. V1 pages are Home, Standards & Leadership, Teaching Philosophy, Dance for Every Body, and CV & Contact. Phases and remaining work: [content plan](docs/plans/content-plan.md).
 
 ## Quick start
 
@@ -29,6 +29,7 @@ Run this before every commit. It checks Terraform, the Astro site, the API stub,
 ## Documentation
 
 - [AGENTS.md](AGENTS.md) — rules for Cursor (brand, lint)
+- [Content plan](docs/plans/content-plan.md) — phases, what's done, and what's left (NCAS launch Oct 18)
 - [Initial setup](docs/setup.md) — local first; Azure later (do not apply unless Jeff asks)
 - [Custom domain](docs/runbooks/custom-domain.md) — bind `tifftindall.com` on prod (Jeff only)
 - [Testing strategy](docs/runbooks/testing-strategy.md) — post-deploy staging journeys and production smoke
