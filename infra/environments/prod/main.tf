@@ -22,27 +22,19 @@ terraform {
 
   # Backend subscription comes from `az login` / ARM_SUBSCRIPTION_ID at init (Tiffany's subscription).
   backend "azurerm" {
-    resource_group_name  = "rg-tiffany-tfstate"
-    storage_account_name = "sttiffanytfstateeu2"
+    resource_group_name  = "rg-tifftindall-tfstate"
+    storage_account_name = "sttifftindalltfstateeu2"
     container_name       = "tfstate"
     key                  = "educator-portfolio/prod.tfstate"
+    # Data-plane auth: the RG-scoped Terraform SP has blob access, not listKeys.
+    use_azuread_auth = true
   }
 }
 
 provider "azurerm" {
-  subscription_id                 = var.subscription_id
+  subscription_id = var.subscription_id
+  # Bootstrap (subscription Owner) registers providers; the RG-scoped Terraform SP cannot.
   resource_provider_registrations = "none"
-  resource_providers_to_register = [
-    "Microsoft.Resources",
-    "Microsoft.Storage",
-    "Microsoft.KeyVault",
-    "Microsoft.Web",
-    "Microsoft.Authorization",
-    "Microsoft.Insights",
-    "Microsoft.OperationalInsights",
-    "Microsoft.AlertsManagement",
-    "Microsoft.Communication",
-  ]
 
   features {
     key_vault {
@@ -62,7 +54,6 @@ module "portfolio" {
   source = "../../modules/portfolio"
 
   environment               = "prod"
-  location                  = var.location
   custom_domain             = var.custom_domain
   additional_auth_hostnames = var.additional_auth_hostnames
   github_owner              = var.github_owner

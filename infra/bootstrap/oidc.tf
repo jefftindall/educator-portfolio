@@ -7,12 +7,8 @@ data "azurerm_client_config" "current" {}
 
 data "azuread_client_config" "current" {}
 
-data "azurerm_subscription" "current" {
-  subscription_id = var.subscription_id
-}
-
 resource "azuread_application" "terraform" {
-  display_name     = "tiffany-portfolio-gha-terraform"
+  display_name     = "tifftindall-portfolio-gha-terraform"
   owners           = [data.azuread_client_config.current.object_id]
   sign_in_audience = "AzureADMyOrg"
 }
@@ -57,23 +53,42 @@ resource "azurerm_role_assignment" "terraform_tfstate_blob" {
   principal_id         = azuread_service_principal.terraform.object_id
 }
 
-# Env stacks create resources and assign RBAC.
-resource "azurerm_role_assignment" "terraform_subscription_contributor" {
-  scope                = data.azurerm_subscription.current.id
-  role_definition_name = "Contributor"
-  principal_id         = azuread_service_principal.terraform.object_id
+# Owner is control-plane only; the human who applies bootstrap also needs blob
+# data access to run env stacks locally (backend uses use_azuread_auth).
+resource "azurerm_role_assignment" "applier_tfstate_blob" {
+  scope                = azurerm_storage_account.tfstate.id
+  role_definition_name = "Storage Blob Data Contributor"
+  principal_id         = data.azurerm_client_config.current.object_id
+
+  lifecycle {
+    ignore_changes = [principal_id]
+  }
 }
 
-resource "azurerm_role_assignment" "terraform_subscription_uaa" {
-  scope                = data.azurerm_subscription.current.id
-  role_definition_name = "User Access Administrator"
-  principal_id         = azuread_service_principal.terraform.object_id
+# Env stacks create resources and assign RBAC inside Tiffany's resource groups only —
+# never at subscription scope, so the SP cannot touch other workloads in a shared
+# subscription. Key Vault uses data-plane RBAC; Contributor does not grant getSecret.
+locals {
+  terraform_rg_scopes = merge(
+    { shared = azurerm_resource_group.shared.id },
+    { for env, rg in azurerm_resource_group.app : env => rg.id },
+  )
+  terraform_rg_roles = ["Contributor", "User Access Administrator", "Key Vault Secrets Officer"]
+
+  terraform_rg_role_assignments = {
+    for pair in setproduct(keys(local.terraform_rg_scopes), local.terraform_rg_roles) :
+    "${pair[0]}/${pair[1]}" => {
+      scope = local.terraform_rg_scopes[pair[0]]
+      role  = pair[1]
+    }
+  }
 }
 
-# Key Vault uses data-plane RBAC; subscription Contributor does not grant getSecret.
-resource "azurerm_role_assignment" "terraform_kv_secrets_officer" {
-  scope                = data.azurerm_subscription.current.id
-  role_definition_name = "Key Vault Secrets Officer"
+resource "azurerm_role_assignment" "terraform_rg" {
+  for_each = local.terraform_rg_role_assignments
+
+  scope                = each.value.scope
+  role_definition_name = each.value.role
   principal_id         = azuread_service_principal.terraform.object_id
 }
 
@@ -107,4 +122,22 @@ resource "github_actions_variable" "azure_tf_subscription_id" {
   repository    = var.github_repo
   variable_name = "AZURE_TF_SUBSCRIPTION_ID"
   value         = data.azurerm_client_config.current.subscription_id
+}
+
+# CI/CD Terraform mints a 1-hour GitHub App installation token for the GitHub provider:
+# Azure OIDC login -> read TERRAFORM-GITHUB-APP-KEY from the shared vault -> mint.
+# The key is written by scripts/create-github-app.mjs and is deliberately not a
+# Terraform resource, so it never lands in state. No GitHub PAT/secret exists.
+resource "github_actions_variable" "tf_github_app_id" {
+  count         = var.manage_github_actions && var.github_app_id != "" ? 1 : 0
+  repository    = var.github_repo
+  variable_name = "TF_GITHUB_APP_ID"
+  value         = var.github_app_id
+}
+
+resource "github_actions_variable" "tf_github_app_installation_id" {
+  count         = var.manage_github_actions && var.github_app_installation_id != "" ? 1 : 0
+  repository    = var.github_repo
+  variable_name = "TF_GITHUB_APP_INSTALLATION_ID"
+  value         = var.github_app_installation_id
 }

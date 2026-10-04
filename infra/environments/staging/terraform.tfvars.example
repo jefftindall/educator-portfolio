@@ -1,7 +1,7 @@
-location = "eastus2"
-
-# Copy to terraform.tfvars (gitignored). Use Tiffany's Azure subscription — not Jacob's.
-subscription_id = "00000000-0000-0000-0000-000000000000"
+# Region comes from the bootstrap-owned resource group (infra/bootstrap location).
+# Copy to terraform.tfvars (gitignored). Must match bootstrap's subscription_id.
+# Today: shared company subscription (docs/runbooks/subscription-hosting.md).
+subscription_id = "a558cbbf-b396-4d5f-b9ee-4ec191bc732b"
 
 custom_domain = ""
 

@@ -1,10 +1,10 @@
 # Application Insights + Log Analytics (cost-capped) per environment.
-# Ops contacts come from shared kv-tiffany-shared ALERT-* (OPS-P1-001 / OPS-P1-002).
+# Ops contacts come from shared kv-tifftindall-shared ALERT-* (OPS-P1-001 / OPS-P1-002).
 # Never pass emails/phones via Terraform variables.
 
 locals {
-  law_name  = "law-tiffany-${local.name_suffix}"
-  appi_name = "appi-tiffany-portfolio-${local.name_suffix}"
+  law_name  = "law-tifftindall-${local.name_suffix}"
+  appi_name = "appi-tifftindall-portfolio-${local.name_suffix}"
 
   availability_url = var.custom_domain != "" ? "https://${var.custom_domain}/" : "https://${azurerm_static_web_app.main.default_host_name}/"
   materials_base   = trimsuffix(local.availability_url, "/")
@@ -55,8 +55,8 @@ locals {
 
 resource "azurerm_log_analytics_workspace" "main" {
   name                = local.law_name
-  location            = azurerm_resource_group.main.location
-  resource_group_name = azurerm_resource_group.main.name
+  location            = data.azurerm_resource_group.main.location
+  resource_group_name = data.azurerm_resource_group.main.name
   sku                 = "PerGB2018"
   retention_in_days   = 30
   tags                = local.tags
@@ -64,8 +64,8 @@ resource "azurerm_log_analytics_workspace" "main" {
 
 resource "azurerm_application_insights" "main" {
   name                 = local.appi_name
-  location             = azurerm_resource_group.main.location
-  resource_group_name  = azurerm_resource_group.main.name
+  location             = data.azurerm_resource_group.main.location
+  resource_group_name  = data.azurerm_resource_group.main.name
   workspace_id         = azurerm_log_analytics_workspace.main.id
   application_type     = "web"
   retention_in_days    = 30
@@ -80,9 +80,9 @@ resource "azurerm_application_insights" "main" {
 resource "azurerm_application_insights_standard_web_test" "homepage" {
   count = local.prod_availability_enabled ? 1 : 0
 
-  name                    = "webtest-tiffany-homepage-${local.name_suffix}"
-  resource_group_name     = azurerm_resource_group.main.name
-  location                = azurerm_resource_group.main.location
+  name                    = "webtest-tifftindall-homepage-${local.name_suffix}"
+  resource_group_name     = data.azurerm_resource_group.main.name
+  location                = data.azurerm_resource_group.main.location
   application_insights_id = azurerm_application_insights.main.id
   geo_locations           = ["us-va-ash-azr"]
   frequency               = 600
@@ -108,9 +108,9 @@ resource "azurerm_application_insights_standard_web_test" "homepage" {
 resource "azurerm_application_insights_standard_web_test" "conservation" {
   count = local.prod_availability_enabled ? 1 : 0
 
-  name                    = "webtest-tiffany-conservation-${local.name_suffix}"
-  resource_group_name     = azurerm_resource_group.main.name
-  location                = azurerm_resource_group.main.location
+  name                    = "webtest-tifftindall-conservation-${local.name_suffix}"
+  resource_group_name     = data.azurerm_resource_group.main.name
+  location                = data.azurerm_resource_group.main.location
   application_insights_id = azurerm_application_insights.main.id
   geo_locations           = ["us-va-ash-azr"]
   frequency               = 600
@@ -136,9 +136,9 @@ resource "azurerm_application_insights_standard_web_test" "conservation" {
 resource "azurerm_application_insights_standard_web_test" "music" {
   count = local.prod_availability_enabled ? 1 : 0
 
-  name                    = "webtest-tiffany-music-${local.name_suffix}"
-  resource_group_name     = azurerm_resource_group.main.name
-  location                = azurerm_resource_group.main.location
+  name                    = "webtest-tifftindall-music-${local.name_suffix}"
+  resource_group_name     = data.azurerm_resource_group.main.name
+  location                = data.azurerm_resource_group.main.location
   application_insights_id = azurerm_application_insights.main.id
   geo_locations           = ["us-va-ash-azr"]
   frequency               = 600
@@ -165,8 +165,8 @@ resource "azurerm_application_insights_standard_web_test" "music" {
 resource "azurerm_monitor_action_group" "notify" {
   count = local.alert_notify_enabled ? 1 : 0
 
-  name                = "ag-tiffany-notify-${local.name_suffix}"
-  resource_group_name = azurerm_resource_group.main.name
+  name                = "ag-tifftindall-notify-${local.name_suffix}"
+  resource_group_name = data.azurerm_resource_group.main.name
   short_name          = "jcbn${local.name_suffix}"
   tags                = local.tags
 
@@ -193,8 +193,8 @@ resource "azurerm_monitor_action_group" "notify" {
 resource "azurerm_monitor_action_group" "critical" {
   count = local.alert_critical_enabled ? 1 : 0
 
-  name                = "ag-tiffany-critical-${local.name_suffix}"
-  resource_group_name = azurerm_resource_group.main.name
+  name                = "ag-tifftindall-critical-${local.name_suffix}"
+  resource_group_name = data.azurerm_resource_group.main.name
   short_name          = "jcbc${local.name_suffix}"
   tags                = local.tags
 
@@ -230,8 +230,8 @@ resource "azurerm_monitor_action_group" "critical" {
 resource "azurerm_monitor_action_group" "watch" {
   count = local.alert_watch_enabled ? 1 : 0
 
-  name                = "ag-tiffany-watch-${local.name_suffix}"
-  resource_group_name = azurerm_resource_group.main.name
+  name                = "ag-tifftindall-watch-${local.name_suffix}"
+  resource_group_name = data.azurerm_resource_group.main.name
   short_name          = "jcbw${local.name_suffix}"
   tags                = local.tags
 
@@ -245,8 +245,8 @@ resource "azurerm_monitor_action_group" "watch" {
 resource "azurerm_monitor_metric_alert" "failed_requests" {
   count = local.alert_notify_enabled ? 1 : 0
 
-  name                = "alert-tiffany-failed-requests-${local.name_suffix}"
-  resource_group_name = azurerm_resource_group.main.name
+  name                = "alert-tifftindall-failed-requests-${local.name_suffix}"
+  resource_group_name = data.azurerm_resource_group.main.name
   scopes              = [azurerm_application_insights.main.id]
   description         = "Failed requests on ${local.appi_name} (Sev2 → notify)"
   severity            = 2
@@ -270,8 +270,8 @@ resource "azurerm_monitor_metric_alert" "failed_requests" {
 resource "azurerm_monitor_metric_alert" "availability" {
   count = local.alert_critical_enabled && local.prod_availability_enabled ? 1 : 0
 
-  name                = "alert-tiffany-availability-${local.name_suffix}"
-  resource_group_name = azurerm_resource_group.main.name
+  name                = "alert-tifftindall-availability-${local.name_suffix}"
+  resource_group_name = data.azurerm_resource_group.main.name
   scopes              = [azurerm_application_insights.main.id]
   description         = "Availability test failed for ${var.custom_domain} homepage or materials (Sev1 → critical)"
   severity            = 1
@@ -298,9 +298,9 @@ resource "azurerm_monitor_metric_alert" "availability" {
 resource "azurerm_monitor_scheduled_query_rules_alert_v2" "deploy_failed" {
   count = local.alert_critical_enabled && var.environment == "prod" ? 1 : 0
 
-  name                    = "alert-tiffany-deploy-failed-${local.name_suffix}"
-  resource_group_name     = azurerm_resource_group.main.name
-  location                = azurerm_resource_group.main.location
+  name                    = "alert-tifftindall-deploy-failed-${local.name_suffix}"
+  resource_group_name     = data.azurerm_resource_group.main.name
+  location                = data.azurerm_resource_group.main.location
   scopes                  = [azurerm_application_insights.main.id]
   description             = "Deploy Production or Smoke Production failed (DeployFailed/SmokeFailed; Sev1 → critical SMS+voice)"
   severity                = 1
@@ -339,9 +339,9 @@ resource "azurerm_monitor_scheduled_query_rules_alert_v2" "deploy_failed" {
 resource "azurerm_monitor_scheduled_query_rules_alert_v2" "homepage_fcp" {
   count = local.alert_watch_enabled && var.environment == "prod" ? 1 : 0
 
-  name                    = "alert-tiffany-homepage-fcp-${local.name_suffix}"
-  resource_group_name     = azurerm_resource_group.main.name
-  location                = azurerm_resource_group.main.location
+  name                    = "alert-tifftindall-homepage-fcp-${local.name_suffix}"
+  resource_group_name     = data.azurerm_resource_group.main.name
+  location                = data.azurerm_resource_group.main.location
   scopes                  = [azurerm_application_insights.main.id]
   description             = "Homepage field FCP p75 over 1.5s / 2d watch window (Sev3 → watch email; SLO-6 scored over 7d in scorecard)"
   severity                = 3

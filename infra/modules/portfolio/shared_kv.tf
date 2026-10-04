@@ -1,6 +1,6 @@
-# Shared foundation vault (bootstrap) — site-build, Turnstile, ACS, and ALERT-* ops
-# contacts identical across staging and prod so a single release artifact / one SMS
-# number / one on-call set is shared.
+# Shared foundation vault (bootstrap) — site-build, Turnstile, and ALERT-* ops
+# contacts identical across staging and prod so a single release artifact / one
+# on-call set is shared.
 # This env’s GitHub Actions OIDC identity is granted Key Vault Secrets User here
 # (not in bootstrap) so first-time bootstrap does not need the env apps to exist yet.
 

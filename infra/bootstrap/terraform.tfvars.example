@@ -1,6 +1,13 @@
 # Copy to terraform.tfvars (gitignored) before bootstrap apply.
-# Use Tiffany's Azure subscription — not Jacob's family subscription.
-subscription_id = "00000000-0000-0000-0000-000000000000"
+# Never Jacob's family subscription. See docs/runbooks/subscription-hosting.md.
+#
+# Today: shared company subscription.
+subscription_id   = "a558cbbf-b396-4d5f-b9ee-4ec191bc732b"
+subscription_mode = "shared"
+#
+# After the move (docs/runbooks/subscription-migration.md):
+# subscription_id   = "<Tiffany's dedicated subscription GUID>"
+# subscription_mode = "dedicated"
 
 location = "eastus2"
 
@@ -10,3 +17,8 @@ github_repo      = "educator-portfolio"
 github_repo_id   = "1350927100"
 
 manage_github_actions = true
+
+# GitHub App for CI/CD Terraform. Fill from `node scripts/create-github-app.mjs`
+# output, then re-apply bootstrap. Not secrets; the key lives only in Key Vault.
+github_app_id              = "5189225"
+github_app_installation_id = "167927312"

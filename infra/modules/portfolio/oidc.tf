@@ -6,7 +6,7 @@ locals {
 
 # Entra app used by GitHub Actions via OIDC (no long-lived Azure client secret).
 resource "azuread_application" "github_actions" {
-  display_name     = "tiffany-portfolio-gha-${var.environment}"
+  display_name     = "tifftindall-portfolio-gha-${var.environment}"
   owners           = [data.azuread_client_config.current.object_id]
   sign_in_audience = "AzureADMyOrg"
 
@@ -59,7 +59,7 @@ resource "azuread_application_federated_identity_credential" "github_main" {
 }
 
 resource "azurerm_role_assignment" "github_actions_rg_reader" {
-  scope                = azurerm_resource_group.main.id
+  scope                = data.azurerm_resource_group.main.id
   role_definition_name = "Reader"
   principal_id         = azuread_service_principal.github_actions.object_id
 }

@@ -8,8 +8,8 @@ Do **not** `terraform apply` from a laptop unless Jeff asks. Merging `custom_dom
 
 | Piece | Value |
 |-------|--------|
-| Resource group | `rg-tiffany-portfolio-prod` |
-| Static Web App | `swa-tiffany-portfolio-prod` |
+| Resource group | `rg-tifftindall-portfolio-prod` |
+| Static Web App | `swa-tifftindall-portfolio-prod` |
 | Default hostname | From `terraform output static_web_app_default_hostname` in `infra/environments/prod` (or Portal → Overview) |
 | DNS host | Namecheap (`dns1.registrar-servers.com`) |
 
@@ -43,8 +43,8 @@ The `www` CNAME must exist **before** Terraform creates `www.tifftindall.com` (`
 
    ```bash
    az staticwebapp hostname list \
-     --name swa-tiffany-portfolio-prod \
-     --resource-group rg-tiffany-portfolio-prod \
+     --name swa-tifftindall-portfolio-prod \
+     --resource-group rg-tifftindall-portfolio-prod \
      --query "[?name=='tifftindall.com'].validationToken" -o tsv
    ```
 
@@ -60,4 +60,4 @@ The `www` CNAME must exist **before** Terraform creates `www.tifftindall.com` (`
 - `https://www.tifftindall.com` redirects to the apex.
 - Page source canonical / `og:url` use `https://tifftindall.com/...`.
 
-Availability tests may page until DNS and TLS are Ready. Search Console (`GSC-SITE-URL` in `kv-tiffany-shared`) is a later step.
+Availability tests may page until DNS and TLS are Ready. Search Console (`GSC-SITE-URL` in `kv-tifftindall-shared`) is a later step.

@@ -46,4 +46,4 @@ Tiffany Tindall: **educator portfolio** at `tifftindall.com`. Phase 1 is hello w
 
 ## Azure (Jeff only)
 
-Terraform lives in `infra/` with Tiffany resource names and a **separate** tfstate account from Jacob’s and Elyse’s sites. Do not apply it unless Jeff explicitly asks. Production hostname cutover: [`docs/runbooks/custom-domain.md`](docs/runbooks/custom-domain.md). See [`docs/setup.md`](docs/setup.md).
+Terraform lives in `infra/` with `tifftindall` resource names and a **separate** tfstate account from Jacob’s and Elyse’s sites. Do not apply it unless Jeff explicitly asks. The site is temporarily hosted in a shared company subscription (`subscription_mode = "shared"`): never grant Terraform identities subscription-scope roles or add budgets/cost resources there. Hosting and the later move to a dedicated subscription: [`docs/runbooks/subscription-hosting.md`](docs/runbooks/subscription-hosting.md), [`docs/runbooks/subscription-migration.md`](docs/runbooks/subscription-migration.md). Production hostname cutover: [`docs/runbooks/custom-domain.md`](docs/runbooks/custom-domain.md). See [`docs/setup.md`](docs/setup.md).
