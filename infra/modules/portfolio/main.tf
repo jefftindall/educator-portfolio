@@ -225,4 +225,9 @@ resource "azurerm_static_web_app_custom_domain" "www" {
   static_web_app_id = azurerm_static_web_app.main.id
   domain_name       = "www.${var.custom_domain}"
   validation_type   = "cname-delegation"
+
+  # Azure does not return validation_type, so an imported domain would otherwise be replaced.
+  lifecycle {
+    ignore_changes = [validation_type]
+  }
 }
