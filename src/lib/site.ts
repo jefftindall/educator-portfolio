@@ -22,7 +22,11 @@ export const site = {
   shortBio:
     'K–12 dance educator and school leader - Georgia standards writer, inclusive practice, and Connected Arts Network action research.',
   description:
-    'Tiffany Tindall, Ed.S., dance educator at Woodland High School: standards-based inclusive dance, NDEO presenter, and Georgia dance standards writing committee (2008).',
+    'Tiffany Tindall, Ed.S., dance educator at Woodland High School and 2026–27 Bartow County School System High School Teacher of the Year: standards-based inclusive dance, NDEO presenter, and Georgia dance standards writing committee (2008).',
+  awards: [
+    'Bartow County School System High School Teacher of the Year (2026–27)',
+    'Barber Middle School Teacher of the Year (2007–08)',
+  ],
   knowsAbout: [
     'Dance education',
     'National Core Arts Standards',
@@ -30,7 +34,8 @@ export const site = {
     'Georgia Standards of Excellence',
     'Arts leadership',
   ],
-  sameAs: [] as string[],
+  linkedin: 'https://www.linkedin.com/in/tiffany-tindall',
+  sameAs: ['https://www.linkedin.com/in/tiffany-tindall'],
 };
 
 export { nav } from './nav';

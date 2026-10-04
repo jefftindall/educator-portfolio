@@ -1,0 +1,26 @@
+---
+import type { CvEntry } from '../lib/content/cv';
+
+interface Props {
+  items: readonly CvEntry[];
+}
+const { items } = Astro.props;
+---
+
+<ol class="space-y-6" role="list">
+  {
+    items.map((item) => (
+      <li>
+        <div class="flex flex-wrap items-baseline justify-between gap-x-4">
+          <h3 class="font-medium text-gray-900">{item.title}</h3>
+          <span class="text-sm tabular-nums text-gray-600">{item.dates}</span>
+        </div>
+        <p class="text-sm text-gray-600">
+          {item.organization}
+          {item.location && ` · ${item.location}`}
+        </p>
+        {item.details && <p class="mt-2 leading-relaxed">{item.details}</p>}
+      </li>
+    ))
+  }
+</ol>

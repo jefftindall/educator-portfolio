@@ -1,8 +1,9 @@
 export const credibilityBadges = [
+  'Bartow County School System High School Teacher of the Year (2026–27)',
   'Georgia Dance Standards Writing Committee (2008)',
   'NDEO National Conference Presenter (2025)',
   'Connected Arts Network National PLC',
-  'Teacher of the Year (2007–08)',
+  'Barber Middle School Teacher of the Year (2007–08)',
 ] as const;
 
 export const heroHeadline = "Don't change the standard. Change the instructional method.";

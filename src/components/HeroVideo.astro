@@ -1,0 +1,63 @@
+---
+interface Props {
+  src: string;
+  poster: string;
+  label: string;
+}
+const { src, poster, label } = Astro.props;
+---
+
+<div class="hero-video relative overflow-hidden rounded-2xl bg-gray-900 shadow-lg" data-hero-video>
+  <video
+    class="aspect-video w-full object-cover"
+    src={src}
+    poster={poster}
+    muted
+    loop
+    playsinline
+    preload="metadata"
+    aria-label={label}
+  ></video>
+  <button
+    type="button"
+    class="absolute bottom-3 right-3 inline-flex min-h-11 min-w-11 items-center justify-center rounded-full bg-black/60 text-white backdrop-blur-sm transition hover:bg-black/80 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+    aria-label="Play video"
+    data-hero-toggle
+  >
+    <svg data-icon-play class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M8 5v14l11-7z" />
+    </svg>
+    <svg data-icon-pause class="hidden h-5 w-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M6 5h4v14H6zM14 5h4v14h-4z" />
+    </svg>
+  </button>
+</div>
+
+<script>
+  for (const root of document.querySelectorAll<HTMLElement>('[data-hero-video]')) {
+    const video = root.querySelector('video');
+    const toggle = root.querySelector<HTMLButtonElement>('[data-hero-toggle]');
+    if (!video || !toggle) continue;
+    const playIcon = toggle.querySelector('[data-icon-play]');
+    const pauseIcon = toggle.querySelector('[data-icon-pause]');
+
+    const sync = () => {
+      const playing = !video.paused;
+      toggle.setAttribute('aria-label', playing ? 'Pause video' : 'Play video');
+      playIcon?.classList.toggle('hidden', playing);
+      pauseIcon?.classList.toggle('hidden', !playing);
+    };
+
+    video.addEventListener('play', sync);
+    video.addEventListener('pause', sync);
+    toggle.addEventListener('click', () => {
+      if (video.paused) void video.play();
+      else video.pause();
+    });
+
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      video.play().catch(sync);
+    }
+    sync();
+  }
+</script>

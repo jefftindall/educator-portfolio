@@ -1,0 +1,23 @@
+---
+interface Props {
+  src: string;
+  poster: string;
+  title: string;
+  caption?: string;
+  class?: string;
+}
+const { src, poster, title, caption, class: className = '' } = Astro.props;
+---
+
+<figure class={className}>
+  <video
+    class="aspect-video w-full rounded-xl bg-gray-900 object-cover shadow-sm"
+    src={src}
+    poster={poster}
+    controls
+    playsinline
+    preload="none"
+    aria-label={title}
+  ></video>
+  {caption && <figcaption class="pt-2 text-sm text-gray-600">{caption}</figcaption>}
+</figure>

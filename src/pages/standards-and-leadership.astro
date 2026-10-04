@@ -2,6 +2,11 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHeader from '../components/PageHeader.astro';
 import Prose from '../components/Prose.astro';
+import Figure from '../components/Figure.astro';
+import VideoFigure from '../components/VideoFigure.astro';
+import barreClass from '../assets/photos/barre-class.jpg';
+import ensembleWhite from '../assets/photos/stage-ensemble-white.jpg';
+import fieldTrip from '../assets/photos/field-trip-performance.jpg';
 import {
   artisticProcesses,
   assessmentPhilosophy,
@@ -50,13 +55,47 @@ import {
       </table>
     </div>
 
+    <VideoFigure
+      src="/media/video/student-choreography.mp4"
+      poster="/media/video/student-choreography-poster.jpg"
+      title="Students performing choreography they created as a class"
+      caption="Creating: one of my classes performs the choreography they built together."
+    />
+
+    <ul class="grid gap-4 sm:grid-cols-3" role="list">
+      <li>
+        <Figure
+          src={barreClass}
+          alt="A full dance class works at portable ballet barres across the studio."
+          caption="Daily technique at the barre."
+          sizes="(min-width: 768px) 15rem, (min-width: 640px) 33vw, 100vw"
+        />
+      </li>
+      <li>
+        <Figure
+          src={ensembleWhite}
+          alt="An ensemble in white shirts crouches low in a line across a blue-lit stage."
+          caption="Performing on the concert stage."
+          sizes="(min-width: 768px) 15rem, (min-width: 640px) 33vw, 100vw"
+        />
+      </li>
+      <li>
+        <Figure
+          src={fieldTrip}
+          alt="Students and staff smile from their seats in a historic theater before a show."
+          caption="Responding: seeing professional dance live."
+          sizes="(min-width: 768px) 15rem, (min-width: 640px) 33vw, 100vw"
+        />
+      </li>
+    </ul>
+
     <h2 class="text-xl font-semibold text-gray-900">Assessment philosophy</h2>
     <p class="leading-relaxed">{assessmentPhilosophy}</p>
 
     <h2 class="text-xl font-semibold text-gray-900">Technology & artistic literacy</h2>
     <p class="leading-relaxed">{technologyStatement}</p>
 
-    <h2 class="text-xl font-semibold text-gray-900">Why I want to serve</h2>
+    <h2 class="text-xl font-semibold text-gray-900">Commitment to service</h2>
     <p class="leading-relaxed">{whyServe}</p>
   </Prose>
 </BaseLayout>

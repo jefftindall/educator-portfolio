@@ -2,7 +2,10 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHeader from '../components/PageHeader.astro';
 import Prose from '../components/Prose.astro';
+import CvList from '../components/CvList.astro';
+import Icon from '../components/Icon.astro';
 import { site } from '../lib/site';
+import { education, experience, honors, volunteering } from '../lib/content/cv';
 ---
 
 <BaseLayout
@@ -13,42 +16,40 @@ import { site } from '../lib/site';
 >
   <PageHeader
     title="CV & contact"
-    lede="Highlights from my résumé, and the best way to reach me."
+    lede="My experience, education, and service, and the best ways to reach me."
   />
 
   <Prose>
     <h2 class="text-xl font-semibold text-gray-900">Contact</h2>
-    <p>
+    <p class="flex flex-wrap items-center gap-x-6 gap-y-2">
       <a
         href={`mailto:${site.email}`}
-        class="font-medium text-accent-700 underline-offset-2 hover:underline"
+        class="inline-flex items-center gap-2 font-medium text-accent-700 underline-offset-2 hover:underline"
       >
+        <Icon name="mail" />
         Email me
+      </a>
+      <a
+        href={site.linkedin}
+        class="inline-flex items-center gap-2 font-medium text-accent-700 underline-offset-2 hover:underline"
+        rel="me noopener"
+        target="_blank"
+      >
+        <Icon name="linkedin" />
+        Connect on LinkedIn
       </a>
     </p>
 
-    <h2 class="text-xl font-semibold text-gray-900">Education & certification</h2>
-    <ul class="list-disc space-y-2 pl-5">
-      <li>Ed.S., Educational Administration - Jacksonville State University</li>
-      <li>M.Ed., Educational Administration - Jacksonville State University</li>
-      <li>P–12 Leadership certification</li>
-    </ul>
+    <h2 class="text-xl font-semibold text-gray-900">Experience</h2>
+    <CvList items={experience} />
 
-    <h2 class="text-xl font-semibold text-gray-900">Current roles (2020–present)</h2>
-    <ul class="list-disc space-y-2 pl-5">
-      <li>Dance Director, Woodland High School</li>
-      <li>Fine Arts Department Lead</li>
-      <li>Performing Arts Center Director</li>
-    </ul>
+    <h2 class="text-xl font-semibold text-gray-900">Education</h2>
+    <CvList items={education} />
 
-    <h2 class="text-xl font-semibold text-gray-900">Selected highlights</h2>
-    <ul class="list-disc space-y-2 pl-5">
-      <li>Georgia Department of Education Performance Standards Writing Committee for Dance Education (2008)</li>
-      <li>Connected Arts Network Teacher Participant (NDEO), 2024–present</li>
-      <li>NDEO National Conference presenter, 2025 - Dance for Every Body</li>
-      <li>$5,000 Georgia Council for the Arts grant - school-wide fine arts musical</li>
-      <li>Reinhardt University adjunct; NDEO member since 2003</li>
-      <li>Community: Red Door Food Pantry leadership; Etowah Scholarship Foundation board</li>
-    </ul>
+    <h2 class="text-xl font-semibold text-gray-900">Honors & professional service</h2>
+    <CvList items={honors} />
+
+    <h2 class="text-xl font-semibold text-gray-900">Volunteering</h2>
+    <CvList items={volunteering} />
   </Prose>
 </BaseLayout>

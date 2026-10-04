@@ -2,6 +2,12 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHeader from '../components/PageHeader.astro';
 import Prose from '../components/Prose.astro';
+import Figure from '../components/Figure.astro';
+import VideoFigure from '../components/VideoFigure.astro';
+import classOnStage from '../assets/photos/inclusive-class-stage.jpg';
+import classInStudio from '../assets/photos/inclusive-class-studio.jpg';
+import ndeoPhoto from '../assets/photos/ndeo-2025.jpg';
+import officeWithStudent from '../assets/photos/office-with-student.jpg';
 import {
   inclusiveBenefits,
   inclusiveStrategies,
@@ -19,14 +25,33 @@ import {
   <PageHeader title="Dance for Every Body" lede={ndeoSessionDescription} />
 
   <Prose>
+    <Figure
+      src={classOnStage}
+      alt="Four students in bright costumes dance on stage, two with fists raised high and two turning toward each other."
+      caption="Performing together on the concert stage."
+      loading="eager"
+    />
+
     <h2 class="text-xl font-semibold text-gray-900">NDEO 2025 national conference</h2>
-    <p class="font-medium text-gray-900">{ndeoSessionTitle}</p>
-    <p class="leading-relaxed">
-      Disability and Pedagogy track · October 2025. Inclusive Dance I brings general and special education
-      students together to learn the same standards and perform each semester - including Karina’s Class,
-      which began at Steps of Faith Dance Studio and continues at Woodland High School with principal
-      support.
-    </p>
+    <div class="grid items-start gap-6 sm:grid-cols-[1fr_12rem]">
+      <div class="space-y-4">
+        <p class="font-medium text-gray-900">{ndeoSessionTitle}</p>
+        <p class="leading-relaxed">
+          Disability and Pedagogy track · October 2025. Inclusive Dance I brings general and special education
+          students together to learn the same standards and perform each semester - including Karina’s Class,
+          which began at Steps of Faith Dance Studio and continues at Woodland High School with principal
+          support.
+        </p>
+      </div>
+      <Figure
+        src={ndeoPhoto}
+        alt="Tiffany smiling with one hand on her hip in front of the National Dance Education Organization banner."
+        caption="At the NDEO national conference."
+        widths={[400, 800]}
+        sizes="(min-width: 640px) 12rem, 100vw"
+        imgClass="aspect-[4/5] object-cover object-top"
+      />
+    </div>
 
     <h2 class="text-xl font-semibold text-gray-900">Three strategies</h2>
     <div class="space-y-8">
@@ -40,6 +65,13 @@ import {
       }
     </div>
 
+    <VideoFigure
+      src="/media/video/clapping-dance.mp4"
+      poster="/media/video/clapping-dance-poster.jpg"
+      title="The clapping dance from Eric's story, performed on stage"
+      caption="The clapping dance from Eric’s story, on stage with his classmates."
+    />
+
     <h2 class="text-xl font-semibold text-gray-900">Dance I etiquette learning ladder</h2>
     <p class="leading-relaxed">
       Concrete rungs turn expectations into steps students can master - shared with classroom teachers when
@@ -52,6 +84,25 @@ import {
         ))
       }
     </ol>
+
+    <ul class="grid gap-4 sm:grid-cols-2" role="list">
+      <li>
+        <Figure
+          src={classInStudio}
+          alt="A large inclusive dance class strikes a pose together in the studio, including a student in a wheelchair."
+          caption="One class, every ability."
+          sizes="(min-width: 768px) 24rem, (min-width: 640px) 50vw, 100vw"
+        />
+      </li>
+      <li>
+        <Figure
+          src={officeWithStudent}
+          alt="A student in a wheelchair points dramatically with both arms while Tiffany, seated behind her at the desk, strikes the same pose."
+          caption="Between classes in my office."
+          sizes="(min-width: 768px) 24rem, (min-width: 640px) 50vw, 100vw"
+        />
+      </li>
+    </ul>
 
     <h2 class="text-xl font-semibold text-gray-900">Who benefits</h2>
     <dl class="space-y-4">

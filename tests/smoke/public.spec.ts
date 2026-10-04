@@ -19,6 +19,21 @@ test.describe('public smoke', () => {
     }
   });
 
+  test('page videos and posters are served', async ({ request }) => {
+    const mediaPaths = new Set<string>();
+    for (const path of PUBLIC_ROUTES) {
+      const html = await (await waitForRequestOk(request, path)).text();
+      for (const match of html.matchAll(/(?:src|poster)="(\/media\/[^"]+)"/g)) {
+        mediaPaths.add(match[1]);
+      }
+    }
+    expect(mediaPaths.size).toBeGreaterThan(0);
+    for (const mediaPath of mediaPaths) {
+      const response = await request.head(mediaPath);
+      expect(response.ok(), `${mediaPath} should be served`).toBeTruthy();
+    }
+  });
+
   test('robots.txt and sitemap are served', async ({ request }) => {
     const robots = await waitForRequestOk(request, '/robots.txt');
     const robotsText = await robots.text();
