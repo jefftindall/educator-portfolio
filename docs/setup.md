@@ -17,7 +17,7 @@ npm install
 npm run dev
 ```
 
-Site: [http://localhost:4321](http://localhost:4321) — phase 1 shows **hello world** only (`public/index.html`).
+Site: [http://localhost:4321](http://localhost:4321).
 
 ```bash
 npm run lint

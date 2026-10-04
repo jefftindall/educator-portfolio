@@ -1,11 +1,11 @@
 ---
-description: Tiffany Tindall educator portfolio — phase 1 scaffold
+description: Tiffany Tindall educator portfolio — brand guardrails
 alwaysApply: true
 ---
 
 # Tiffany’s brand
 
-Tiffany Tindall’s site is an **educator portfolio** at `tifftindall.com`. Phase 1 is platform-only (plain-text hello world); content and visual design ship in a later phase.
+Tiffany Tindall’s site is an **educator portfolio** at `tifftindall.com`. It supports her NCAS National Arts Standards (Dance) application. Phases and status: [`docs/plans/content-plan.md`](../../docs/plans/content-plan.md).
 
 ## Do
 

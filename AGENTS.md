@@ -36,12 +36,12 @@ Never print secret values in workflows, scripts, logs, or commit messages. Full 
 
 ## Brand
 
-Tiffany Tindall: **educator portfolio** at `tifftindall.com`. Phase 1 is hello world only. See [`.cursor/rules/tiffany-brand.mdc`](.cursor/rules/tiffany-brand.mdc).
+Tiffany Tindall: **educator portfolio** at `tifftindall.com`. V1 content supports her NCAS application; see [`docs/plans/content-plan.md`](docs/plans/content-plan.md) for phases and status. See [`.cursor/rules/tiffany-brand.mdc`](.cursor/rules/tiffany-brand.mdc).
 
 ## Public site
 
 - Dev: `npm run dev` (Astro, port 4321). Build: `npm run build`.
-- Phase 1: single home page (`src/pages/index.astro`).
+- Pages live in `src/pages/`; page copy lives in `src/lib/content/`. Nav is `src/lib/nav.ts`.
 - **Removed pages:** if a public URL goes away, add a 301 in [`public/staticwebapp.config.json`](public/staticwebapp.config.json) and the root [`staticwebapp.config.json`](staticwebapp.config.json), and drop or update the Playwright smoke/journey that covered it.
 
 ## Azure (Jeff only)
