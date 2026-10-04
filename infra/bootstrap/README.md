@@ -19,8 +19,10 @@
 #   Subscription budget: budget-tifftindall-portfolio-monthly — subscription_mode = "dedicated" only
 #   Region:            eastus2
 #   Subscription:      subscription_id + subscription_mode in terraform.tfvars
-#   Entra app:         tifftindall-portfolio-gha-terraform (OIDC for plan/apply)
+#   Entra apps:        tifftindall-portfolio-gha-terraform (OIDC for plan/apply)
+#                      tifftindall-portfolio-gha-build (CD Build release; reads SITE-* only)
 #   Repo variables:    AZURE_TF_CLIENT_ID, AZURE_TF_TENANT_ID, AZURE_TF_SUBSCRIPTION_ID,
+#                      AZURE_BUILD_CLIENT_ID, AZURE_BUILD_TENANT_ID,
 #                      AZURE_SHARED_KEY_VAULT_NAME
 #
 # The Terraform SP gets Contributor, User Access Administrator, and Key Vault Secrets
@@ -36,6 +38,8 @@
 # Staging/prod backends are preconfigured to use this account with distinct state keys.
 # Apply bootstrap first (it does not require env GitHub Actions apps). Then apply
 # staging and prod; each env grants its own GHA identity on kv-tifftindall-shared.
+# The build identity trusts pushes to main (no GitHub environment) and has Key Vault
+# Secrets User on the individual SITE-* secrets, so CD can build before either env exists.
 # Re-apply bootstrap after pulling OIDC / shared vault / budget changes so Actions can run Terraform.
 # Populate shared vault secrets per docs/runbooks/rotate-secrets.md before CD builds.
 # In dedicated mode, set ALERT-EMAIL before expecting budget threshold emails (otherwise Owners are notified).

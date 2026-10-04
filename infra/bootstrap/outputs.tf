@@ -52,6 +52,15 @@ output "terraform_oidc_subjects" {
   ]
 }
 
+output "build_client_id" {
+  description = "Entra application (client) ID for CD's Build release job"
+  value       = azuread_application.build.client_id
+}
+
+output "build_oidc_subject" {
+  value = azuread_application_federated_identity_credential.build_main.subject
+}
+
 output "shared_key_vault_name" {
   description = "Foundational vault for site-build secrets shared by staging and prod"
   value       = azurerm_key_vault.shared.name

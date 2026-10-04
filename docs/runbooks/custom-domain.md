@@ -13,7 +13,7 @@ Do **not** `terraform apply` from a laptop unless Jeff asks. Merging `custom_dom
 | Default hostname | From `terraform output static_web_app_default_hostname` in `infra/environments/prod` (or Portal → Overview) |
 | DNS host | Namecheap (`dns1.registrar-servers.com`) |
 
-Canonical URL in Astro comes from GitHub environment variable `SITE_URL` (`https://tifftindall.com`). Local `.env` stays `http://localhost:4321`.
+Canonical URL in Astro comes from `SITE_URL` at build time. **Build release** runs without a GitHub environment, so it reads a repo-level `SITE_URL` variable if one exists and otherwise uses `https://tifftindall.com`. Local `.env` stays `http://localhost:4321`.
 
 ## DNS records (Namecheap Advanced DNS)
 
@@ -52,7 +52,7 @@ The `www` CNAME must exist **before** Terraform creates `www.tifftindall.com` (`
 4. Add the `asuid` TXT record, then the `@` ALIAS.
 5. Wait until both hostnames show **Ready** in Portal → Static Web App → Custom domains (or `az staticwebapp hostname list`). Apex apply can sit in **Validating** until the TXT is public; if CD times out, add DNS and re-run **CD: main**.
 6. Portal → Custom domains → set **tifftindall.com** as the default domain so `www` 301s to apex. Terraform does not set this.
-7. Canonical URLs: **CD: main** falls back to `https://tifftindall.com` when `vars.SITE_URL` is unset, so the first deploy after this change should already have the right sitemap/canonicals. Terraform still writes the prod env var on apply.
+7. Canonical URLs: **Build release** uses `https://tifftindall.com` unless a repo-level `SITE_URL` is set, so sitemap/canonicals are already right. Terraform still writes the prod env var on apply, but the build does not read it.
 
 ## Checks
 

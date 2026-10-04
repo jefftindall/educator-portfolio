@@ -40,7 +40,7 @@ All Azure and Entra names use the `tifftindall` prefix.
 | Env vaults | `kv-tifftindall-staging`, `kv-tifftindall-prod` |
 | Static Web Apps | `swa-tifftindall-portfolio-staging`, `swa-tifftindall-portfolio-prod` |
 | Monitoring | `law-`, `appi-`, `webtest-`, `ag-`, `alert-tifftindall-*` |
-| Entra apps (tenant) | `tifftindall-portfolio-gha-terraform`, `tifftindall-portfolio-gha-{env}`, `tifftindall-portfolio-{env}` |
+| Entra apps (tenant) | `tifftindall-portfolio-gha-terraform`, `tifftindall-portfolio-gha-build`, `tifftindall-portfolio-gha-{env}`, `tifftindall-portfolio-{env}` |
 
 ### Role-scope model
 
@@ -51,9 +51,11 @@ flowchart LR
   tfSP[tifftindall-portfolio-gha-terraform] -->|"Contributor, UAA, KV Secrets Officer"| rgs
   tfSP -->|"Storage Blob Data Contributor"| tfstate[sttifftindalltfstateeu2]
   tfSP -->|"Cloud Application Administrator (tenant)"| entra[Entra apps]
+  buildSP[tifftindall-portfolio-gha-build] -->|"KV Secrets User on SITE-* secrets only"| sharedkv[kv-tifftindall-shared]
 ```
 
-- `infra/bootstrap` owns **all four** resource groups. The env stacks (`infra/environments/*`) only data-source their resource group.
+- `infra/bootstrap` owns **all four** resource groups.
+- **Build release** in CD runs without a GitHub environment and signs in as `tifftindall-portfolio-gha-build` (trusts pushes to `main`). It can read only the individual `SITE-*` secrets, so CD can build before the env stacks exist. The env stacks (`infra/environments/*`) only data-source their resource group.
 - The env stacks set `resource_provider_registrations = "none"`; bootstrap (run by an Owner) registers the providers they need. The RG-scoped SP cannot register providers.
 - The SP is never granted anything at subscription scope.
 
