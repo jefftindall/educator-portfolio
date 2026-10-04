@@ -1,6 +1,13 @@
 # Copy to terraform.tfvars (gitignored) before bootstrap apply.
-# Use Tiffany's Azure subscription — not Jacob's family subscription.
-subscription_id = "00000000-0000-0000-0000-000000000000"
+# Never Jacob's family subscription. See docs/runbooks/subscription-hosting.md.
+#
+# Today: shared company subscription.
+subscription_id   = "a558cbbf-b396-4d5f-b9ee-4ec191bc732b"
+subscription_mode = "shared"
+#
+# After the move (docs/runbooks/subscription-migration.md):
+# subscription_id   = "<Tiffany's dedicated subscription GUID>"
+# subscription_mode = "dedicated"
 
 location = "eastus2"
 

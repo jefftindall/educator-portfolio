@@ -37,7 +37,7 @@ resource "github_actions_environment_variable" "azure_resource_group" {
   environment   = github_repository_environment.this[0].environment
   repository    = var.github_repo
   variable_name = "AZURE_RESOURCE_GROUP"
-  value         = azurerm_resource_group.main.name
+  value         = data.azurerm_resource_group.main.name
 }
 
 resource "github_actions_environment_variable" "azure_static_web_app_name" {
@@ -75,8 +75,8 @@ resource "github_actions_environment_variable" "site_url" {
   value         = "https://${var.custom_domain}"
 }
 
-# Deploy jobs read env-scoped API secrets from this vault (Gemini, ACS, etc.).
-# SITE-* / Turnstile are in bootstrap kv-tiffany-shared (AZURE_SHARED_KEY_VAULT_NAME).
+# Deploy jobs read env-scoped API secrets from this vault (Gemini, GitHub App, etc.).
+# SITE-* / Turnstile are in bootstrap kv-tifftindall-shared (AZURE_SHARED_KEY_VAULT_NAME).
 resource "github_actions_environment_variable" "azure_key_vault_name" {
   count         = var.manage_github_actions ? 1 : 0
   environment   = github_repository_environment.this[0].environment

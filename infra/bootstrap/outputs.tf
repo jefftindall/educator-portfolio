@@ -65,11 +65,11 @@ output "shared_key_vault_uri" {
   value = azurerm_key_vault.shared.vault_uri
 }
 
-output "shared_acs_name" {
-  description = "Shared Communication Service (email + SMS) used by staging and prod"
-  value       = azurerm_communication_service.shared.name
+output "app_resource_group_names" {
+  description = "Per-environment resource groups (env stacks data-source these)"
+  value       = { for env, rg in azurerm_resource_group.app : env => rg.name }
 }
 
-output "shared_acs_email_name" {
-  value = azurerm_email_communication_service.shared.name
+output "subscription_mode" {
+  value = var.subscription_mode
 }

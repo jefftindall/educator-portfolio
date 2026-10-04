@@ -139,6 +139,8 @@ jobs:
       fail-fast: false
       matrix:
         environment: [staging, prod]
+    env:
+      TF_VAR_subscription_id: ${{ vars.AZURE_TF_SUBSCRIPTION_ID }}
     defaults:
       run:
         working-directory: infra/environments/${{ matrix.environment }}

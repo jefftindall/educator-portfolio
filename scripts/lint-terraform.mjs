@@ -16,6 +16,7 @@ const validateSubscriptionId =
 const terraformEnv = {
   ...process.env,
   TF_VAR_subscription_id: validateSubscriptionId,
+  TF_VAR_subscription_mode: process.env.TF_VAR_subscription_mode ?? "shared",
 };
 
 function run(label, command, args, cwd = root) {

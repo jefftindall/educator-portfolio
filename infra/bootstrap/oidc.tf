@@ -7,12 +7,8 @@ data "azurerm_client_config" "current" {}
 
 data "azuread_client_config" "current" {}
 
-data "azurerm_subscription" "current" {
-  subscription_id = var.subscription_id
-}
-
 resource "azuread_application" "terraform" {
-  display_name     = "tiffany-portfolio-gha-terraform"
+  display_name     = "tifftindall-portfolio-gha-terraform"
   owners           = [data.azuread_client_config.current.object_id]
   sign_in_audience = "AzureADMyOrg"
 }
@@ -57,23 +53,30 @@ resource "azurerm_role_assignment" "terraform_tfstate_blob" {
   principal_id         = azuread_service_principal.terraform.object_id
 }
 
-# Env stacks create resources and assign RBAC.
-resource "azurerm_role_assignment" "terraform_subscription_contributor" {
-  scope                = data.azurerm_subscription.current.id
-  role_definition_name = "Contributor"
-  principal_id         = azuread_service_principal.terraform.object_id
+# Env stacks create resources and assign RBAC inside Tiffany's resource groups only —
+# never at subscription scope, so the SP cannot touch other workloads in a shared
+# subscription. Key Vault uses data-plane RBAC; Contributor does not grant getSecret.
+locals {
+  terraform_rg_scopes = merge(
+    { shared = azurerm_resource_group.shared.id },
+    { for env, rg in azurerm_resource_group.app : env => rg.id },
+  )
+  terraform_rg_roles = ["Contributor", "User Access Administrator", "Key Vault Secrets Officer"]
+
+  terraform_rg_role_assignments = {
+    for pair in setproduct(keys(local.terraform_rg_scopes), local.terraform_rg_roles) :
+    "${pair[0]}/${pair[1]}" => {
+      scope = local.terraform_rg_scopes[pair[0]]
+      role  = pair[1]
+    }
+  }
 }
 
-resource "azurerm_role_assignment" "terraform_subscription_uaa" {
-  scope                = data.azurerm_subscription.current.id
-  role_definition_name = "User Access Administrator"
-  principal_id         = azuread_service_principal.terraform.object_id
-}
+resource "azurerm_role_assignment" "terraform_rg" {
+  for_each = local.terraform_rg_role_assignments
 
-# Key Vault uses data-plane RBAC; subscription Contributor does not grant getSecret.
-resource "azurerm_role_assignment" "terraform_kv_secrets_officer" {
-  scope                = data.azurerm_subscription.current.id
-  role_definition_name = "Key Vault Secrets Officer"
+  scope                = each.value.scope
+  role_definition_name = each.value.role
   principal_id         = azuread_service_principal.terraform.object_id
 }
 

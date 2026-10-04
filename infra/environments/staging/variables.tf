@@ -1,6 +1,6 @@
 variable "subscription_id" {
   type        = string
-  description = "Tiffany's Azure subscription (terraform.tfvars — not Jacob's)"
+  description = "Host subscription (terraform.tfvars locally, TF_VAR_subscription_id in CI). Must match bootstrap."
 
   validation {
     condition     = can(regex("^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$", var.subscription_id))
@@ -11,12 +11,6 @@ variable "subscription_id" {
     condition     = var.subscription_id != "bf40ce12-d60e-4d58-8954-9f43445ca2af"
     error_message = "Do not use Jacob's Azure subscription."
   }
-}
-
-variable "location" {
-  type        = string
-  description = "Azure region for all resources"
-  default     = "eastus2"
 }
 
 variable "custom_domain" {

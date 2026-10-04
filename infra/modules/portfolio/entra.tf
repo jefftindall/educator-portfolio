@@ -18,7 +18,7 @@ locals {
 }
 
 resource "azuread_application" "swa" {
-  display_name     = "tiffany-portfolio-${var.environment}"
+  display_name     = "tifftindall-portfolio-${var.environment}"
   owners           = [data.azuread_client_config.current.object_id]
   sign_in_audience = "AzureADMyOrg"
 
