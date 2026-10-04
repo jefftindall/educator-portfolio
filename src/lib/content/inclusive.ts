@@ -10,14 +10,14 @@ export const inclusiveStrategies = [
       'Eric could not tolerate clapping because of sensory needs tied to a childhood injury. Instead of removing him from class rituals, we moved from snaps to golf claps to choreography that built clapping in gradually. By semester’s end he clapped on stage and attended professional performances with his classmates.',
   },
   {
-    title: 'Leverage existing resources',
+    title: 'Use the people already around the student',
     body:
-      'Danika’s Learning Ladder goals included fist bumps instead of hugs — coordinated with her other teachers so dance class reinforced the same expectations across her day. When the rungs are shared, students progress faster and staff stay aligned.',
+      'Danika’s Learning Ladder goals included fist bumps instead of hugs. I coordinated with her other teachers so dance class reinforced the same expectations she heard everywhere else, and she got one consistent message all day.',
   },
   {
     title: 'Embrace social emotional learning',
     body:
-      'Students with prior studio training were taking over choreography projects while others felt they did not belong. Through Connected Arts Network action research, I asked how SEL practices could help every student feel valued regardless of training — Pair/Think/Create peer teaching and structured group roles leveled the playing field.',
+      'Students with prior studio training were taking over choreography projects while others felt they did not belong. Through Connected Arts Network action research, I asked how SEL practices could help every student feel valued regardless of training. Pair/Think/Create peer teaching and structured group roles gave every student a real part to play.',
   },
 ] as const;
 
@@ -38,7 +38,7 @@ export const inclusiveBenefits = {
   generalEducationStudents:
     'Empathy, collaboration, and leadership as they learn alongside classmates with different strengths and needs.',
   teachers:
-    'A repeatable model for high expectations with flexible instruction — assessment focused on individual progress, not comparison.',
+    'A repeatable model for high expectations with flexible instruction - assessment focused on individual progress, not comparison.',
   specialEducationStaff:
-    'Partners who invite paras and therapists into the studio, align goals across settings, and celebrate shared concerts.',
+    'A dance teacher who invites paras and therapists into the studio, lines up goals across settings, and celebrates with them at concerts.',
 } as const;

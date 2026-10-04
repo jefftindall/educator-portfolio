@@ -11,4 +11,4 @@ export const heroSubhead =
   'Dance Director & Fine Arts Department Lead, Woodland High School · 25+ years teaching dance from pre-K through university';
 
 export const positioningParagraph =
-  'Tiffany Tindall is a K–12 dance educator and school leader who has spent 25+ years proving that rigorous, standards-based dance belongs to every student. She writes standards from the classroom up: she helped write Georgia’s dance standards, she teaches them daily to students of every ability in one room, and she studies her own practice through national action research.';
+  'I’m a K–12 dance educator and school leader. For more than 25 years I have made the case that rigorous, standards-based dance belongs to every student. I helped write Georgia’s dance standards, I teach them daily to students of every ability in the same room, and I study my own teaching through national action research.';

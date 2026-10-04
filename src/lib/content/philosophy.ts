@@ -1,6 +1,6 @@
 export const philosophyPrinciples = [
-  'Let students tell you what they need — no assumptions based on a label.',
-  'Use your caseload managers, therapists and especially paraprofessionals — and get them dancing.',
+  'Let students tell you what they need - no assumptions based on a label.',
+  'Use your caseload managers, therapists and especially paraprofessionals - and get them dancing.',
   'Adapt classroom supports from other subjects for dance.',
   "Don't change the standard; change the instructional method.",
   'Teach the class together, and let it teach itself.',

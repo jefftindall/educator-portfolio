@@ -20,7 +20,7 @@ export const site = {
   url: siteUrl(),
   email: requiredSiteEnv('SITE_CONTACT_EMAIL', import.meta.env.SITE_CONTACT_EMAIL),
   shortBio:
-    'K–12 dance educator and school leader — Georgia standards writer, inclusive practice, and Connected Arts Network action research.',
+    'K–12 dance educator and school leader - Georgia standards writer, inclusive practice, and Connected Arts Network action research.',
   description:
     'Tiffany Tindall, Ed.S., dance educator at Woodland High School: standards-based inclusive dance, NDEO presenter, and Georgia dance standards writing committee (2008).',
   knowsAbout: [
