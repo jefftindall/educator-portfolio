@@ -8,7 +8,7 @@ export type CvEntry = {
 
 export const experience: readonly CvEntry[] = [
   {
-    title: 'Dance Director, Fine Arts Department Lead & Performing Arts Center Director',
+    title: 'Dance Director & Fine Arts Department Lead',
     organization: 'Woodland High School, Bartow County School District',
     dates: '2020–present',
     location: 'Cartersville, Georgia',
@@ -109,6 +109,7 @@ export const professionalLearning: readonly CvEntry[] = [
   },
   {
     title: 'Leadership Bartow',
+    organization: 'Cartersville-Bartow Chamber of Commerce',
     dates: '2018',
   },
   {

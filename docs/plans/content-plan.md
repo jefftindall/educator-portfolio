@@ -51,7 +51,7 @@ The visual system and voice now follow the [brand style guide](../brand/style-gu
 | Typography | Fraunces (headings) + Source Sans 3 (body), self-hosted | ✅ |
 | Wordmark and monogram | Name + gold arc + "Arts Education Leader"; TT favicon | ✅ Coded wordmark; monogram favicon in outlined Fraunces (SVG + PNG). 🟡 Standalone wordmark files in all three versions (for LinkedIn, slides, print) still to produce |
 | Arc motif, icons | Arc dividers and header shapes; Lucide outline icons with text labels | ✅ |
-| Titles | Headings: "Arts Education Leader". Bios: "Dance Teacher and Fine Arts Department Lead" | ✅ Hero, Person schema. The CV entry keeps her résumé title ("Dance Director, Fine Arts Department Lead & Performing Arts Center Director"), confirmed correct |
+| Titles | Headings: "Arts Education Leader". Bios: "Dance Teacher and Fine Arts Department Lead" | ✅ Hero, Person schema. The CV entry uses "Dance Director & Fine Arts Department Lead" (Performing Arts Center Director dropped, Oct 5, 2026) |
 | Proof points | Bartow County HS Teacher of the Year on the first screen (the Woodland HS honor stays in the Person schema only) | ✅ |
 | Voice | Confident, warm, specific, first person | ✅ Copy pass done in PR #4; positioning updated to leadership framing |
 | Visual direction | Group and mixed-ability imagery; no studio clichés | ✅ Photos chosen for group moments |
@@ -62,7 +62,7 @@ The visual system and voice now follow the [brand style guide](../brand/style-gu
 Decided (Jeff, Oct 4, 2026):
 
 - ✅ **Teal on ivory** (about 4.47:1) is accepted, and the palette stays as written.
-- ✅ **CV title** stays as on her résumé.
+- ✅ **CV title** is "Dance Director & Fine Arts Department Lead" (Performing Arts Center Director removed Oct 5).
 - ✅ **Site structure** from the guide becomes the V2 plan (see Phase 3).
 
 Still open:
