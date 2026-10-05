@@ -38,7 +38,7 @@ const isActive = (href: string) => pathname === href || pathname.startsWith(href
           <summary class="flex min-h-11 cursor-pointer list-none items-center gap-2 rounded-brand border border-ivory/40 px-3 [&::-webkit-details-marker]:hidden">
             <Icon name="menu" class="h-6 w-6 group-open:hidden" />
             <Icon name="x" class="hidden h-6 w-6 group-open:block" />
-            <span class="text-base font-semibold">Menu</span>
+            <span class="sr-only">Menu</span>
           </summary>
           <div class="absolute right-0 mt-2 w-60 rounded-brand border border-ivory/20 bg-midnight p-2">
             {nav.map((item) => (

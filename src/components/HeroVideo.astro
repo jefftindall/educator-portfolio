@@ -22,12 +22,12 @@ const { src, poster, label } = Astro.props;
   ></video>
   <button
     type="button"
-    class="absolute right-3 bottom-3 inline-flex min-h-11 items-center gap-2 rounded-brand bg-midnight/70 px-4 font-semibold text-ivory [--focus-ring:var(--color-spotlight)] transition hover:bg-midnight"
+    class="absolute right-3 bottom-3 inline-flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-brand bg-midnight/70 px-3 font-semibold sm:px-4 text-ivory [--focus-ring:var(--color-spotlight)] transition hover:bg-midnight"
     data-hero-toggle
   >
     <Icon name="play" class="h-5 w-5" data-icon-play />
     <Icon name="pause" class="hidden h-5 w-5" data-icon-pause />
-    <span data-hero-label>Play video</span>
+    <span class="sr-only sm:not-sr-only" data-hero-label>Play video</span>
   </button>
 </div>
 
