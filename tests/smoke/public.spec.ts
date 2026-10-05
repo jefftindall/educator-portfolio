@@ -1,5 +1,5 @@
 import { expect, test } from '@playwright/test';
-import { BRAND, HERO_HEADLINE_PHRASE, PUBLIC_ROUTES } from '../helpers/content';
+import { BRAND, HERO_HEADLINE_PHRASE, MOVED_ROUTES, PUBLIC_ROUTES } from '../helpers/content';
 import { isStaticWebAppHost, waitForRequestOk } from '../helpers/propagation';
 import { presentationPdf } from '../../src/lib/content/inclusive';
 
@@ -11,7 +11,7 @@ test.describe('public smoke', () => {
     expect(html).toContain(HERO_HEADLINE_PHRASE);
   });
 
-  test('priority V1 routes respond', async ({ request }) => {
+  test('public routes respond', async ({ request }) => {
     for (const path of PUBLIC_ROUTES) {
       const response = await waitForRequestOk(request, path);
       expect(response.ok()).toBeTruthy();
@@ -35,10 +35,23 @@ test.describe('public smoke', () => {
     }
   });
 
+  test('moved V1 URLs redirect permanently', async ({ request }) => {
+    test.skip(!isStaticWebAppHost(), 'Redirects come from staticwebapp.config.json on deployed SWA hosts');
+    for (const [from, to] of Object.entries(MOVED_ROUTES)) {
+      for (const path of [from, `${from}/`]) {
+        const response = await waitForRequestOk(request, path, { maxRedirects: 0 });
+        expect(response.status(), `${path} should 301`).toBe(301);
+        const location = new URL(response.headers()['location'] ?? '', 'https://placeholder.invalid');
+        expect(location.pathname.replace(/\/$/, ''), `${path} target`).toBe(to);
+      }
+    }
+  });
+
   test('NDEO presentation PDF is linked and served', async ({ request }) => {
-    const page = await waitForRequestOk(request, '/dance-for-every-body');
-    const html = await page.text();
-    expect(html).toContain(`href="${presentationPdf}"`);
+    for (const path of ['/leadership-and-impact/dance-for-every-body', '/speaking-and-workshops']) {
+      const html = await (await waitForRequestOk(request, path)).text();
+      expect(html, `${path} links the slides`).toContain(`href="${presentationPdf}"`);
+    }
     const pdf = await request.head(presentationPdf);
     expect(pdf.ok()).toBeTruthy();
     expect(pdf.headers()['content-type'] ?? '').toMatch(/pdf/i);

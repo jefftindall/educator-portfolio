@@ -26,14 +26,24 @@ const ogImage = await getImage({ src: grayDressCircle, width: 1200, format: 'jpg
 
 const explore = [
   {
-    href: '/standards-and-leadership',
-    title: 'Standards & leadership',
-    body: 'Georgia standards writing, NCAS artistic processes, assessment',
+    href: '/about',
+    title: 'About',
+    body: 'My story and teaching philosophy',
   },
   {
-    href: '/dance-for-every-body',
-    title: 'Dance for Every Body',
-    body: 'Inclusive practice, NDEO 2025, classroom stories',
+    href: '/leadership-and-impact',
+    title: 'Leadership and impact',
+    body: 'Department leadership, Georgia standards writing, NCAS artistic processes, inclusive dance',
+  },
+  {
+    href: '/speaking-and-workshops',
+    title: 'Speaking and workshops',
+    body: 'NDEO 2025 session and Connected Arts Network action research',
+  },
+  {
+    href: '/experience',
+    title: 'Experience',
+    body: 'Career, Teacher of the Year honors, standards service, professional learning, education',
   },
 ];
 ---
@@ -55,11 +65,11 @@ const explore = [
           <BadgeList items={firstScreenHonors} columns={1} />
         </div>
         <div class="mt-8 flex flex-wrap items-center gap-3">
-          <a href="/teaching-philosophy" class="btn-primary">
+          <a href="/about#teaching-philosophy" class="btn-primary">
             Read my teaching philosophy
             <Icon name="arrow-right" class="h-5 w-5" />
           </a>
-          <a href="/contact" class="btn-secondary">CV & contact</a>
+          <a href="/experience" class="btn-secondary">My experience</a>
         </div>
       </div>
       <Figure

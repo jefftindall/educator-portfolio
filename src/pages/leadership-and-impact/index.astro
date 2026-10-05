@@ -1,34 +1,54 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import PageHeader from '../components/PageHeader.astro';
-import Prose from '../components/Prose.astro';
-import Figure from '../components/Figure.astro';
-import VideoFigure from '../components/VideoFigure.astro';
-import barreClass from '../assets/photos/barre-class.jpg';
-import ensembleWhite from '../assets/photos/stage-ensemble-white.jpg';
-import fieldTrip from '../assets/photos/field-trip-performance.jpg';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import Prose from '../../components/Prose.astro';
+import Figure from '../../components/Figure.astro';
+import VideoFigure from '../../components/VideoFigure.astro';
+import Icon from '../../components/Icon.astro';
+import barreClass from '../../assets/photos/barre-class.jpg';
+import ensembleWhite from '../../assets/photos/stage-ensemble-white.jpg';
+import fieldTrip from '../../assets/photos/field-trip-performance.jpg';
+import classInStudio from '../../assets/photos/inclusive-class-studio.jpg';
+import { departmentLeadership, programIntro, programPoints } from '../../lib/content/program';
+import { ndeoSessionDescription } from '../../lib/content/inclusive';
 import {
   artisticProcesses,
   assessmentPhilosophy,
   standardsWriting,
   technologyStatement,
   whyServe,
-} from '../lib/content/standards';
+} from '../../lib/content/standards';
 ---
 
 <BaseLayout
-  title="Standards & leadership"
-  description="Georgia dance standards writing, classroom alignment with NCAS artistic processes, and leadership in standards-based dance education."
-  canonicalPath="/standards-and-leadership"
+  title="Leadership and impact"
+  description="Fine arts department leadership, Georgia dance standards writing, an open-enrollment dance program aligned to the NCAS artistic processes, and inclusive dance for every student."
+  canonicalPath="/leadership-and-impact"
 >
   <PageHeader
-    title="Standards & leadership"
-    lede="Standards written from the classroom up - and taught every day in an inclusive high-school dance program."
+    title="Leadership and impact"
+    lede="Standards written from the classroom up, a dance program open to every student, and a fine arts department that serves all four arts."
   />
 
   <Prose>
+    <h2 class="pt-0!">Leading a fine arts department</h2>
+    <p class="leading-relaxed">{departmentLeadership}</p>
+
     <h2>Standards-writing experience</h2>
     <p class="leading-relaxed">{standardsWriting}</p>
+
+    <h2>Building dance programs</h2>
+    <p class="leading-relaxed">{programIntro}</p>
+    <div class="grid gap-4 sm:grid-cols-2">
+      {
+        programPoints.map((point) => (
+          <article class="rounded-brand border border-soft-stone bg-white p-5">
+            <h3>{point.title}</h3>
+            <p class="mt-2 leading-relaxed">{point.body}</p>
+          </article>
+        ))
+      }
+    </div>
 
     <h2>Artistic processes in my classroom</h2>
     <p>Aligned to the National Core Arts Standards anchor processes.</p>
@@ -88,6 +108,25 @@ import {
         />
       </li>
     </ul>
+
+    <h2>Dance for every body</h2>
+    <div class="grid items-start gap-6 rounded-brand border border-soft-stone bg-white p-6 sm:grid-cols-[1fr_12rem]">
+      <div class="space-y-4">
+        <p class="leading-relaxed">{ndeoSessionDescription}</p>
+        <p>
+          <a href="/leadership-and-impact/dance-for-every-body" class="btn-primary">
+            Read about inclusive dance
+            <Icon name="arrow-right" class="h-5 w-5" />
+          </a>
+        </p>
+      </div>
+      <Figure
+        src={classInStudio}
+        alt="A large inclusive dance class strikes a pose together in the studio, including a student in a wheelchair."
+        sizes="(min-width: 640px) 12rem, 100vw"
+        class="max-w-[12rem]"
+      />
+    </div>
 
     <h2>Assessment philosophy</h2>
     <p class="leading-relaxed">{assessmentPhilosophy}</p>

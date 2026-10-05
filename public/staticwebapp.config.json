@@ -1,6 +1,21 @@
 {
   "routes": [
     {
+      "route": "/standards-and-leadership*",
+      "redirect": "/leadership-and-impact",
+      "statusCode": 301
+    },
+    {
+      "route": "/teaching-philosophy*",
+      "redirect": "/about",
+      "statusCode": 301
+    },
+    {
+      "route": "/dance-for-every-body*",
+      "redirect": "/leadership-and-impact/dance-for-every-body",
+      "statusCode": 301
+    },
+    {
       "route": "/_astro/*",
       "headers": {
         "Cache-Control": "public, max-age=31536000, immutable"

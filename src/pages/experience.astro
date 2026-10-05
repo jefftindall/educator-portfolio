@@ -1,0 +1,59 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import Prose from '../components/Prose.astro';
+import CvList from '../components/CvList.astro';
+import Icon from '../components/Icon.astro';
+import {
+  education,
+  experience,
+  otherTraining,
+  professionalLearning,
+  standardsAndService,
+  teachingHonors,
+  volunteering,
+} from '../lib/content/cv';
+---
+
+<BaseLayout
+  title="Experience"
+  description="CV for Tiffany Tindall, Ed.S., Dance Teacher and Fine Arts Department Lead at Woodland High School: experience, Teacher of the Year honors, standards and national service, professional learning, education, and community leadership."
+  canonicalPath="/experience"
+>
+  <PageHeader
+    title="Experience"
+    lede="More than 25 years of teaching and leading in the arts, from pre-K through university."
+  />
+
+  <Prose>
+    <h2 class="pt-0!">Career</h2>
+    <CvList items={experience} />
+
+    <h2>Teacher of the Year</h2>
+    <CvList items={teachingHonors} />
+
+    <h2>Standards and national service</h2>
+    <CvList items={standardsAndService} />
+
+    <h2>Professional learning</h2>
+    <CvList items={professionalLearning} />
+
+    <h3>Also trained in</h3>
+    <ul class="list-disc space-y-2 pl-5">
+      {otherTraining.map((item) => <li>{item}</li>)}
+    </ul>
+
+    <h2>Education</h2>
+    <CvList items={education} />
+
+    <h2>Community leadership</h2>
+    <CvList items={volunteering} />
+
+    <p class="pt-4">
+      <a href="/contact" class="btn-primary">
+        Get in touch
+        <Icon name="arrow-right" class="h-5 w-5" />
+      </a>
+    </p>
+  </Prose>
+</BaseLayout>
