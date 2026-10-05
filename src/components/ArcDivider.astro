@@ -1,0 +1,13 @@
+---
+import Arc from './Arc.astro';
+
+interface Props {
+  /** `recede` = Soft Stone on ivory; `dark` = gold on indigo. */
+  tone?: 'recede' | 'dark';
+}
+const { tone = 'recede' } = Astro.props;
+---
+
+<div class:list={['mx-auto max-w-5xl px-6', tone === 'dark' ? 'text-spotlight' : 'text-soft-stone']}>
+  <Arc class="h-8 w-full md:h-10" strokeWidth={2} />
+</div>

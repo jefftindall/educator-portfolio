@@ -1,5 +1,8 @@
 export const ndeoSessionTitle = 'Dance for Every Body: Dance for All Abilities';
 
+/** NDEO 2025 slide deck, served from public/. */
+export const presentationPdf = '/media/docs/dance-for-every-body-ndeo-2025.pdf';
+
 export const ndeoSessionDescription =
   'Inclusive dance in a public-school setting: practical strategies for teaching the same standards to general and special education students in one room, with stories from Woodland High School and Karina’s Class.';
 

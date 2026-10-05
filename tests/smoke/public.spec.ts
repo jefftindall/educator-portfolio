@@ -1,6 +1,7 @@
 import { expect, test } from '@playwright/test';
 import { BRAND, HERO_HEADLINE_PHRASE, PUBLIC_ROUTES } from '../helpers/content';
 import { isStaticWebAppHost, waitForRequestOk } from '../helpers/propagation';
+import { presentationPdf } from '../../src/lib/content/inclusive';
 
 test.describe('public smoke', () => {
   test('home shows brand and hero headline', async ({ request }) => {
@@ -32,6 +33,15 @@ test.describe('public smoke', () => {
       const response = await request.head(mediaPath);
       expect(response.ok(), `${mediaPath} should be served`).toBeTruthy();
     }
+  });
+
+  test('NDEO presentation PDF is linked and served', async ({ request }) => {
+    const page = await waitForRequestOk(request, '/dance-for-every-body');
+    const html = await page.text();
+    expect(html).toContain(`href="${presentationPdf}"`);
+    const pdf = await request.head(presentationPdf);
+    expect(pdf.ok()).toBeTruthy();
+    expect(pdf.headers()['content-type'] ?? '').toMatch(/pdf/i);
   });
 
   test('robots.txt and sitemap are served', async ({ request }) => {

@@ -1,4 +1,6 @@
 ---
+import Icon from './Icon.astro';
+
 interface Props {
   src: string;
   poster: string;
@@ -7,7 +9,7 @@ interface Props {
 const { src, poster, label } = Astro.props;
 ---
 
-<div class="hero-video relative overflow-hidden rounded-2xl bg-gray-900 shadow-lg" data-hero-video>
+<div class="hero-video relative overflow-hidden rounded-brand bg-midnight" data-hero-video>
   <video
     class="aspect-video w-full object-cover"
     src={src}
@@ -20,16 +22,12 @@ const { src, poster, label } = Astro.props;
   ></video>
   <button
     type="button"
-    class="absolute bottom-3 right-3 inline-flex min-h-11 min-w-11 items-center justify-center rounded-full bg-black/60 text-white backdrop-blur-sm transition hover:bg-black/80 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
-    aria-label="Play video"
+    class="absolute right-3 bottom-3 inline-flex min-h-11 items-center gap-2 rounded-brand bg-midnight/70 px-4 font-semibold text-ivory [--focus-ring:var(--color-spotlight)] transition hover:bg-midnight"
     data-hero-toggle
   >
-    <svg data-icon-play class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-      <path d="M8 5v14l11-7z" />
-    </svg>
-    <svg data-icon-pause class="hidden h-5 w-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-      <path d="M6 5h4v14H6zM14 5h4v14h-4z" />
-    </svg>
+    <Icon name="play" class="h-5 w-5" data-icon-play />
+    <Icon name="pause" class="hidden h-5 w-5" data-icon-pause />
+    <span data-hero-label>Play video</span>
   </button>
 </div>
 
@@ -40,10 +38,11 @@ const { src, poster, label } = Astro.props;
     if (!video || !toggle) continue;
     const playIcon = toggle.querySelector('[data-icon-play]');
     const pauseIcon = toggle.querySelector('[data-icon-pause]');
+    const label = toggle.querySelector('[data-hero-label]');
 
     const sync = () => {
       const playing = !video.paused;
-      toggle.setAttribute('aria-label', playing ? 'Pause video' : 'Play video');
+      if (label) label.textContent = playing ? 'Pause video' : 'Play video';
       playIcon?.classList.toggle('hidden', playing);
       pauseIcon?.classList.toggle('hidden', !playing);
     };

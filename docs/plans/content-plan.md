@@ -19,7 +19,7 @@ Status as of **Oct 4, 2026**. Legend: ✅ done · 🟡 partial / needs Tiffany's
 |---|---|---|
 | **1. Platform** | Astro scaffold, Azure Static Web Apps, Terraform, CI/CD, Playwright gates | ✅ Done (PR #2, #5, #6) |
 | **2. V1 — NCAS launch** | Five priority pages: Home, Standards & Leadership, Teaching Philosophy, Dance for Every Body, CV & Contact | 🟡 Pages built (PR #4); content decisions and the launch checklist remain |
-| **3. V2 — Depth** | Professional Learning, The Program, My Story, Gallery | ⬜ Not started |
+| **3. V2 — Depth** | Style guide structure: Home, About, Leadership and Impact, Speaking and Workshops, Recognition, Contact | ⬜ Not started |
 | **4. Later** | Testimonials, resources, possible "Work With Me", ongoing CAN research updates | ⬜ Not started |
 
 ---
@@ -40,22 +40,45 @@ Done:
 
 ### Brand foundations
 
+The visual system and voice now follow the [brand style guide](../brand/style-guide.md) (Oct 4, 2026). It replaces the earlier "accent from the Woodland HS logo" plan: the brand uses no school colors, mascots, or logos.
+
 | Item | Plan | Status |
 |---|---|---|
-| Hero line | "Don't change the standard. Change the instructional method." | ✅ `src/lib/content/credentials.ts` |
-| Positioning paragraph | First-person version of the strategy's positioning statement | ✅ |
-| Voice | Warm, practical, story-led, first person | ✅ Copy pass done in PR #4 |
+| Positioning | "Award-winning educator and fine arts leader who works to make high-quality arts education available to every student" | ✅ Home opening line |
+| Tagline | "Arts education for all." (style guide option 1) | ✅ Home `h1`, footer, page titles |
+| Hero line | "Don't change the standard. Change the instructional method." | ✅ Moved to an indigo pull-quote band on Home |
+| Palette | Midnight Indigo, Studio Teal, Spotlight Gold, Warm Ivory, Soft Stone, Charcoal | ✅ `src/styles/global.css`; Tailwind default colors turned off |
+| Typography | Fraunces (headings) + Source Sans 3 (body), self-hosted | ✅ |
+| Wordmark and monogram | Name + gold arc + "Arts Education Leader"; TT favicon | ✅ Coded wordmark; monogram favicon in outlined Fraunces (SVG + PNG). 🟡 Standalone wordmark files in all three versions (for LinkedIn, slides, print) still to produce |
+| Arc motif, icons | Arc dividers and header shapes; Lucide outline icons with text labels | ✅ |
+| Titles | Headings: "Arts Education Leader". Bios: "Dance Teacher and Fine Arts Department Lead" | ✅ Hero, Person schema. The CV entry keeps her résumé title ("Dance Director, Fine Arts Department Lead & Performing Arts Center Director"), confirmed correct |
+| Proof points | Bartow County HS Teacher of the Year on the first screen (the Woodland HS honor stays in the Person schema only) | ✅ |
+| Voice | Confident, warm, specific, first person | ✅ Copy pass done in PR #4; positioning updated to leadership framing |
 | Visual direction | Group and mixed-ability imagery; no studio clichés | ✅ Photos chosen for group moments |
-| Palette | One accent from the Woodland HS logo + neutral base | 🟡 Accent palette in place; confirm it matches the logo, and check district rules before using the logo itself |
-| CAN prominence | The NCAS project manager came out of the CAN network, so make CAN prominent | 🟡 One badge plus one sentence on Home; consider a stronger callout |
+| CAN prominence | The NCAS project manager came out of the CAN network, so make CAN prominent | 🟡 One dated badge on Home (the separate sentence was removed); consider a stronger callout |
+
+#### Brand decisions
+
+Decided (Jeff, Oct 4, 2026):
+
+- ✅ **Teal on ivory** (about 4.47:1) is accepted, and the palette stays as written.
+- ✅ **CV title** stays as on her résumé.
+- ✅ **Site structure** from the guide becomes the V2 plan (see Phase 3).
+
+Still open:
+
+1. **Degrees after her name** (M.Ed., Ed.S.). The guide limits them to résumés, speaker bios, and email signatures. The hero no longer shows "Ed.S."; the meta description and CV still do.
+2. **Professional photo session** (guide shot list). The NDEO conference photo stands in for the headshot until then.
+3. **Bios on file** in three lengths: one line, 50 words, 150 words.
 
 ### Pages
 
 #### 1. Home (`/`) — 🟡 mostly done
 
-- ✅ Hero headline, subhead, CTAs (philosophy, CV & contact)
+- ✅ First screen per the style guide: tagline headline, positioning line, circular portrait, Bartow County Teacher of the Year honor, one gold CTA (philosophy) plus CV & contact
 - ✅ Hero video loop: `winter-finale-loop.mp4` (Winter 2021 finale, trimmed)
-- ✅ Credibility badges: GA Standards Writing Committee (2008), NDEO Presenter (2025), CAN National PLC, Barber MS Teacher of the Year (2007–08), and the new **Bartow County HS Teacher of the Year (2026–27)**, which isn't in the strategy doc
+- ✅ Pull quote band: "Don't change the standard. Change the instructional method."
+- ✅ Leadership and recognition, newest first: Bartow County HS Teacher of the Year (2026–27), NDEO Presenter (2025), CAN National PLC (2024–present), Fine Arts Department Lead (2021–present), GA Standards Writing Committee (2008), Barber MS Teacher of the Year (2007–08)
 - ✅ Three group photos and "Explore" links to Standards and Dance for Every Body
 - ⬜ Principal quote (Melinda Wilder) once received
 
@@ -84,6 +107,7 @@ Done:
 - ✅ Dance I etiquette Learning Ladder (8 rungs, as an ordered list)
 - ✅ "Who benefits" for four audiences
 - ✅ "More stories" (first names only)
+- ✅ NDEO 2025 slide deck available to download at the end of the page (`public/media/docs/dance-for-every-body-ndeo-2025.pdf`, smoke-tested)
 - ⬜ Learning Ladder as a graphic instead of a list (nice to have)
 - ⬜ Principal quote (optional second spot)
 - 🔒/⚠️ **Confirm a signed media release** for the student in the clapping-dance video before launch; if it isn't confirmed, swap in a photo
@@ -122,6 +146,19 @@ Done:
 ---
 
 ## Phase 3 — V2 depth pages ⬜
+
+V2 moves the site to the [style guide's](../brand/style-guide.md) structure: **Home, About, Leadership and Impact, Speaking and Workshops, Recognition, Contact**. The V1 pages and the planned depth pages fold into it like this:
+
+| Style guide page | Built from |
+|---|---|
+| Home | V1 Home (first screen already follows the guide) |
+| About | My Story + Teaching Philosophy |
+| Leadership and Impact | Standards & Leadership, The Program, Dance for Every Body |
+| Speaking and Workshops | NDEO 2025 and 2017 sessions, CAN action research, Professional Learning timeline |
+| Recognition | Teacher of the Year honors, standards committee, service (from CV) |
+| Contact | V1 CV & Contact |
+
+Gallery stays as a supporting page. Any V1 URL that moves gets a 301 in both `staticwebapp.config.json` files, and the NCAS-linked URLs must keep working.
 
 Each new route needs: a `src/lib/nav.ts` entry, a smoke assertion in `tests/smoke/public.spec.ts`, a sitemap check, and a journey test if it's a real visitor flow ([post-deploy-tests](../../.cursor/rules/post-deploy-tests.mdc)).
 

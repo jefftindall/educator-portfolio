@@ -1,0 +1,31 @@
+---
+import Arc from './Arc.astro';
+
+interface Props {
+  /** `full` for ivory/white backgrounds; `reversed` for indigo. */
+  variant?: 'full' | 'reversed';
+  showDescriptor?: boolean;
+  class?: string;
+}
+const { variant = 'full', showDescriptor = true, class: className = '' } = Astro.props;
+const reversed = variant === 'reversed';
+---
+
+<span class:list={['inline-flex min-w-[140px] flex-col leading-none', className]}>
+  <span
+    class:list={[
+      'font-serif text-2xl font-semibold tracking-tight md:text-[1.75rem]',
+      reversed ? 'text-ivory' : 'text-midnight',
+    ]}
+  >
+    Tiffany Tindall
+  </span>
+  <Arc class="mt-1 h-2 w-full text-spotlight" strokeWidth={1.75} />
+  {
+    showDescriptor && (
+      <span class:list={['label mt-1.5 text-[11px]! md:text-xs!', reversed ? 'text-ivory' : 'text-studio']}>
+        Arts Education Leader
+      </span>
+    )
+  }
+</span>

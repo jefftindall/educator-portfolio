@@ -1,4 +1,7 @@
 ---
+import '@fontsource-variable/fraunces/wght.css';
+import '@fontsource-variable/fraunces/wght-italic.css';
+import '@fontsource-variable/source-sans-3/wght.css';
 import '../styles/global.css';
 import Seo from '../components/Seo.astro';
 import Nav from '../components/Nav.astro';
@@ -45,6 +48,10 @@ const pageTitle = title
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
+    <meta name="theme-color" content="#1E2A5A" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <Seo
       title={pageTitle}
       description={description}
@@ -54,10 +61,10 @@ const pageTitle = title
       noIndex={noIndex}
     />
   </head>
-  <body class="bg-white text-gray-900 antialiased">
+  <body class="antialiased">
     <a
       href="#main"
-      class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded focus:bg-gray-900 focus:px-3 focus:py-2 focus:text-white"
+      class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-brand focus:bg-spotlight focus:px-3 focus:py-2 focus:font-semibold focus:text-midnight"
     >
       Skip to content
     </a>

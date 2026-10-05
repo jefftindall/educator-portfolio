@@ -4,6 +4,8 @@ import PageHeader from '../components/PageHeader.astro';
 import Prose from '../components/Prose.astro';
 import Figure from '../components/Figure.astro';
 import VideoFigure from '../components/VideoFigure.astro';
+import Icon from '../components/Icon.astro';
+import { presentationPdf } from '../lib/content/inclusive';
 import classOnStage from '../assets/photos/inclusive-class-stage.jpg';
 import classInStudio from '../assets/photos/inclusive-class-studio.jpg';
 import ndeoPhoto from '../assets/photos/ndeo-2025.jpg';
@@ -32,10 +34,10 @@ import {
       loading="eager"
     />
 
-    <h2 class="text-xl font-semibold text-gray-900">NDEO 2025 national conference</h2>
+    <h2>NDEO 2025 national conference</h2>
     <div class="grid items-start gap-6 sm:grid-cols-[1fr_12rem]">
       <div class="space-y-4">
-        <p class="font-medium text-gray-900">{ndeoSessionTitle}</p>
+        <p class="font-serif text-[22px] italic text-midnight">{ndeoSessionTitle}</p>
         <p class="leading-relaxed">
           Disability and Pedagogy track · October 2025. Inclusive Dance I brings general and special education
           students together to learn the same standards and perform each semester - including Karina’s Class,
@@ -50,15 +52,16 @@ import {
         widths={[400, 800]}
         sizes="(min-width: 640px) 12rem, 100vw"
         imgClass="aspect-[4/5] object-cover object-top"
+        class="max-w-[12rem]"
       />
     </div>
 
-    <h2 class="text-xl font-semibold text-gray-900">Three strategies</h2>
+    <h2>Three strategies</h2>
     <div class="space-y-8">
       {
         inclusiveStrategies.map((strategy) => (
           <article>
-            <h3 class="text-lg font-medium text-gray-900">{strategy.title}</h3>
+            <h3>{strategy.title}</h3>
             <p class="mt-2 leading-relaxed">{strategy.body}</p>
           </article>
         ))
@@ -72,7 +75,7 @@ import {
       caption="The clapping dance from Eric’s story, on stage with his classmates."
     />
 
-    <h2 class="text-xl font-semibold text-gray-900">Dance I etiquette learning ladder</h2>
+    <h2>Dance I etiquette learning ladder</h2>
     <p class="leading-relaxed">
       Concrete rungs turn expectations into steps students can master - shared with classroom teachers when
       goals overlap.
@@ -104,27 +107,27 @@ import {
       </li>
     </ul>
 
-    <h2 class="text-xl font-semibold text-gray-900">Who benefits</h2>
+    <h2>Who benefits</h2>
     <dl class="space-y-4">
       <div>
-        <dt class="font-medium text-gray-900">Students with disabilities</dt>
+        <dt class="font-bold text-midnight">Students with disabilities</dt>
         <dd class="mt-1">{inclusiveBenefits.studentsWithDisabilities}</dd>
       </div>
       <div>
-        <dt class="font-medium text-gray-900">General education students</dt>
+        <dt class="font-bold text-midnight">General education students</dt>
         <dd class="mt-1">{inclusiveBenefits.generalEducationStudents}</dd>
       </div>
       <div>
-        <dt class="font-medium text-gray-900">Dance teachers</dt>
+        <dt class="font-bold text-midnight">Dance teachers</dt>
         <dd class="mt-1">{inclusiveBenefits.teachers}</dd>
       </div>
       <div>
-        <dt class="font-medium text-gray-900">Special education staff</dt>
+        <dt class="font-bold text-midnight">Special education staff</dt>
         <dd class="mt-1">{inclusiveBenefits.specialEducationStaff}</dd>
       </div>
     </dl>
 
-    <h2 class="text-xl font-semibold text-gray-900">More stories</h2>
+    <h2>More stories</h2>
     <ul class="list-disc space-y-2 pl-5">
       <li>
         John preferred bright lights and loud music - a reminder to observe before assuming what a label
@@ -143,5 +146,19 @@ import {
         class.
       </li>
     </ul>
+
+    <h2>Use the presentation</h2>
+    <div class="rounded-brand border border-soft-stone bg-white p-6">
+      <p>
+        The slides from my NDEO 2025 session are free to view, share, and adapt for your own classes and
+        professional learning.
+      </p>
+      <p class="mt-5">
+        <a href={presentationPdf} download class="btn-primary">
+          <Icon name="download" class="h-5 w-5" />
+          Download the slides (PDF, 5.3 MB)
+        </a>
+      </p>
+    </div>
   </Prose>
 </BaseLayout>

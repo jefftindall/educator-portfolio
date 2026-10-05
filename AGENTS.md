@@ -36,7 +36,9 @@ Never print secret values in workflows, scripts, logs, or commit messages. Full 
 
 ## Brand
 
-Tiffany Tindall: **educator portfolio** at `tifftindall.com`. V1 content supports her NCAS application; see [`docs/plans/content-plan.md`](docs/plans/content-plan.md) for phases and status. See [`.cursor/rules/tiffany-brand.mdc`](.cursor/rules/tiffany-brand.mdc).
+Tiffany Tindall: **educator portfolio** at `tifftindall.com`, positioned as an **arts education leader** ("Arts education for all."). V1 content supports her NCAS application; see [`docs/plans/content-plan.md`](docs/plans/content-plan.md) for phases and status.
+
+The look and voice come from [`docs/brand/style-guide.md`](docs/brand/style-guide.md): six colors, Fraunces and Source Sans 3, the gold arc motif, and first-person voice. Its "In code" section maps the guide to Tailwind utilities (`midnight`, `studio`, `spotlight`, `ivory`, `soft-stone`, `charcoal`) and components. Tailwind's default palette is turned off on purpose. Guardrails: [`.cursor/rules/tiffany-brand.mdc`](.cursor/rules/tiffany-brand.mdc).
 
 ## Public site
 

@@ -15,15 +15,16 @@ function siteUrl(): string {
 
 export const site = {
   name: 'Tiffany Tindall',
-  tagline: 'Dance educator',
-  jobTitle: 'Dance Director & Fine Arts Department Lead',
+  tagline: 'Arts education for all.',
+  jobTitle: 'Dance Teacher and Fine Arts Department Lead',
   url: siteUrl(),
   email: requiredSiteEnv('SITE_CONTACT_EMAIL', import.meta.env.SITE_CONTACT_EMAIL),
   shortBio:
-    'K–12 dance educator and school leader - Georgia standards writer, inclusive practice, and Connected Arts Network action research.',
+    'Arts education leader and Bartow County School System High School Teacher of the Year, working to make high-quality arts education available to every student.',
   description:
-    'Tiffany Tindall, Ed.S., dance educator at Woodland High School and 2026–27 Bartow County School System High School Teacher of the Year: standards-based inclusive dance, NDEO presenter, and Georgia dance standards writing committee (2008).',
+    'Tiffany Tindall is an award-winning educator and fine arts leader at Woodland High School and the 2026–27 Bartow County School System High School Teacher of the Year. She helped write Georgia’s dance standards, presents nationally on inclusive dance, and works to make high-quality arts education available to every student.',
   awards: [
+    'Woodland High School Teacher of the Year (2026)',
     'Bartow County School System High School Teacher of the Year (2026–27)',
     'Barber Middle School Teacher of the Year (2007–08)',
   ],

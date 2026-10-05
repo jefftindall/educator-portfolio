@@ -1,5 +1,6 @@
 ---
 import Icon from './Icon.astro';
+import Wordmark from './Wordmark.astro';
 import { site } from '../lib/site';
 
 interface Props {
@@ -8,30 +9,28 @@ interface Props {
 const { hideCta = false } = Astro.props;
 ---
 
-<footer class="mt-16 border-t border-gray-200 md:mt-24">
-  <div class="mx-auto max-w-6xl px-6 py-10 text-center text-sm text-gray-600">
-    <p class="mb-4 flex flex-wrap items-center justify-center gap-x-4 gap-y-2">
-      {
-        !hideCta && (
-          <a
-            href={`mailto:${site.email}`}
-            class="inline-flex items-center gap-1.5 font-medium text-accent-700 underline-offset-2 hover:underline"
-          >
-            <Icon name="mail" />
-            Email me
-          </a>
-        )
-      }
-      <a
-        href={site.linkedin}
-        class="inline-flex items-center gap-1.5 font-medium text-accent-700 underline-offset-2 hover:underline"
-        rel="me noopener"
-        target="_blank"
-      >
-        <Icon name="linkedin" />
-        Connect on LinkedIn
-      </a>
-    </p>
-    <p>© {new Date().getFullYear()} {site.name}</p>
+<footer class="surface-dark mt-16 md:mt-24">
+  <div class="mx-auto flex max-w-6xl flex-col gap-8 px-6 py-12 md:flex-row md:items-end md:justify-between">
+    <div>
+      <Wordmark variant="reversed" />
+      <p class="mt-4 font-serif text-xl italic">{site.tagline}</p>
+    </div>
+    <div class="flex flex-col gap-3 md:items-end">
+      <p class="flex flex-wrap items-center gap-x-6 gap-y-2">
+        {
+          !hideCta && (
+            <a href={`mailto:${site.email}`} class="inline-flex items-center gap-2 font-semibold">
+              <Icon name="mail" />
+              Email me
+            </a>
+          )
+        }
+        <a href={site.linkedin} class="inline-flex items-center gap-2 font-semibold" rel="me noopener" target="_blank">
+          <Icon name="linkedin" />
+          Connect on LinkedIn
+        </a>
+      </p>
+      <p class="text-base">© {new Date().getFullYear()} {site.name}</p>
+    </div>
   </div>
 </footer>

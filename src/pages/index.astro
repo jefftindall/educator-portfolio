@@ -1,79 +1,115 @@
 ---
 import { getImage } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Arc from '../components/Arc.astro';
+import ArcDivider from '../components/ArcDivider.astro';
 import BadgeList from '../components/BadgeList.astro';
 import Figure from '../components/Figure.astro';
 import HeroVideo from '../components/HeroVideo.astro';
+import Icon from '../components/Icon.astro';
 import { buildPersonJsonLd } from '../lib/personSchema';
+import { site } from '../lib/site';
 import grayDressCircle from '../assets/photos/gray-dress-circle.jpg';
+import ndeoPortrait from '../assets/photos/ndeo-2025-headshot.jpg';
 import circleHoldingHands from '../assets/photos/stage-circle-holding-hands.jpg';
 import stageWarmUp from '../assets/photos/stage-warm-up.jpg';
 import {
   credibilityBadges,
+  firstScreenHonors,
   heroHeadline,
   heroSubhead,
   positioningParagraph,
+  positioningStatement,
 } from '../lib/content/credentials';
 const jsonLd = buildPersonJsonLd();
 const ogImage = await getImage({ src: grayDressCircle, width: 1200, format: 'jpg' });
+
+const explore = [
+  {
+    href: '/standards-and-leadership',
+    title: 'Standards & leadership',
+    body: 'Georgia standards writing, NCAS artistic processes, assessment',
+  },
+  {
+    href: '/dance-for-every-body',
+    title: 'Dance for Every Body',
+    body: 'Inclusive practice, NDEO 2025, classroom stories',
+  },
+];
 ---
 
-<BaseLayout
-  title="Home"
-  description={positioningParagraph}
-  image={ogImage.src}
-  canonicalPath="/"
-  jsonLd={jsonLd}
->
-  <section class="border-b border-gray-200 bg-gradient-to-b from-accent-50/90 to-white">
-    <div class="mx-auto max-w-4xl px-6 py-14 text-center md:py-20">
-      <p class="text-sm font-medium uppercase tracking-wide text-accent-700">Dance educator · Ed.S.</p>
-      <h1 class="mt-3 text-3xl font-semibold leading-tight tracking-tight text-gray-900 md:text-5xl">
-        {heroHeadline}
-      </h1>
-      <p class="mx-auto mt-5 max-w-2xl text-lg text-gray-700">{heroSubhead}</p>
-      <div class="mt-8 flex flex-wrap items-center justify-center gap-3">
-        <a
-          href="/teaching-philosophy"
-          class="inline-flex min-h-11 items-center rounded-lg bg-accent-900 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-accent-700"
-        >
-          Read my teaching philosophy
-        </a>
-        <a
-          href="/contact"
-          class="inline-flex min-h-11 items-center rounded-lg border border-gray-300 bg-white px-5 py-2.5 text-sm font-medium text-gray-900 transition hover:border-accent-200 hover:bg-accent-50"
-        >
-          CV & contact
-        </a>
+<BaseLayout title="Home" image={ogImage.src} canonicalPath="/" jsonLd={jsonLd}>
+  <section class="relative overflow-hidden">
+    <Arc
+      class="pointer-events-none absolute right-0 bottom-0 h-64 w-full text-soft-stone md:h-96"
+      strokeWidth={28}
+    />
+    <div
+      class="relative mx-auto grid max-w-6xl items-center gap-6 px-6 py-10 md:grid-cols-[minmax(0,1fr)_auto] md:gap-16 md:py-20"
+    >
+      <div class="max-w-[40rem]">
+        <h1>{site.tagline}</h1>
+        <p class="mt-5 text-xl leading-relaxed">{positioningStatement}</p>
+        <p class="mt-3 text-base">{heroSubhead}</p>
+        <div class="mt-8">
+          <BadgeList items={firstScreenHonors} columns={1} />
+        </div>
+        <div class="mt-8 flex flex-wrap items-center gap-3">
+          <a href="/teaching-philosophy" class="btn-primary">
+            Read my teaching philosophy
+            <Icon name="arrow-right" class="h-5 w-5" />
+          </a>
+          <a href="/contact" class="btn-secondary">CV & contact</a>
+        </div>
       </div>
-    </div>
-    <div class="mx-auto max-w-5xl px-6 pb-14 md:pb-20">
-      <HeroVideo
-        src="/media/video/winter-finale-loop.mp4"
-        poster="/media/video/winter-finale-poster.jpg"
-        label="Students dancing together in the finale of the 2021 winter concert"
+      <Figure
+        src={ndeoPortrait}
+        alt="Tiffany Tindall smiling at the National Dance Education Organization conference."
+        widths={[256, 450]}
+        sizes="(min-width: 768px) 20rem, 8rem"
+        quality={95}
+        loading="eager"
+        class="order-first w-32 md:order-none md:mx-auto md:w-80"
+        imgClass="aspect-square rounded-full! object-cover"
       />
     </div>
   </section>
 
-  <section class="mx-auto max-w-3xl px-6 py-12 md:py-16">
-    <p class="text-lg leading-relaxed text-gray-700">{positioningParagraph}</p>
-    <div class="mt-10">
-      <BadgeList items={credibilityBadges} />
-    </div>
-    <p class="mt-10 text-center text-sm text-gray-600">
-      Since 2024, I have been part of the Connected Arts Network’s national professional learning
-      community.
-    </p>
+  <section class="mx-auto max-w-5xl px-6 pb-12 md:pb-16">
+    <HeroVideo
+      src="/media/video/winter-finale-loop.mp4"
+      poster="/media/video/winter-finale-poster.jpg"
+      label="Students dancing together in the finale of the 2021 winter concert"
+    />
   </section>
 
-  <section class="mx-auto max-w-6xl px-6 pb-12 md:pb-16">
+  <section class="surface-dark">
+    <div class="mx-auto max-w-4xl px-6 py-14 text-center md:py-20">
+      <p class="pull-quote text-ivory md:text-[32px]">“{heroHeadline}”</p>
+      <div class="mx-auto mt-8 w-48 text-spotlight">
+        <Arc class="h-5 w-full" strokeWidth={2.5} />
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-[44rem] px-6 py-12 md:py-16">
+    <p class="text-xl leading-relaxed">{positioningParagraph}</p>
+    <h2 class="mt-12">Leadership and recognition</h2>
+    <div class="mt-6">
+      <BadgeList items={credibilityBadges} />
+    </div>
+  </section>
+
+  <ArcDivider />
+
+  <section class="mx-auto max-w-6xl px-6 py-12 md:py-16">
     <ul class="grid gap-4 sm:grid-cols-3" role="list">
       <li>
         <Figure
           src={grayDressCircle}
           alt="Dancers in flowing gray dresses form a circle on a lit stage, arms raised."
           sizes="(min-width: 640px) 33vw, 100vw"
+          imgClass="aspect-[4/5] object-cover"
         />
       </li>
       <li>
@@ -81,6 +117,7 @@ const ogImage = await getImage({ src: grayDressCircle, width: 1200, format: 'jpg
           src={circleHoldingHands}
           alt="Dancers of all ages join hands in one large circle across the stage."
           sizes="(min-width: 640px) 33vw, 100vw"
+          imgClass="aspect-[4/5] object-cover"
         />
       </li>
       <li>
@@ -88,38 +125,33 @@ const ogImage = await getImage({ src: grayDressCircle, width: 1200, format: 'jpg
           src={stageWarmUp}
           alt="Students in bright T-shirts rehearse together on stage under the lights."
           sizes="(min-width: 640px) 33vw, 100vw"
+          imgClass="aspect-[4/5] object-cover"
         />
       </li>
     </ul>
   </section>
 
-  <section class="border-t border-gray-200 bg-gray-50">
-    <div class="mx-auto max-w-4xl px-6 py-12 md:py-14">
-      <h2 class="text-center text-xl font-semibold text-gray-900">Explore</h2>
-      <ul class="mt-8 grid gap-4 sm:grid-cols-2" role="list">
-        <li>
-          <a
-            href="/standards-and-leadership"
-            class="block h-full rounded-xl border border-gray-200 bg-white p-5 shadow-sm transition hover:border-accent-200 hover:shadow-md"
-          >
-            <span class="font-medium text-gray-900">Standards & leadership</span>
-            <span class="mt-1 block text-sm text-gray-600"
-              >Georgia standards writing, NCAS artistic processes, assessment</span
+  <section class="mx-auto max-w-4xl px-6 pb-4">
+    <h2 class="text-center">Explore</h2>
+    <ul class="mt-8 grid gap-4 sm:grid-cols-2" role="list">
+      {
+        explore.map((item) => (
+          <li>
+            <a
+              href={item.href}
+              class="group flex h-full items-start justify-between gap-4 rounded-brand border border-soft-stone bg-white p-6 no-underline transition hover:border-studio"
             >
-          </a>
-        </li>
-        <li>
-          <a
-            href="/dance-for-every-body"
-            class="block h-full rounded-xl border border-gray-200 bg-white p-5 shadow-sm transition hover:border-accent-200 hover:shadow-md"
-          >
-            <span class="font-medium text-gray-900">Dance for Every Body</span>
-            <span class="mt-1 block text-sm text-gray-600"
-              >Inclusive practice, NDEO 2025, classroom stories</span
-            >
-          </a>
-        </li>
-      </ul>
-    </div>
+              <span>
+                <span class="block text-[22px] leading-snug font-bold text-midnight group-hover:underline">
+                  {item.title}
+                </span>
+                <span class="mt-2 block text-charcoal">{item.body}</span>
+              </span>
+              <Icon name="arrow-right" class="mt-1 h-6 w-6 shrink-0 text-studio" />
+            </a>
+          </li>
+        ))
+      }
+    </ul>
   </section>
 </BaseLayout>
