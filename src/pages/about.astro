@@ -1,0 +1,53 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import Prose from '../components/Prose.astro';
+import Figure from '../components/Figure.astro';
+import Icon from '../components/Icon.astro';
+import ndeoPhoto from '../assets/photos/ndeo-2025.jpg';
+import { philosophyPrinciples, philosophyStatement } from '../lib/content/philosophy';
+import { aboutLede, myStory } from '../lib/content/story';
+
+const paragraphs = (text: string) => text.split('\n\n');
+---
+
+<BaseLayout
+  title="About"
+  description="Tiffany Tindall's story and teaching philosophy, from 25+ years in K–12 and university dance education."
+  canonicalPath="/about"
+>
+  <PageHeader label="About" title="Arts Education Leader" lede={aboutLede} />
+
+  <Prose>
+    <div class="grid items-start gap-6 sm:grid-cols-[1fr_12rem]">
+      <div class="space-y-4">
+        <h2 class="pt-0!">My story</h2>
+        {paragraphs(myStory).map((paragraph) => <p class="leading-relaxed">{paragraph}</p>)}
+      </div>
+      <Figure
+        src={ndeoPhoto}
+        alt="Tiffany smiling with one hand on her hip in front of the National Dance Education Organization banner."
+        widths={[400, 800]}
+        sizes="(min-width: 640px) 12rem, 100vw"
+        imgClass="aspect-[4/5] object-cover object-top"
+        class="max-w-[12rem]"
+        loading="eager"
+      />
+    </div>
+
+    <h2 id="teaching-philosophy" class="scroll-mt-24">Teaching philosophy</h2>
+    {paragraphs(philosophyStatement).map((paragraph) => <p class="leading-relaxed">{paragraph}</p>)}
+
+    <h3>Lessons learned as an educator</h3>
+    <ol class="list-decimal space-y-3 pl-5">
+      {philosophyPrinciples.map((principle) => <li class="leading-relaxed">{principle}</li>)}
+    </ol>
+
+    <p class="pt-4">
+      <a href="/leadership-and-impact" class="btn-primary">
+        See how I lead
+        <Icon name="arrow-right" class="h-5 w-5" />
+      </a>
+    </p>
+  </Prose>
+</BaseLayout>

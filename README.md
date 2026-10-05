@@ -2,7 +2,7 @@
 
 Personal site for **Tiffany Tindall** (`tifftindall.com`). Built with Astro on the same platform as [Jacob’s portfolio](https://github.com/jefftindall/jacobs-portfolio): Azure Static Web Apps, Terraform, GitHub Actions, and Playwright post-deploy checks.
 
-The site supports Tiffany’s NCAS National Arts Standards (Dance) application. V1 pages are Home, Standards & Leadership, Teaching Philosophy, Dance for Every Body, and CV & Contact. Phases and remaining work: [content plan](docs/plans/content-plan.md).
+The site supports Tiffany’s NCAS National Arts Standards (Dance) application. Pages follow the style guide's structure: Home, About, Leadership and Impact (with Dance for Every Body beneath it), Speaking and Workshops, Recognition, and CV & Contact. Phases and remaining work: [content plan](docs/plans/content-plan.md).
 
 ## Quick start
 

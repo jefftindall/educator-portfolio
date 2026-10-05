@@ -15,10 +15,12 @@ const { items } = Astro.props;
           <h3>{item.title}</h3>
           <span class="text-base tabular-nums">{item.dates}</span>
         </div>
-        <p class="text-base">
-          {item.organization}
-          {item.location && ` · ${item.location}`}
-        </p>
+        {item.organization && (
+          <p class="text-base">
+            {item.organization}
+            {item.location && ` · ${item.location}`}
+          </p>
+        )}
         {item.details && <p class="mt-2">{item.details}</p>}
       </li>
     ))

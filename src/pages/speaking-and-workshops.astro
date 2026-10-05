@@ -1,0 +1,75 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import Prose from '../components/Prose.astro';
+import CvList from '../components/CvList.astro';
+import Icon from '../components/Icon.astro';
+import { site } from '../lib/site';
+import { ndeoSessionDescription, ndeoSessionTitle, presentationPdf } from '../lib/content/inclusive';
+import { actionResearchCycles, otherTraining, professionalLearning } from '../lib/content/speaking';
+---
+
+<BaseLayout
+  title="Speaking and workshops"
+  description="Tiffany Tindall's NDEO national conference session on inclusive dance, Connected Arts Network action research, and professional learning."
+  canonicalPath="/speaking-and-workshops"
+>
+  <PageHeader
+    title="Speaking and workshops"
+    lede="I share what works in my classroom with teachers across the country, and I keep studying my own teaching."
+  />
+
+  <Prose>
+    <h2 class="pt-0!">Sessions</h2>
+    <article class="rounded-brand border border-soft-stone bg-white p-6">
+      <p class="label text-studio">NDEO National Conference · October 2025</p>
+      <h3 class="mt-2">{ndeoSessionTitle}</h3>
+      <p class="mt-1 text-base">Disability and Pedagogy track</p>
+      <p class="mt-4 leading-relaxed">{ndeoSessionDescription}</p>
+      <p class="mt-5 flex flex-wrap items-center gap-3">
+        <a href="/leadership-and-impact/dance-for-every-body" class="btn-primary">
+          Read the strategies and stories
+          <Icon name="arrow-right" class="h-5 w-5" />
+        </a>
+        <a href={presentationPdf} download class="btn-secondary">
+          <Icon name="download" class="h-5 w-5" />
+          Download the slides (PDF, 5.3 MB)
+        </a>
+      </p>
+    </article>
+
+    <h2>Action research with the Connected Arts Network</h2>
+    <p class="leading-relaxed">
+      Since 2024 I have been part of the Connected Arts Network, a national professional learning community led
+      by the National Dance Education Organization. In each cycle I pick a question about my own classroom, try
+      a change, and study what happens.
+    </p>
+    <ol class="divide-y divide-soft-stone border-y border-soft-stone" role="list">
+      {
+        actionResearchCycles.map((cycle) => (
+          <li class="py-5">
+            <div class="flex flex-wrap items-baseline justify-between gap-x-4">
+              <h3>{cycle.question}</h3>
+              <span class="text-base tabular-nums">{cycle.years}</span>
+            </div>
+            <p class="mt-2 leading-relaxed">{cycle.body}</p>
+          </li>
+        ))
+      }
+    </ol>
+
+    <h2>Professional learning</h2>
+    <CvList items={professionalLearning} />
+
+    <h3>Also trained in</h3>
+    <ul class="list-disc space-y-2 pl-5">
+      {otherTraining.map((item) => <li>{item}</li>)}
+    </ul>
+
+    <h2>Invite me to speak</h2>
+    <p class="leading-relaxed">
+      I am glad to share the inclusive dance strategies on this site with dance and arts teachers.{' '}
+      <a href={`mailto:${site.email}`}>Email me about a session for your teachers</a>.
+    </p>
+  </Prose>
+</BaseLayout>

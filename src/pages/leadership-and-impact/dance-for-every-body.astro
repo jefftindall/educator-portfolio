@@ -1,30 +1,30 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import PageHeader from '../components/PageHeader.astro';
-import Prose from '../components/Prose.astro';
-import Figure from '../components/Figure.astro';
-import VideoFigure from '../components/VideoFigure.astro';
-import Icon from '../components/Icon.astro';
-import { presentationPdf } from '../lib/content/inclusive';
-import classOnStage from '../assets/photos/inclusive-class-stage.jpg';
-import classInStudio from '../assets/photos/inclusive-class-studio.jpg';
-import ndeoPhoto from '../assets/photos/ndeo-2025.jpg';
-import officeWithStudent from '../assets/photos/office-with-student.jpg';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import Prose from '../../components/Prose.astro';
+import Figure from '../../components/Figure.astro';
+import VideoFigure from '../../components/VideoFigure.astro';
+import Icon from '../../components/Icon.astro';
+import classOnStage from '../../assets/photos/inclusive-class-stage.jpg';
+import classInStudio from '../../assets/photos/inclusive-class-studio.jpg';
+import ndeoPhoto from '../../assets/photos/ndeo-2025.jpg';
+import officeWithStudent from '../../assets/photos/office-with-student.jpg';
 import {
   inclusiveBenefits,
   inclusiveStrategies,
   learningLadderRungs,
   ndeoSessionDescription,
   ndeoSessionTitle,
-} from '../lib/content/inclusive';
+  presentationPdf,
+} from '../../lib/content/inclusive';
 ---
 
 <BaseLayout
   title="Dance for Every Body"
   description="Inclusive dance practice: NDEO 2025 session, three strategies, and the Dance I etiquette learning ladder."
-  canonicalPath="/dance-for-every-body"
+  canonicalPath="/leadership-and-impact/dance-for-every-body"
 >
-  <PageHeader title="Dance for Every Body" lede={ndeoSessionDescription} />
+  <PageHeader label="Leadership and impact" title="Dance for Every Body" lede={ndeoSessionDescription} />
 
   <Prose>
     <Figure

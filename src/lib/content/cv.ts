@@ -1,6 +1,6 @@
 export type CvEntry = {
   title: string;
-  organization: string;
+  organization?: string;
   dates: string;
   location?: string;
   details?: string;
