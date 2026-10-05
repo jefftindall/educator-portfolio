@@ -1,0 +1,24 @@
+---
+/* The signature motif: one continuous curve rising left to right. Decorative only. */
+interface Props {
+  class?: string;
+  strokeWidth?: number;
+}
+const { class: className = '', strokeWidth = 2 } = Astro.props;
+---
+
+<svg
+  class={className}
+  viewBox="0 0 200 40"
+  preserveAspectRatio="none"
+  fill="none"
+  aria-hidden="true"
+  focusable="false"
+>
+  <path
+    d="M2 36 C 60 40, 130 30, 198 4"
+    stroke="currentColor"
+    stroke-width={strokeWidth}
+    stroke-linecap="round"
+    vector-effect="non-scaling-stroke"></path>
+</svg>

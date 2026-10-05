@@ -10,7 +10,7 @@ import { education, experience, honors, volunteering } from '../lib/content/cv';
 
 <BaseLayout
   title="CV & contact"
-  description="Contact Tiffany Tindall, Ed.S., dance educator and fine arts leader at Woodland High School."
+  description="CV and contact for Tiffany Tindall, Ed.S., Dance Teacher and Fine Arts Department Lead at Woodland High School."
   canonicalPath="/contact"
   hideFooterCta={false}
 >
@@ -20,36 +20,28 @@ import { education, experience, honors, volunteering } from '../lib/content/cv';
   />
 
   <Prose>
-    <h2 class="text-xl font-semibold text-gray-900">Contact</h2>
-    <p class="flex flex-wrap items-center gap-x-6 gap-y-2">
-      <a
-        href={`mailto:${site.email}`}
-        class="inline-flex items-center gap-2 font-medium text-accent-700 underline-offset-2 hover:underline"
-      >
+    <h2>Contact</h2>
+    <p class="flex flex-wrap items-center gap-3">
+      <a href={`mailto:${site.email}`} class="btn-primary">
         <Icon name="mail" />
         Email me
       </a>
-      <a
-        href={site.linkedin}
-        class="inline-flex items-center gap-2 font-medium text-accent-700 underline-offset-2 hover:underline"
-        rel="me noopener"
-        target="_blank"
-      >
+      <a href={site.linkedin} class="btn-secondary" rel="me noopener" target="_blank">
         <Icon name="linkedin" />
         Connect on LinkedIn
       </a>
     </p>
 
-    <h2 class="text-xl font-semibold text-gray-900">Experience</h2>
+    <h2>Experience</h2>
     <CvList items={experience} />
 
-    <h2 class="text-xl font-semibold text-gray-900">Education</h2>
+    <h2>Education</h2>
     <CvList items={education} />
 
-    <h2 class="text-xl font-semibold text-gray-900">Honors & professional service</h2>
+    <h2>Honors & professional service</h2>
     <CvList items={honors} />
 
-    <h2 class="text-xl font-semibold text-gray-900">Volunteering</h2>
+    <h2>Volunteering</h2>
     <CvList items={volunteering} />
   </Prose>
 </BaseLayout>

@@ -1,17 +1,31 @@
 ---
+import Icon from './Icon.astro';
+
+/** A plain string, or phrases that wrap only between each other (never inside one). */
+type Item = string | readonly string[];
+
 interface Props {
-  items: readonly string[];
+  items: readonly Item[];
+  columns?: 1 | 2;
 }
-const { items } = Astro.props;
+const { items, columns = 2 } = Astro.props;
 ---
 
-<ul class="flex flex-wrap justify-center gap-2 md:gap-3" role="list">
+<ul class:list={['grid gap-3', columns === 2 && 'sm:grid-cols-2']} role="list">
   {
     items.map((item) => (
-      <li
-        class="rounded-full border border-accent-200 bg-white px-3 py-1.5 text-xs font-medium text-accent-900 md:text-sm"
-      >
-        {item}
+      <li class="flex items-start gap-3 rounded-brand border border-soft-stone bg-white px-4 py-3">
+        <Icon name="award" class="mt-0.5 h-6 w-6 shrink-0 text-studio" />
+        <span class="font-semibold text-balance text-midnight">
+          {typeof item === 'string'
+            ? item
+            : item.map((phrase, i) => (
+                <>
+                  {i > 0 && ' '}
+                  <span class="min-[360px]:whitespace-nowrap">{phrase}</span>
+                </>
+              ))}
+        </span>
       </li>
     ))
   }

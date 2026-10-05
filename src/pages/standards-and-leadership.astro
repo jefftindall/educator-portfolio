@@ -27,27 +27,27 @@ import {
   />
 
   <Prose>
-    <h2 class="text-xl font-semibold text-gray-900">Standards-writing experience</h2>
+    <h2>Standards-writing experience</h2>
     <p class="leading-relaxed">{standardsWriting}</p>
 
-    <h2 class="text-xl font-semibold text-gray-900">Artistic processes in my classroom</h2>
-    <p class="text-sm text-gray-600">Aligned to the National Core Arts Standards anchor processes.</p>
-    <div class="overflow-x-auto">
-      <table class="mt-4 w-full min-w-[32rem] border-collapse text-left text-sm">
-        <thead>
-          <tr class="border-b border-gray-200">
-            <th class="py-2 pr-4 font-semibold text-gray-900">Process</th>
-            <th class="py-2 pr-4 font-semibold text-gray-900">In class</th>
-            <th class="py-2 font-semibold text-gray-900">Evidence</th>
+    <h2>Artistic processes in my classroom</h2>
+    <p>Aligned to the National Core Arts Standards anchor processes.</p>
+    <div class="overflow-x-auto rounded-brand border border-soft-stone bg-white">
+      <table class="w-full min-w-[32rem] border-collapse text-left text-base">
+        <thead class="surface-dark">
+          <tr>
+            <th class="label px-4 py-3">Process</th>
+            <th class="label px-4 py-3">In class</th>
+            <th class="label px-4 py-3">Evidence</th>
           </tr>
         </thead>
         <tbody>
           {
             artisticProcesses.map((row) => (
-              <tr class="border-b border-gray-100 align-top">
-                <td class="py-3 pr-4 font-medium text-gray-900">{row.process}</td>
-                <td class="py-3 pr-4">{row.classroom}</td>
-                <td class="py-3 text-gray-600">{row.artifact}</td>
+              <tr class="align-top even:bg-soft-stone/60">
+                <td class="px-4 py-3 font-bold text-midnight">{row.process}</td>
+                <td class="px-4 py-3">{row.classroom}</td>
+                <td class="px-4 py-3">{row.artifact}</td>
               </tr>
             ))
           }
@@ -89,13 +89,13 @@ import {
       </li>
     </ul>
 
-    <h2 class="text-xl font-semibold text-gray-900">Assessment philosophy</h2>
+    <h2>Assessment philosophy</h2>
     <p class="leading-relaxed">{assessmentPhilosophy}</p>
 
-    <h2 class="text-xl font-semibold text-gray-900">Technology & artistic literacy</h2>
+    <h2>Technology & artistic literacy</h2>
     <p class="leading-relaxed">{technologyStatement}</p>
 
-    <h2 class="text-xl font-semibold text-gray-900">Commitment to service</h2>
+    <h2>Commitment to service</h2>
     <p class="leading-relaxed">{whyServe}</p>
   </Prose>
 </BaseLayout>

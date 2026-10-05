@@ -7,14 +7,44 @@ alwaysApply: true
 
 Tiffany Tindall’s site is an **educator portfolio** at `tifftindall.com`. It supports her NCAS National Arts Standards (Dance) application. Phases and status: [`docs/plans/content-plan.md`](../../docs/plans/content-plan.md).
 
-## Do
+**Source of truth for look and voice:** [`docs/brand/style-guide.md`](../../docs/brand/style-guide.md). Its "In code" section maps the guide to Tailwind utilities and components. Read it before any visual or copy change.
 
-- Mirror Jacob’s **platform** quality: lint, Terraform, CD, and Playwright gates
-- Use Tiffany’s **own** Azure subscription and branding (not Jacob’s style guide or ocean/music theme)
-- Mark placeholder copy clearly until Tiffany adds real content
+**Positioning:** an arts education leader who happens to teach dance, not a dance teacher who wants a promotion. Tagline: **"Arts education for all."**
 
-## Do not
+## Visual system
 
-- Copy Elyse’s theatre, lessons, casting, resume, or Broadway framing
-- Copy Jacob’s conservation/music content or Jacob’s visual style guide
-- Invent credentials, employers, or quotes
+- Use only the six brand colors: `midnight`, `studio` (teal), `spotlight` (gold), `ivory`, `soft-stone`, `charcoal`, plus `white`. Tailwind's default palette is turned off, so `gray-*`, `blue-*`, and similar classes won't generate.
+- Aim for about 60% neutrals, 30% indigo, and 10% teal and gold combined. **One gold element per screen**, usually the `btn-primary`.
+- **Never:** gold text on white or ivory, teal text on indigo, or gradients between brand colors. On indigo, use `surface-dark` (ivory text, gold focus ring).
+- Teal text on ivory (about 4.47:1) is accepted by Jeff. Don't put teal text on Soft Stone (about 3.7:1).
+- Fonts: Fraunces 600 for h1 and h2, Source Sans 3 for everything else. The base layer sets sizes, so don't add size classes to headings. Use `label` for short uppercase labels only, and `pull-quote` for quotes.
+- Use 8px corners (`rounded-brand`), flat color, and thin Soft Stone dividers. No heavy shadows.
+- Use the arc motif (`Arc` / `ArcDivider`) for dividers and faint shapes behind headers. Gold on indigo, Soft Stone on ivory.
+- Icons: Lucide outline paths in `Icon.astro` only. Always pair them with a text label. No emoji as icons, and no ballet-slipper, theatre-mask, or paint-palette clip art.
+- Wordmark: `Wordmark.astro`, minimum 140px wide. Don't recolor it, stretch it, or add shadows.
+- Use **no Woodland High School or Dancing Wildcats colors, mascots, or logos.**
+
+## Voice and copy
+
+- Write in the first person: confident, warm, and specific. Lead with what students and programs gained, then her role.
+- Use short sentences, active verbs, and numbers. Don't write "passionate," "dedicated," or "world-class," and avoid education jargon. Aim for roughly an eighth-grade reading level.
+- Headings say "Arts Education Leader." Bios use her exact title, **"Dance Teacher and Fine Arts Department Lead."** Never use an administrative title she doesn't hold.
+- Degrees (Ed.S.) appear only in résumé, bio, and signature contexts, not in headings or the hero.
+- When imagery stands for her field, show all four arts (dance, music, theatre, visual art).
+
+## Accessibility (WCAG 2.2 AA)
+
+- Use only the approved contrast pairings in the guide. Body text is 18px.
+- Links are underlined, link text says where it goes, and the focus outline stays visible.
+- Alt text describes the action. Videos get captions or a written description.
+- Motion stays subtle and respects `prefers-reduced-motion`.
+
+## Photos and privacy
+
+- Only use photos covered by a media release. Prefer wide, group, and motion shots. Never caption students by name, and don't use stock photos.
+
+## Also
+
+- Mirror Jacob’s **platform** quality (lint, Terraform, CD, Playwright), but use Tiffany’s **own** Azure subscription and branding. Don't use Jacob’s style guide or his ocean/music theme.
+- Don't copy Elyse’s theatre, lessons, casting, résumé, or Broadway framing, or Jacob’s conservation/music content.
+- Never invent credentials, employers, or quotes. Mark placeholder copy clearly.

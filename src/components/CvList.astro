@@ -7,19 +7,19 @@ interface Props {
 const { items } = Astro.props;
 ---
 
-<ol class="space-y-6" role="list">
+<ol class="divide-y divide-soft-stone border-y border-soft-stone" role="list">
   {
     items.map((item) => (
-      <li>
+      <li class="py-5">
         <div class="flex flex-wrap items-baseline justify-between gap-x-4">
-          <h3 class="font-medium text-gray-900">{item.title}</h3>
-          <span class="text-sm tabular-nums text-gray-600">{item.dates}</span>
+          <h3>{item.title}</h3>
+          <span class="text-base tabular-nums">{item.dates}</span>
         </div>
-        <p class="text-sm text-gray-600">
+        <p class="text-base">
           {item.organization}
           {item.location && ` · ${item.location}`}
         </p>
-        {item.details && <p class="mt-2 leading-relaxed">{item.details}</p>}
+        {item.details && <p class="mt-2">{item.details}</p>}
       </li>
     ))
   }

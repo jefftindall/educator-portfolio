@@ -29,6 +29,7 @@ Run this before every commit. It checks Terraform, the Astro site, the API stub,
 ## Documentation
 
 - [AGENTS.md](AGENTS.md) — rules for Cursor (brand, lint)
+- [Brand style guide](docs/brand/style-guide.md) — colors, type, wordmark, voice, accessibility, and how they map to code
 - [Content plan](docs/plans/content-plan.md) — phases, what's done, and what's left (NCAS launch Oct 18)
 - [Initial setup](docs/setup.md) — local first; Azure later (do not apply unless Jeff asks)
 - [Custom domain](docs/runbooks/custom-domain.md) — bind `tifftindall.com` on prod (Jeff only)

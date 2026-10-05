@@ -11,6 +11,7 @@ interface Props {
   class?: string;
   imgClass?: string;
   loading?: 'lazy' | 'eager';
+  quality?: number;
 }
 
 const {
@@ -22,6 +23,7 @@ const {
   class: className = '',
   imgClass = 'aspect-[4/3] object-cover',
   loading = 'lazy',
+  quality,
 } = Astro.props;
 const usableWidths = widths.filter((w) => w <= src.width);
 ---
@@ -33,7 +35,8 @@ const usableWidths = widths.filter((w) => w <= src.width);
     widths={usableWidths.length > 0 ? usableWidths : [src.width]}
     sizes={sizes}
     loading={loading}
-    class:list={['h-auto w-full rounded-xl bg-gray-100', imgClass]}
+    quality={quality}
+    class:list={['h-auto w-full rounded-brand bg-soft-stone', imgClass]}
   />
-  {caption && <figcaption class="pt-2 text-sm text-gray-600">{caption}</figcaption>}
+  {caption && <figcaption class="pt-2 text-base">{caption}</figcaption>}
 </figure>

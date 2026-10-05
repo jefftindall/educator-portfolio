@@ -1,14 +1,22 @@
 ---
+import Arc from './Arc.astro';
+
 interface Props {
   title: string;
   lede?: string;
+  label?: string;
 }
-const { title, lede } = Astro.props;
+const { title, lede, label } = Astro.props;
 ---
 
-<section class="border-b border-gray-200 bg-gradient-to-b from-accent-50/80 to-white">
-  <div class="mx-auto max-w-3xl px-6 py-12 md:py-16">
-    <h1 class="text-3xl font-semibold tracking-tight text-gray-900 md:text-4xl">{title}</h1>
-    {lede && <p class="mt-4 text-lg leading-relaxed text-gray-700">{lede}</p>}
+<section class="relative overflow-hidden">
+  <Arc
+    class="pointer-events-none absolute -bottom-6 left-0 h-40 w-full text-soft-stone md:h-56"
+    strokeWidth={28}
+  />
+  <div class="relative mx-auto max-w-[44rem] px-6 pt-14 pb-12 md:pt-20 md:pb-16">
+    {label && <p class="label text-studio">{label}</p>}
+    <h1 class:list={[label && 'mt-3']}>{title}</h1>
+    {lede && <p class="mt-5 text-xl leading-relaxed">{lede}</p>}
   </div>
 </section>
