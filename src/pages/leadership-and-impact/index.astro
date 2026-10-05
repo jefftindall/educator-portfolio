@@ -9,7 +9,7 @@ import barreClass from '../../assets/photos/barre-class.jpg';
 import ensembleWhite from '../../assets/photos/stage-ensemble-white.jpg';
 import fieldTrip from '../../assets/photos/field-trip-performance.jpg';
 import classInStudio from '../../assets/photos/inclusive-class-studio.jpg';
-import { departmentLeadership, programPoints } from '../../lib/content/program';
+import { departmentLeadership, programIntro, programPoints } from '../../lib/content/program';
 import { ndeoSessionDescription } from '../../lib/content/inclusive';
 import {
   artisticProcesses,
@@ -37,7 +37,8 @@ import {
     <h2>Standards-writing experience</h2>
     <p class="leading-relaxed">{standardsWriting}</p>
 
-    <h2>Building the dance program</h2>
+    <h2>Building dance programs</h2>
+    <p class="leading-relaxed">{programIntro}</p>
     <div class="grid gap-4 sm:grid-cols-2">
       {
         programPoints.map((point) => (

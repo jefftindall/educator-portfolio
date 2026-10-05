@@ -2,25 +2,21 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHeader from '../components/PageHeader.astro';
 import Prose from '../components/Prose.astro';
-import CvList from '../components/CvList.astro';
 import Icon from '../components/Icon.astro';
 import { site } from '../lib/site';
-import { education, experience, honors, volunteering } from '../lib/content/cv';
 ---
 
 <BaseLayout
-  title="CV & contact"
-  description="CV and contact for Tiffany Tindall, Ed.S., Dance Teacher and Fine Arts Department Lead at Woodland High School."
+  title="Contact"
+  description="How to reach Tiffany Tindall, Dance Teacher and Fine Arts Department Lead at Woodland High School."
   canonicalPath="/contact"
-  hideFooterCta={false}
 >
   <PageHeader
-    title="CV & contact"
-    lede="My experience, education, and service, and the best ways to reach me."
+    title="Contact"
+    lede="I’d love to hear from you about arts education, standards work, or a session for your teachers."
   />
 
   <Prose>
-    <h2>Contact</h2>
     <p class="flex flex-wrap items-center gap-3">
       <a href={`mailto:${site.email}`} class="btn-primary">
         <Icon name="mail" />
@@ -31,17 +27,6 @@ import { education, experience, honors, volunteering } from '../lib/content/cv';
         Connect on LinkedIn
       </a>
     </p>
-
-    <h2>Experience</h2>
-    <CvList items={experience} />
-
-    <h2>Education</h2>
-    <CvList items={education} />
-
-    <h2>Honors & professional service</h2>
-    <CvList items={honors} />
-
-    <h2>Volunteering</h2>
-    <CvList items={volunteering} />
+    <p>Looking for my background first? <a href="/experience">See my experience and honors</a>.</p>
   </Prose>
 </BaseLayout>

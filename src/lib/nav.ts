@@ -4,7 +4,7 @@ export const nav: readonly NavItem[] = [
   { href: '/about', label: 'About' },
   { href: '/leadership-and-impact', label: 'Leadership' },
   { href: '/speaking-and-workshops', label: 'Speaking' },
-  { href: '/recognition', label: 'Recognition' },
+  { href: '/experience', label: 'Experience' },
   { href: '/contact', label: 'Contact' },
 ];
 

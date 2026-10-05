@@ -39,7 +39,7 @@ export const experience: readonly CvEntry[] = [
   },
   {
     title: 'Dance & Theatre Teacher',
-    organization: 'Cobb County Schools',
+    organization: 'Cobb County School District',
     dates: '2002–2010',
     details:
       'Taught dance and theatre to grades 6–8 at three middle schools: ballet, jazz, and modern performance classes, nine-week cultural and social dance units, and musical theatre.',
@@ -64,12 +64,25 @@ export const education: readonly CvEntry[] = [
   },
 ];
 
-export const honors: readonly CvEntry[] = [
+export const teachingHonors: readonly CvEntry[] = [
   {
     title: 'High School Teacher of the Year',
     organization: 'Bartow County School System',
     dates: '2026–27',
   },
+  {
+    title: 'Teacher of the Year',
+    organization: 'Woodland High School',
+    dates: '2026',
+  },
+  {
+    title: 'Teacher of the Year',
+    organization: 'Barber Middle School, Cobb County School District',
+    dates: '2007–08',
+  },
+];
+
+export const standardsAndService: readonly CvEntry[] = [
   {
     title: 'National Conference Presenter, “Dance for Every Body”',
     organization: 'National Dance Education Organization',
@@ -79,16 +92,29 @@ export const honors: readonly CvEntry[] = [
     title: 'Teacher Participant, Connected Arts Network national PLC',
     organization: 'National Dance Education Organization',
     dates: '2024–present',
+    details: 'Two cycles of action research on my own teaching.',
   },
   {
     title: 'Member, Performance Standards Writing Committee for Dance Education',
     organization: 'Georgia Department of Education',
     dates: '2008',
   },
+];
+
+export const professionalLearning: readonly CvEntry[] = [
   {
-    title: 'Teacher of the Year',
-    organization: 'Barber Middle School',
-    dates: '2007–08',
+    title: 'Kinesiology for dance educators (OPDI 110)',
+    organization: 'NDEO Online Professional Development Institute',
+    dates: '2018',
+  },
+  {
+    title: 'Leadership Bartow',
+    dates: '2018',
+  },
+  {
+    title: 'Leadership Academy and Teacher Leader Institute',
+    organization: 'Cobb County School District',
+    dates: '2008',
   },
   {
     title: 'Member',
@@ -96,6 +122,12 @@ export const honors: readonly CvEntry[] = [
     dates: '2003–present',
   },
 ];
+
+export const otherTraining = [
+  'Bartow County Schools Aspiring Leaders program',
+  'Gholdy Muhammad’s five pursuits: identity, skills, intellect, criticality, and joy',
+  'Liz Lerman’s Critical Response Process',
+] as const;
 
 export const volunteering: readonly CvEntry[] = [
   {

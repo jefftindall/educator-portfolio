@@ -19,7 +19,7 @@ Status as of **Oct 4, 2026**. Legend: ✅ done · 🟡 partial / needs Tiffany's
 |---|---|---|
 | **1. Platform** | Astro scaffold, Azure Static Web Apps, Terraform, CI/CD, Playwright gates | ✅ Done (PR #2, #5, #6) |
 | **2. V1 — NCAS launch** | Five priority pages: Home, Standards & Leadership, Teaching Philosophy, Dance for Every Body, CV & Contact | 🟡 Pages built (PR #4); content decisions and the launch checklist remain |
-| **3. V2 — Depth** | Style guide structure: Home, About, Leadership and Impact, Speaking and Workshops, Recognition, Contact | 🟡 Pages built; draft copy needs Tiffany's review |
+| **3. V2 — Depth** | Home, About, Leadership and Impact, Speaking and Workshops, Experience, Contact | 🟡 Pages built; draft copy needs Tiffany's review |
 | **4. Later** | Testimonials, resources, possible "Work With Me", ongoing CAN research updates | ⬜ Not started |
 
 ---
@@ -75,11 +75,11 @@ Still open:
 
 #### 1. Home (`/`) — 🟡 mostly done
 
-- ✅ First screen per the style guide: tagline headline, positioning line, circular portrait, Bartow County Teacher of the Year honor, one gold CTA (philosophy) plus CV & contact
+- ✅ First screen per the style guide: tagline headline, positioning line, circular portrait, Bartow County Teacher of the Year honor, one gold CTA (philosophy) plus "My experience"
 - ✅ Hero video loop: `winter-finale-loop.mp4` (Winter 2021 finale, trimmed)
 - ✅ Pull quote band: "Don't change the standard. Change the instructional method."
 - ✅ Leadership and recognition, newest first: Bartow County HS Teacher of the Year (2026–27), NDEO Presenter (2025), CAN National PLC (2024–present), Fine Arts Department Lead (2021–present), GA Standards Writing Committee (2008), Barber MS Teacher of the Year (2007–08)
-- ✅ Three group photos and "Explore" cards to About, Leadership and Impact, Speaking and Workshops, and Recognition (Phase 3)
+- ✅ Three group photos and "Explore" cards to About, Leadership and Impact, Speaking and Workshops, and Experience (Phase 3)
 - ⬜ Principal quote (Melinda Wilder) once received
 
 V1 URLs that moved in Phase 3 301 to their new homes: `/standards-and-leadership` → `/leadership-and-impact`, `/teaching-philosophy` → `/about`, `/dance-for-every-body` → `/leadership-and-impact/dance-for-every-body`. Use the new URLs on the NCAS application.
@@ -114,10 +114,10 @@ V1 URLs that moved in Phase 3 301 to their new homes: `/standards-and-leadership
 - ⬜ Principal quote (optional second spot)
 - 🔒/⚠️ **Confirm a signed media release** for the student in the clapping-dance video before launch; if it isn't confirmed, swap in a photo
 
-#### 5. CV & Contact (`/contact`) — 🟡 mostly done
+#### 5. CV & Contact — 🟡 mostly done (split in Phase 3: CV on `/experience`, contact-only `/contact`)
 
-- ✅ Email (`mailto:`, address from env) and LinkedIn
-- ✅ Experience, Education, Honors & service, Volunteering (newest first)
+- ✅ Email (`mailto:`, address from env) and LinkedIn on `/contact`
+- ✅ Experience, Teacher of the Year, standards and national service, professional learning, education, community leadership on `/experience` (newest first)
 - ✅ No home address or cell phone
 - ⬜ Downloadable PDF résumé (the strategy asks for one)
 - ⬜ Contact form (the strategy suggests one; `mailto:` is fine for V1). Adding a form means updating the Playwright contact assertions in the same change.
@@ -149,17 +149,17 @@ V1 URLs that moved in Phase 3 301 to their new homes: `/standards-and-leadership
 
 ## Phase 3 — V2 depth pages 🟡
 
-V2 moves the site to the [style guide's](../brand/style-guide.md) structure: **Home, About, Leadership and Impact, Speaking and Workshops, Recognition, Contact**. There is no Gallery page; photos and videos live on the pages they support.
+V2 moves the site to the [style guide's](../brand/style-guide.md) structure, with one change: the guide's Recognition page became **Experience**, a single CV page. The pages are **Home, About, Leadership and Impact, Speaking and Workshops, Experience, Contact**. There is no Gallery page; photos and videos live on the pages they support.
 
 | Style guide page | URL | Built from | Status |
 |---|---|---|---|
 | Home | `/` | V1 Home; Explore cards now point to the four new sections | ✅ |
 | About | `/about` | My Story + Teaching Philosophy (`#teaching-philosophy`; the Home gold button links there) | 🟡 My Story is a draft |
-| Leadership and Impact | `/leadership-and-impact` | Department leadership, Standards & Leadership, The Program, Dance for Every Body summary | 🟡 Program copy needs review |
+| Leadership and Impact | `/leadership-and-impact` | Department leadership, Standards & Leadership, The Program (framed as principles proven in three schools across Cobb and Bartow), Dance for Every Body summary | 🟡 Program copy needs review |
 | ↳ Dance for Every Body | `/leadership-and-impact/dance-for-every-body` | V1 page, moved unchanged | 🟡 Releases pending (see Phase 2) |
-| Speaking and Workshops | `/speaking-and-workshops` | NDEO 2025 session + slides, CAN action research, Professional Learning timeline | 🟡 Facts to confirm |
-| Recognition | `/recognition` | Teacher of the Year honors, standards and national service, community leadership (from CV) | ✅ |
-| Contact | `/contact` | V1 CV & Contact | ✅ |
+| Speaking and Workshops | `/speaking-and-workshops` | NDEO 2025 session + slides, CAN 2024–25 action research, invitation to speak | ✅ |
+| Experience | `/experience` | Every CV item: experience, Teacher of the Year honors, standards and national service, professional learning, education, community leadership | 🟡 Facts to confirm |
+| Contact | `/contact` | Email and LinkedIn only, plus a link to Experience | ✅ |
 
 Moved V1 URLs 301 in both `staticwebapp.config.json` files (see Phase 2). Nav is `src/lib/nav.ts`; the Dance for Every Body subpage is in `subpages` there so tests cover it. Smoke checks every route, the redirects (on SWA hosts), and the slides link; journeys `VISIT-02`–`VISIT-05` cover the new flows.
 
@@ -169,8 +169,8 @@ Moved V1 URLs 301 in both `staticwebapp.config.json` files (see Phase 2). Nav is
 |---|---|---|---|
 | **My Story** (About) | Dancing since 2, assistant teaching at 16; her father; Karina's Class origin; Leroy; Martha Graham; Cobb County program building; brief personal touches | Draft from CV facts only: dancing since 2, teaching at 16, UGA, Cobb County, Karina's Class, Reinhardt, Woodland | ⬜ Tiffany rewrites in her voice and adds her father, Leroy, and Martha Graham stories (sources: 2020 Bartow bio, NDEO notes, NDEO deck photos *My Dad and I*, *Karina's Class – The Beginning*) |
 | **The Program** (Leadership and Impact) | Weekly structure (ballet / jazz / improv / daily conditioning), Dance I–IV mastery-based levels open to all students, Winter Concert 2025-26 photos by piece, student leadership story (with permission) | Four cards: open levels, weekly technique, every class performs, inclusive Dance I. Department leadership paragraph names all four arts. | ⬜ Winter Concert 2025-26 photos (media releases first) · ⬜ student leadership story (consent first) · 🟡 Tiffany confirms the department covers dance, music, theatre, and visual art |
-| **Professional Learning** (Speaking and Workshops) | Timeline: CAN 2024–present (two action-research cycles), NDEO 2025 presenter, NDEO 2017 sessions, OPDI 110 kinesiology (2018), Leadership Bartow (2018), Bartow Aspiring Leaders, CCSD Leadership Academy / Teacher Leader Institute, NDEO member since 2003. Training in Muhammad's 5 Pursuits and Liz Lerman's Critical Response Process. | Dated timeline, newest first; undated items under "Also trained in" | 🟡 Tiffany confirms whether she presented or attended at NDEO 2017, the OPDI 110 course title, and dates for Aspiring Leaders and the CCSD programs |
-| **CAN action research** (Speaking and Workshops) | Two cycles | 2024–25 question and approach; 2025–26 "under way" | ⬜ Add 2024-25 findings and the 2025-26 question (see Content gaps) |
+| **Professional Learning** (Experience) | Timeline: CAN 2024–present (two action-research cycles), NDEO 2025 presenter, NDEO 2017 sessions, OPDI 110 kinesiology (2018), Leadership Bartow (2018), Bartow Aspiring Leaders, CCSD Leadership Academy / Teacher Leader Institute (2008), NDEO member since 2003. Training in Muhammad's 5 Pursuits and Liz Lerman's Critical Response Process. | Dated timeline, newest first; undated items under "Also trained in". NDEO presenter and CAN sit under "Standards and national service" | ⬜ NDEO 2017 left off until there's specific content (session title, presented or attended) · 🟡 OPDI 110 course title and the Aspiring Leaders date |
+| **CAN action research** (Speaking and Workshops) | Two cycles | 2024–25 question and approach only | ⬜ Add 2024-25 findings; add the 2025-26 cycle once its question is written (see Content gaps) |
 
 ---
 

@@ -2,21 +2,20 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHeader from '../components/PageHeader.astro';
 import Prose from '../components/Prose.astro';
-import CvList from '../components/CvList.astro';
 import Icon from '../components/Icon.astro';
 import { site } from '../lib/site';
 import { ndeoSessionDescription, ndeoSessionTitle, presentationPdf } from '../lib/content/inclusive';
-import { actionResearchCycles, otherTraining, professionalLearning } from '../lib/content/speaking';
+import { actionResearch } from '../lib/content/speaking';
 ---
 
 <BaseLayout
   title="Speaking and workshops"
-  description="Tiffany Tindall's NDEO national conference session on inclusive dance, Connected Arts Network action research, and professional learning."
+  description="Tiffany Tindall's NDEO national conference session on inclusive dance and her Connected Arts Network action research."
   canonicalPath="/speaking-and-workshops"
 >
   <PageHeader
     title="Speaking and workshops"
-    lede="I share what works in my classroom with teachers across the country, and I keep studying my own teaching."
+    lede="I share what works in my classroom with teachers across the country, and I study my own teaching to keep improving it."
   />
 
   <Prose>
@@ -41,30 +40,16 @@ import { actionResearchCycles, otherTraining, professionalLearning } from '../li
     <h2>Action research with the Connected Arts Network</h2>
     <p class="leading-relaxed">
       Since 2024 I have been part of the Connected Arts Network, a national professional learning community led
-      by the National Dance Education Organization. In each cycle I pick a question about my own classroom, try
-      a change, and study what happens.
+      by the National Dance Education Organization. I pick a question about my own classroom, try a change, and
+      study what happens.
     </p>
-    <ol class="divide-y divide-soft-stone border-y border-soft-stone" role="list">
-      {
-        actionResearchCycles.map((cycle) => (
-          <li class="py-5">
-            <div class="flex flex-wrap items-baseline justify-between gap-x-4">
-              <h3>{cycle.question}</h3>
-              <span class="text-base tabular-nums">{cycle.years}</span>
-            </div>
-            <p class="mt-2 leading-relaxed">{cycle.body}</p>
-          </li>
-        ))
-      }
-    </ol>
-
-    <h2>Professional learning</h2>
-    <CvList items={professionalLearning} />
-
-    <h3>Also trained in</h3>
-    <ul class="list-disc space-y-2 pl-5">
-      {otherTraining.map((item) => <li>{item}</li>)}
-    </ul>
+    <div class="border-y border-soft-stone py-5">
+      <div class="flex flex-wrap items-baseline justify-between gap-x-4">
+        <h3>{actionResearch.question}</h3>
+        <span class="text-base tabular-nums">{actionResearch.years}</span>
+      </div>
+      <p class="mt-2 leading-relaxed">{actionResearch.body}</p>
+    </div>
 
     <h2>Invite me to speak</h2>
     <p class="leading-relaxed">

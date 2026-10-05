@@ -1,6 +1,9 @@
 export const departmentLeadership =
   'As Fine Arts Department Lead, I support teachers across dance, music, theatre, and visual art. I run department planning, observe and coach teachers, and oversee our fine arts events. I co-produce and choreograph our fine arts productions, and I won a $5,000 Georgia Council for the Arts grant for a school-wide fine arts musical.';
 
+export const programIntro =
+  'I have built dance programs at three schools in two school systems, Cobb County and Bartow County. Each school had different students, staff, and resources, and the same principles worked in every one. That is how I know they can work in other schools too. Here is how they look at Woodland High School today.';
+
 export const programPoints = [
   {
     title: 'Open to every student',

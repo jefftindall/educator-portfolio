@@ -41,9 +41,9 @@ Home shows **Tiffany Tindall** and the hero headline; every public route (nav pl
 |----|------|
 | `VISIT-01` | Home greeting |
 | `VISIT-02` | Home → About, teaching philosophy section |
-| `VISIT-03` | Home Explore cards → About, Leadership and Impact, Speaking and Workshops, Recognition |
+| `VISIT-03` | Home Explore cards → About, Leadership and Impact, Speaking and Workshops, Experience |
 | `VISIT-04` | Leadership and Impact → Dance for Every Body → slides link |
-| `VISIT-05` | Recognition → full CV on Contact |
+| `VISIT-05` | Experience (CV) → Contact `mailto:` |
 | `J-SEO-01` | Sitemap lists public routes; title/canonical/description on `/` |
 
 When you add pages or flows, extend these suites in the same PR ([`.cursor/rules/post-deploy-tests.mdc`](../../.cursor/rules/post-deploy-tests.mdc)).

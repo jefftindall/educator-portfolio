@@ -36,10 +36,11 @@ test.describe('visitor journeys', () => {
     await expect(page.getByRole('link', { name: /download the slides/i })).toHaveAttribute('href', presentationPdf);
   });
 
-  test('VISIT-05 recognition leads to the full CV and contact', async ({ page }) => {
-    await page.goto('/recognition');
+  test('VISIT-05 experience leads to contact', async ({ page }) => {
+    await page.goto('/experience');
     await expect(page.getByRole('heading', { level: 2, name: /teacher of the year/i })).toBeVisible();
-    await page.getByRole('link', { name: /see my full cv/i }).click();
+    await expect(page.getByRole('heading', { level: 2, name: /professional learning/i })).toBeVisible();
+    await page.getByRole('link', { name: /get in touch/i }).click();
     await expect(page).toHaveURL(/\/contact\/?$/);
     await expect(page.locator('main a[href^="mailto:"]')).toHaveCount(1);
   });
