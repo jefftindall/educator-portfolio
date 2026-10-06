@@ -34,6 +34,19 @@ If Terraform or TFLint is missing, say so — do not skip the gate silently. Do 
 
 Never print secret values in workflows, scripts, logs, or commit messages. Full rules: [`.cursor/rules/never-echo-secrets.mdc`](.cursor/rules/never-echo-secrets.mdc).
 
+### Pull requests
+
+Every PR body follows [`.github/pull_request_template.md`](.github/pull_request_template.md). `gh pr create` does not apply the template on its own, so build the body from it:
+
+- Keep every heading: **Summary**, **Why**, **Type of change**, **How it was tested**, **Checklist**.
+- Fill in each section with real content. Summarize all commits on the branch, not just the last one, and link the issue or content-plan phase under **Why**.
+- Check (`[x]`) only the boxes that are true. Leave the rest unchecked, and don't delete them.
+- Under **How it was tested**, list the commands you actually ran and what you checked. Don't check `npm run lint` unless it passed.
+- Remove the `<!-- -->` hint comments.
+- Pass the body with `--body-file` or a heredoc. Never put secrets in it.
+
+When you update an existing PR with new commits, update its body to match.
+
 ## Brand
 
 Tiffany Tindall: **educator portfolio** at `tifftindall.com`, positioned as an **arts education leader** ("Arts education for all."). V1 content supports her NCAS application; see [`docs/plans/content-plan.md`](docs/plans/content-plan.md) for phases and status.
