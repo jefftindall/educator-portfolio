@@ -15,7 +15,8 @@ import {
   artisticProcesses,
   assessmentPhilosophy,
   standardsWriting,
-  technologyStatement,
+  technologyIntro,
+  technologyUses,
   whyServe,
 } from '../../lib/content/standards';
 ---
@@ -66,7 +67,17 @@ import {
             artisticProcesses.map((row) => (
               <tr class="align-top even:bg-soft-stone/60">
                 <td class="px-4 py-3 font-bold text-midnight">{row.process}</td>
-                <td class="px-4 py-3">{row.classroom}</td>
+                <td class="px-4 py-3">
+                  {typeof row.classroom === 'string' ? (
+                    row.classroom
+                  ) : (
+                    <ul class="list-disc space-y-2 pl-5">
+                      {row.classroom.map((item) => (
+                        <li>{item}</li>
+                      ))}
+                    </ul>
+                  )}
+                </td>
                 <td class="px-4 py-3">{row.artifact}</td>
               </tr>
             ))
@@ -87,7 +98,7 @@ import {
         <Figure
           src={barreClass}
           alt="A full dance class works at portable ballet barres across the studio."
-          caption="Daily technique at the barre."
+          caption="Daily technique classes."
           sizes="(min-width: 768px) 15rem, (min-width: 640px) 33vw, 100vw"
         />
       </li>
@@ -132,7 +143,16 @@ import {
     <p class="leading-relaxed">{assessmentPhilosophy}</p>
 
     <h2>Technology & artistic literacy</h2>
-    <p class="leading-relaxed">{technologyStatement}</p>
+    <p class="leading-relaxed">{technologyIntro}</p>
+    <ol class="list-decimal space-y-3 pl-5">
+      {
+        technologyUses.map((use) => (
+          <li class="leading-relaxed">
+            <strong class="text-midnight">{use.title}:</strong> {use.body}
+          </li>
+        ))
+      }
+    </ol>
 
     <h2>Commitment to service</h2>
     <p class="leading-relaxed">{whyServe}</p>

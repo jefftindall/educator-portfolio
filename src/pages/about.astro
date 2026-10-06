@@ -5,7 +5,7 @@ import Prose from '../components/Prose.astro';
 import Figure from '../components/Figure.astro';
 import Icon from '../components/Icon.astro';
 import ndeoPhoto from '../assets/photos/ndeo-2025.jpg';
-import { philosophyPrinciples, philosophyStatement } from '../lib/content/philosophy';
+import { pedagogicalPriorities, philosophyClosing, philosophyPrinciples } from '../lib/content/philosophy';
 import { aboutLede, myStory } from '../lib/content/story';
 
 const paragraphs = (text: string) => text.split('\n\n');
@@ -13,7 +13,7 @@ const paragraphs = (text: string) => text.split('\n\n');
 
 <BaseLayout
   title="About"
-  description="Tiffany Tindall's story and teaching philosophy, from 25+ years in K–12 and university dance education."
+  description="Tiffany Tindall's story and teaching philosophy, from 30+ years in K–12 and university dance education."
   canonicalPath="/about"
 >
   <PageHeader label="About" title="Arts Education Leader" lede={aboutLede} />
@@ -36,7 +36,17 @@ const paragraphs = (text: string) => text.split('\n\n');
     </div>
 
     <h2 id="teaching-philosophy" class="scroll-mt-24">Teaching philosophy</h2>
-    {paragraphs(philosophyStatement).map((paragraph) => <p class="leading-relaxed">{paragraph}</p>)}
+    <h3>Pedagogical priorities</h3>
+    <ol class="list-decimal space-y-4 pl-5">
+      {
+        pedagogicalPriorities.map((priority) => (
+          <li class="leading-relaxed">
+            <strong class="text-midnight">{priority.lead}</strong> {priority.body}
+          </li>
+        ))
+      }
+    </ol>
+    <p class="leading-relaxed">{philosophyClosing}</p>
 
     <h3>Lessons learned as an educator</h3>
     <ol class="list-decimal space-y-3 pl-5">
