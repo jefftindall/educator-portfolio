@@ -3,7 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHeader from '../../components/PageHeader.astro';
 import Prose from '../../components/Prose.astro';
 import Figure from '../../components/Figure.astro';
-import VideoFigure from '../../components/VideoFigure.astro';
+import YouTubeFigure from '../../components/YouTubeFigure.astro';
 import Icon from '../../components/Icon.astro';
 import classOnStage from '../../assets/photos/inclusive-class-stage.jpg';
 import classInStudio from '../../assets/photos/inclusive-class-studio.jpg';
@@ -15,6 +15,7 @@ import {
   learningLadderRungs,
   ndeoSessionDescription,
   ndeoSessionTitle,
+  performanceVideoId,
   presentationPdf,
 } from '../../lib/content/inclusive';
 ---
@@ -68,11 +69,10 @@ import {
       }
     </div>
 
-    <VideoFigure
-      src="/media/video/clapping-dance.mp4"
-      poster="/media/video/clapping-dance-poster.jpg"
-      title="The clapping dance from Eric's story, performed on stage"
-      caption="The clapping dance from Eric’s story, on stage with his classmates."
+    <YouTubeFigure
+      videoId={performanceVideoId}
+      title="Autocorrect Humanity: the advanced dance class performs their end-of-semester choreography project"
+      caption="“Autocorrect Humanity”: the Woodland High School advanced dance class performs their end-of-semester choreography project (2021)."
     />
 
     <h2>Dance I etiquette learning ladder</h2>

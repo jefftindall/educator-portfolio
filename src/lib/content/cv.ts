@@ -13,7 +13,7 @@ export const experience: readonly CvEntry[] = [
     dates: '2020–present',
     location: 'Cartersville, Georgia',
     details:
-      'Redesigned the class structure and rebuilt the dance program, teaching ballet, jazz, modern, and contemporary. As department lead I support all fine arts faculty, run department planning, observe and coach teachers, oversee fine arts events, and co-produce and choreograph fine arts productions. Secured a $5,000 Georgia Council for the Arts grant for a school-wide fine arts musical.',
+      'Redesigned the class structure and rebuilt the dance program, teaching ballet, jazz, modern, and contemporary. As department lead I support all fine arts faculty, run department planning, observe and coach teachers, oversee fine arts events, and co-produce and choreograph fine arts productions. Secured a $5,000 grant from the Georgia Council for the Arts to support school-wide musical programs for both the 2025–2026 and the 2026–2027 grant cycles.',
   },
   {
     title: 'Dance Instructor',
@@ -48,12 +48,12 @@ export const experience: readonly CvEntry[] = [
 
 export const education: readonly CvEntry[] = [
   {
-    title: 'Ed.S., Educational Administration',
+    title: 'Ed.S., Educational Leadership',
     organization: 'Jacksonville State University',
     dates: '2008',
   },
   {
-    title: 'M.S.Ed., Educational Administration',
+    title: 'M.S.Ed., Educational Leadership',
     organization: 'Jacksonville State University',
     dates: '2005',
   },
@@ -95,9 +95,9 @@ export const standardsAndService: readonly CvEntry[] = [
     details: 'Two cycles of action research on my own teaching.',
   },
   {
-    title: 'Member, Performance Standards Writing Committee for Dance Education',
+    title: 'Member, Power Standards Writing Committee for Dance Education',
     organization: 'Georgia Department of Education',
-    dates: '2008',
+    dates: '2005',
   },
 ];
 

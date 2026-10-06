@@ -1,0 +1,22 @@
+---
+interface Props {
+  videoId: string;
+  title: string;
+  caption?: string;
+  class?: string;
+}
+const { videoId, title, caption, class: className = '' } = Astro.props;
+---
+
+<figure class={className}>
+  <iframe
+    class="aspect-video w-full rounded-brand bg-midnight"
+    src={`https://www.youtube-nocookie.com/embed/${videoId}?rel=0`}
+    title={title}
+    loading="lazy"
+    allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen"
+    referrerpolicy="strict-origin-when-cross-origin"
+    allowfullscreen
+  ></iframe>
+  {caption && <figcaption class="pt-2 text-base">{caption}</figcaption>}
+</figure>

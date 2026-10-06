@@ -67,7 +67,7 @@ Decided (Jeff, Oct 4, 2026):
 
 Still open:
 
-1. **Degrees after her name** (M.Ed., Ed.S.). The guide limits them to résumés, speaker bios, and email signatures. The hero no longer shows "Ed.S."; the meta description and CV still do.
+1. **Degrees after her name** (M.S.Ed., Ed.S.). The guide limits them to résumés, speaker bios, and email signatures. The hero no longer shows "Ed.S."; the meta description and CV still do.
 2. **Professional photo session** (guide shot list). The NDEO conference photo stands in for the headshot until then.
 3. **Bios on file** in three lengths: one line, 50 words, 150 words.
 
@@ -78,7 +78,7 @@ Still open:
 - ✅ First screen per the style guide: tagline headline, positioning line, circular portrait, Bartow County Teacher of the Year honor, one gold CTA (philosophy) plus "My experience"
 - ✅ Hero video loop: `winter-finale-loop.mp4` (Winter 2021 finale, trimmed)
 - ✅ Pull quote band: "Don't change the standard. Change the instructional method."
-- ✅ Leadership and recognition, newest first: Bartow County HS Teacher of the Year (2026–27), NDEO Presenter (2025), CAN National PLC (2024–present), Fine Arts Department Lead (2021–present), GA Standards Writing Committee (2008), Barber MS Teacher of the Year (2007–08)
+- ✅ Leadership and recognition, newest first: Bartow County HS Teacher of the Year (2026–27), NDEO Presenter (2025), CAN National PLC (2024–present), Fine Arts Department Lead (2021–present), Barber MS Teacher of the Year (2007–08), GA Dance Power Standards Writing Committee (2005)
 - ✅ Three group photos and "Explore" cards to About, Leadership and Impact, Speaking and Workshops, and Experience (Phase 3)
 - ⬜ Principal quote (Melinda Wilder) once received
 
@@ -86,33 +86,35 @@ V1 URLs that moved in Phase 3 301 to their new homes: `/standards-and-leadership
 
 #### 2. Standards & Leadership (now part of `/leadership-and-impact`) — ✅ built, 🟡 verify facts
 
-- ✅ Standards-writing experience (2008 GA DOE committee, GSE, Dance I–IV design)
+- ✅ Standards-writing experience (2005 GA DOE committee, GSE, Dance I–IV design)
 - ✅ NCAS artistic processes table: Creating / Performing / Responding / Connecting
 - ✅ Student choreography video (evidence for *Creating*) and three supporting photos
 - ✅ Assessment philosophy (individual progress, not comparison)
-- ✅ Technology & artistic literacy statement (fills the NCAS Technology & AI gap)
+- ✅ Technology & artistic literacy statement in Tiffany's words: reflective practices (video) and AI applications
 - ✅ "Commitment to service" paragraph
+- ✅ Oct 2026 corrections applied: two-cycle GCA grant, Power Standards committee name, 80/20 summative/supportive grading, full technique week, performances by level, Ailey and KSU field trips, no "at the barre"
 - ⬜ Short CAN action-research findings paragraph (after the Jan–May results are written up; see open decisions)
-- 🟡 Tiffany to confirm the official committee name and the technology statement are accurate in her own words
 
-#### 3. Teaching Philosophy (now part of `/about`) — 🟡 needs Tiffany's sign-off
+#### 3. Teaching Philosophy (now part of `/about`) — ✅ Tiffany's words
 
-- ✅ Philosophy statement (the strategy's draft, used as written)
+- ✅ Three pedagogical priorities and closing paragraph from Tiffany's Teacher of the Year application
 - ✅ Five "Lessons learned as an educator" principles
-- ⬜ Tiffany edits the draft so it sounds like her before launch
+- ✅ "My story" is her professional biography, in first person
+- ✅ Confirmed by Tiffany (Oct 2026): standards committee 2005, M.S.Ed. and Ed.S. in Educational Leadership, 30+ years of experience
 
 #### 4. Dance for Every Body (`/leadership-and-impact/dance-for-every-body`) — 🟡 built, releases pending
 
 - ✅ NDEO 2025 session title, description, Disability and Pedagogy track context
 - ✅ Three strategies, each with one story
-- ✅ Clapping-dance video (from the Eric story)
+- ✅ Advanced class performance video ("Autocorrect Humanity," 2021), embedded from YouTube; replaced the clapping-dance clip in Oct 2026
+- ✅ Caption describes the video: the advanced class performing their end-of-semester choreography project
 - ✅ Dance I etiquette Learning Ladder (8 rungs, as an ordered list)
 - ✅ "Who benefits" for four audiences
 - ✅ "More stories" (first names only)
 - ✅ NDEO 2025 slide deck available to download at the end of the page (`public/media/docs/dance-for-every-body-ndeo-2025.pdf`, smoke-tested)
 - ⬜ Learning Ladder as a graphic instead of a list (nice to have)
 - ⬜ Principal quote (optional second spot)
-- 🔒/⚠️ **Confirm a signed media release** for the student in the clapping-dance video before launch; if it isn't confirmed, swap in a photo
+- ✅ Media releases cover the dancers in the embedded performance video (confirmed Oct 2026); captions name no students
 
 #### 5. CV & Contact — 🟡 mostly done (split in Phase 3: CV on `/experience`, contact-only `/contact`)
 
@@ -138,8 +140,8 @@ V1 URLs that moved in Phase 3 301 to their new homes: `/standards-and-leadership
 
 | Item | Strategy recommends | Site today | Action |
 |---|---|---|---|
-| Years teaching | "25+ years" everywhere | "25+" / "more than 25" | ✅ Consistent |
-| GA committee name | Official name from the résumé | "Performance Standards Writing Committee for Dance Education" | ✅ Uses the official name |
+| Years teaching | "25+ years" everywhere | "30+" / "more than 30" | ✅ Updated to 30+ by Tiffany (Oct 2026) |
+| GA committee name | Official name from the résumé | "Power Standards Writing Committee for Dance Education" | ✅ Corrected by Tiffany (Oct 2026) |
 | CAN dates | 2024–present | 2024–present | ✅ |
 | Woodland role | 2020–present | 2020–present | ✅ |
 | Red Door Food Pantry | Confirm 2012–2024 vs 2012–2025; co-director / board chair | "Board Member, 2020–2026" (LinkedIn) | ⬜ Tiffany confirms dates and title |

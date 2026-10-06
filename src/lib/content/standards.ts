@@ -1,4 +1,8 @@
-export const artisticProcesses = [
+export const artisticProcesses: readonly {
+  process: string;
+  classroom: string | readonly string[];
+  artifact: string;
+}[] = [
   {
     process: 'Creating',
     classroom:
@@ -7,14 +11,17 @@ export const artisticProcesses = [
   },
   {
     process: 'Performing',
-    classroom:
-      'Every class performs at least two pieces per concert - one teacher-choreographed and one student-created - so all students experience rehearsal discipline and stage presence.',
+    classroom: [
+      'The advanced dance class performs a minimum of five dances each semester: ballet, jazz, contemporary, musical theater, and choreography project.',
+      'The intermediate class performs a minimum of three dances each semester: ballet, jazz, and choreography project.',
+      'The beginning class performs two to three dances each semester: one or two jazz dances, and one choreography project.',
+    ],
     artifact: 'Winter and spring concert programs',
   },
   {
     process: 'Responding',
     classroom:
-      'Self- and peer-assessment rubrics, end-of-semester reflections, Critical Response Process, and field trips to professional performances (for example, Alvin Ailey’s Revelations).',
+      'Self- and peer-assessment rubrics, end-of-semester reflections, Critical Response Process, and field trips to professional performances including Alvin Ailey American Dance Theater and Kennesaw State University Dance Department performances.',
     artifact: 'Course syllabi and Connected Arts Network action research',
   },
   {
@@ -23,16 +30,26 @@ export const artisticProcesses = [
       'SEL competencies in improvisation and group work; kinesiology and injury prevention; cultural and social dance units that connect technique to community and history.',
     artifact: 'Dance I–IV course design, informed by NDEO conferences',
   },
-] as const;
+];
 
 export const standardsWriting =
-  'Member, Georgia Department of Education Performance Standards Writing Committee for Dance Education (2008). I teach daily to the Georgia Standards of Excellence and design Dance I–IV with sequenced objectives, 60/40 summative/formative grading, and self- and peer-assessment rubrics.';
+  'Member, Georgia Department of Education Power Standards Writing Committee for Dance Education (2005). I wrote the power standards for dance. I teach daily to the Georgia Standards of Excellence and design Dance I–IV with sequenced objectives, 80% summative and 20% supportive grading, and self- and peer-assessment rubrics.';
 
 export const assessmentPhilosophy =
-  'I assess individual progress, not comparison between students. That lens keeps grade-band performance standards honest: every learner should show growth against the same expectations, with instruction adapted to how they learn best.';
+  'I assess individual progress, not comparison between students. That lens keeps grade-band standards honest: every learner should show growth against the same expectations, with instruction adapted to how they learn best.';
 
 export const whyServe =
-  'I have spent more than 25 years teaching dance from pre-K through university, and one belief runs through all of it: every student deserves a real arts education. That belief has carried me beyond my own classroom - onto the committee that wrote Georgia’s dance standards, into national action research with the Connected Arts Network, and to the NDEO national conference to share what inclusive teaching looks like. I serve because the work is bigger than any one program. When teachers have clear, practical standards and the support to teach them well, students of every ability get the chance to create, perform, and grow. Helping the field get there, from the studio floor to the wider profession, is work I care about deeply and will keep doing.';
+  'I have spent more than 30 years teaching dance from pre-K through university, and one belief runs through all of it: every student deserves an effective arts education. That belief has carried me beyond my own classroom - onto the committee that wrote Georgia’s dance power standards, into national action research with the Connected Arts Network, and to the NDEO national conference to share what inclusive teaching looks like. I serve because the work is bigger than any one program. When teachers have clear, practical standards and the support to teach them well, students of every ability get the chance to create, perform, and grow. Helping the field get there, from the studio floor to the wider profession, is work I care about deeply and will keep doing.';
 
-export const technologyStatement =
-  'I use technology when it helps students reflect on their work and access it, never as a replacement for learning in the body. Students watch video of themselves to self-assess, record choreography for peer feedback, and use captioning, visual cues, and adaptive pacing so they can document and revise what they make. As AI tools show up in classrooms, I want to help teachers protect student voice, give credit to human choreographers, and use technology to bring more students into dance.';
+export const technologyIntro = 'I use technology to facilitate my students’ education in the following ways:';
+
+export const technologyUses = [
+  {
+    title: 'Reflective practices',
+    body: 'We create videos for dance and use them to assess and revise work. We also use videos to document performances.',
+  },
+  {
+    title: 'AI applications',
+    body: 'We use AI to facilitate the creation of dance concert programs, advertising for concerts and performances, and to analyze ideas and help create ideas for choreography.',
+  },
+] as const;
