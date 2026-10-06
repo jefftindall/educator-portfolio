@@ -106,8 +106,7 @@ V1 URLs that moved in Phase 3 301 to their new homes: `/standards-and-leadership
 
 - ✅ NDEO 2025 session title, description, Disability and Pedagogy track context
 - ✅ Three strategies, each with one story
-- ✅ Advanced class performance video ("Autocorrect Humanity," 2021), embedded from YouTube; replaced the clapping-dance clip in Oct 2026
-- ✅ Caption describes the video: the advanced class performing their end-of-semester choreography project
+- ✅ Clapping-dance video from Eric's story, with poster and caption (smoke-tested)
 - ✅ Dance I etiquette Learning Ladder (8 rungs, as an ordered list)
 - ✅ "Who benefits" for four audiences
 - ✅ "More stories" (first names only)
