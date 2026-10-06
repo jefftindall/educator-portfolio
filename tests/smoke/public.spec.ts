@@ -1,7 +1,7 @@
 import { expect, test } from '@playwright/test';
 import { BRAND, HERO_HEADLINE_PHRASE, MOVED_ROUTES, PUBLIC_ROUTES } from '../helpers/content';
 import { isStaticWebAppHost, waitForRequestOk } from '../helpers/propagation';
-import { performanceVideoId, presentationPdf } from '../../src/lib/content/inclusive';
+import { clappingDancePoster, clappingDanceVideo, presentationPdf } from '../../src/lib/content/inclusive';
 
 test.describe('public smoke', () => {
   test('home shows brand and hero headline', async ({ request }) => {
@@ -35,9 +35,10 @@ test.describe('public smoke', () => {
     }
   });
 
-  test('Dance for Every Body embeds the performance video', async ({ request }) => {
+  test('Dance for Every Body shows the clapping dance video', async ({ request }) => {
     const html = await (await waitForRequestOk(request, '/leadership-and-impact/dance-for-every-body')).text();
-    expect(html).toContain(`youtube-nocookie.com/embed/${performanceVideoId}`);
+    expect(html).toContain(`src="${clappingDanceVideo}"`);
+    expect(html).toContain(`poster="${clappingDancePoster}"`);
   });
 
   test('moved V1 URLs redirect permanently', async ({ request }) => {
