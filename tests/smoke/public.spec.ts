@@ -41,6 +41,13 @@ test.describe('public smoke', () => {
     expect(html).toContain(`poster="${clappingDancePoster}"`);
   });
 
+  test('Leadership links to the Dance I learning ladder', async ({ request }) => {
+    const leadership = await (await waitForRequestOk(request, '/leadership-and-impact')).text();
+    expect(leadership).toContain('href="/leadership-and-impact/dance-for-every-body#learning-ladder"');
+    const inclusive = await (await waitForRequestOk(request, '/leadership-and-impact/dance-for-every-body')).text();
+    expect(inclusive).toContain('id="learning-ladder"');
+  });
+
   test('moved V1 URLs redirect permanently', async ({ request }) => {
     test.skip(!isStaticWebAppHost(), 'Redirects come from staticwebapp.config.json on deployed SWA hosts');
     for (const [from, to] of Object.entries(MOVED_ROUTES)) {
