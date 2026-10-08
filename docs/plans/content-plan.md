@@ -93,6 +93,8 @@ V1 URLs that moved in Phase 3 301 to their new homes: `/standards-and-leadership
 - ✅ Technology & artistic literacy statement in Tiffany's words: reflective practices (video) and AI applications
 - ✅ "Commitment to service" paragraph
 - ✅ Oct 2026 corrections applied: two-cycle GCA grant, Power Standards committee name, 80/20 summative/supportive grading, full technique week, performances by level, Ailey and KSU field trips, no "at the barre"
+- ✅ Batch 2 corrections (Oct 7, 2026): research-cycle sentence in the assessment philosophy, Learning Ladder link under "Building dance programs", inclusive alt text on the studio photo. "Effective arts education" and "Power Standards" were already consistent site-wide.
+- ⬜ Board positions: Tiffany verifies dates and titles against her résumé and appointment letters (batch 2, item 2)
 - ⬜ Short CAN action-research findings paragraph (after the Jan–May results are written up; see open decisions)
 
 #### 3. Teaching Philosophy (now part of `/about`) — ✅ Tiffany's words
@@ -106,10 +108,12 @@ V1 URLs that moved in Phase 3 301 to their new homes: `/standards-and-leadership
 
 - ✅ NDEO 2025 session title, description, Disability and Pedagogy track context
 - ✅ Three strategies, each with one story
-- ✅ Clapping-dance video from Eric's story, with poster and caption (smoke-tested)
+- ✅ Clapping-dance video from the first strategy's story, with poster and caption (smoke-tested)
 - ✅ Dance I etiquette Learning Ladder (8 rungs, as an ordered list)
 - ✅ "Who benefits" for four audiences
-- ✅ "More stories" (first names only)
+- ✅ "More stories" and the three strategies name no students (batch 2, Oct 7, 2026). "Karina's Class" stays as the program's name.
+- ✅ Photo captions and alt text lead with what students are doing, not with disability (batch 2)
+- ⬜ The downloadable NDEO slide deck still names a student and a staff member on slide 11; Tiffany decides whether to re-export it
 - ✅ NDEO 2025 slide deck available to download at the end of the page (`public/media/docs/dance-for-every-body-ndeo-2025.pdf`, smoke-tested)
 - ⬜ Learning Ladder as a graphic instead of a list (nice to have)
 - ⬜ Principal quote (optional second spot)
@@ -170,7 +174,7 @@ Moved V1 URLs 301 in both `staticwebapp.config.json` files (see Phase 2). Nav is
 |---|---|---|---|
 | **My Story** (About) | Dancing since 2, assistant teaching at 16; her father; Karina's Class origin; Leroy; Martha Graham; Cobb County program building; brief personal touches | Draft from CV facts only: dancing since 2, teaching at 16, UGA, Cobb County, Karina's Class, Reinhardt, Woodland | ⬜ Tiffany rewrites in her voice and adds her father, Leroy, and Martha Graham stories (sources: 2020 Bartow bio, NDEO notes, NDEO deck photos *My Dad and I*, *Karina's Class – The Beginning*) |
 | **The Program** (Leadership and Impact) | Weekly structure (ballet / jazz / improv / daily conditioning), Dance I–IV mastery-based levels open to all students, Winter Concert 2025-26 photos by piece, student leadership story (with permission) | Four cards: open levels, weekly technique, every class performs, inclusive Dance I. Department leadership paragraph names all four arts. | ⬜ Winter Concert 2025-26 photos (media releases first) · ⬜ student leadership story (consent first) · 🟡 Tiffany confirms the department covers dance, music, theatre, and visual art |
-| **Professional Learning** (Experience) | Timeline: CAN 2024–present (two action-research cycles), NDEO 2025 presenter, NDEO 2017 sessions, OPDI 110 kinesiology (2018), Leadership Bartow (2018), Bartow Aspiring Leaders, CCSD Leadership Academy / Teacher Leader Institute (2008), NDEO member since 2003. Training in Muhammad's 5 Pursuits and Liz Lerman's Critical Response Process. | Dated timeline, newest first; undated items under "Also trained in". NDEO presenter and CAN sit under "Standards and national service" | ⬜ NDEO 2017 left off until there's specific content (session title, presented or attended) · 🟡 OPDI 110 course title and the Aspiring Leaders date |
+| **Professional Learning** (Experience) | Timeline: CAN 2024–present (two action-research cycles), NDEO 2025 presenter, NDEO 2017 sessions, OPDI 110 kinesiology (2018), Leadership Bartow (2018), Bartow Aspiring Leaders, CCSD Leadership Academy / Teacher Leader Institute (2008), NDEO member since 2003. Training in Muhammad's 5 Pursuits and Liz Lerman's Critical Response Process. | Dated timeline, newest first; undated items under "Also trained in". NDEO presenter and CAN sit under "Standards and national service". The CAN entry names the reflect, act, assess, revise cycle; the Power Standards entry says it wrote Georgia's state standards (batch 2) | ⬜ NDEO 2017 left off until there's specific content (session title, presented or attended) · 🟡 OPDI 110 course title and the Aspiring Leaders date · ⬜ Batch 2 item 3: Tiffany confirms the CAN timeline and any National Education Association professional learning, with dates |
 | **CAN action research** (Speaking and Workshops) | Two cycles | 2024–25 question and approach only | ⬜ Add 2024-25 findings; add the 2025-26 cycle once its question is written (see Content gaps) |
 
 ---

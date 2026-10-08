@@ -3,7 +3,7 @@ export const ndeoSessionTitle = 'Dance for Every Body: Dance for All Abilities';
 /** NDEO 2025 slide deck, served from public/. */
 export const presentationPdf = '/media/docs/dance-for-every-body-ndeo-2025.pdf';
 
-/** The clapping dance from Eric's story, served from public/. */
+/** The clapping dance from the first strategy's story, served from public/. */
 export const clappingDanceVideo = '/media/video/clapping-dance.mp4';
 export const clappingDancePoster = '/media/video/clapping-dance-poster.jpg';
 export const ndeoSessionDescription =
@@ -13,12 +13,12 @@ export const inclusiveStrategies = [
   {
     title: 'Accommodate the student, not the diagnosis',
     body:
-      'Eric could not tolerate clapping because of sensory needs tied to a childhood injury. Instead of removing him from class rituals, we moved from snaps to golf claps to choreography that built clapping in gradually. By semester’s end he clapped on stage and attended professional performances with his classmates.',
+      'One student could not tolerate clapping because of sensory needs tied to a childhood injury. Instead of removing him from class rituals, we moved from snaps to golf claps to choreography that built clapping in gradually. By semester’s end he clapped on stage and attended professional performances with his classmates.',
   },
   {
     title: 'Use the people already around the student',
     body:
-      'Danika’s Learning Ladder goals included fist bumps instead of hugs. I coordinated with her other teachers so dance class reinforced the same expectations she heard everywhere else, and she got one consistent message all day.',
+      'One student’s Learning Ladder goals included fist bumps instead of hugs. I coordinated with her other teachers so dance class reinforced the same expectations she heard everywhere else, and she got one consistent message all day.',
   },
   {
     title: 'Embrace social emotional learning',

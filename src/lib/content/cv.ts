@@ -92,12 +92,14 @@ export const standardsAndService: readonly CvEntry[] = [
     title: 'Teacher Participant, Connected Arts Network national PLC',
     organization: 'National Dance Education Organization',
     dates: '2024–present',
-    details: 'Two cycles of action research on my own teaching.',
+    details:
+      'Two cycles of action research on my own teaching. Each cycle follows the same steps: reflect, act, assess, and revise.',
   },
   {
     title: 'Member, Power Standards Writing Committee for Dance Education',
     organization: 'Georgia Department of Education',
     dates: '2005',
+    details: 'Wrote Georgia’s state power standards for dance.',
   },
 ];
 
