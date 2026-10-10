@@ -76,7 +76,7 @@ Still open:
 #### 1. Home (`/`) — 🟡 mostly done
 
 - ✅ First screen per the style guide: tagline headline, positioning line, circular portrait, Bartow County Teacher of the Year honor, one gold CTA (philosophy) plus "My experience"
-- ✅ Hero video loop: `winter-finale-loop.mp4` (Winter 2021 finale, trimmed)
+- ✅ Hero video loop: `highlight-reel.mp4` (33-second highlight reel of student ensembles)
 - ✅ Pull quote band: "Don't change the standard. Change the instructional method."
 - ✅ Leadership and recognition, newest first: Bartow County HS Teacher of the Year (2026–27), NDEO Presenter (2025), CAN National PLC (2024–present), Fine Arts Department Lead (2021–present), Barber MS Teacher of the Year (2007–08), GA Dance Power Standards Writing Committee (2005)
 - ✅ Three group photos and "Explore" cards to About, Leadership and Impact, Speaking and Workshops, and Experience (Phase 3)
