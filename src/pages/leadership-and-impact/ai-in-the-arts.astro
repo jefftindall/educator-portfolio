@@ -1,0 +1,114 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import Prose from '../../components/Prose.astro';
+import {
+  aiPageLede,
+  aiPageTitle,
+  artForms,
+  assistantPlatformsNote,
+  buildAnAssistantSteps,
+  departmentIdeas,
+  ideasIntro,
+  myUses,
+  responsibleUse,
+} from '../../lib/content/ai';
+---
+
+<BaseLayout
+  title={aiPageTitle}
+  description="How an arts education leader uses AI for show collateral, leveled lessons, and grants, with prompts and reusable assistants for dance, theatre, music, and visual art teachers."
+  canonicalPath="/leadership-and-impact/ai-in-the-arts"
+>
+  <PageHeader label="Leadership and impact" title={aiPageTitle} lede={aiPageLede} />
+
+  <Prose>
+    <h2 class="pt-0!">Use AI responsibly</h2>
+    <ul class="list-disc space-y-2 pl-5">
+      {responsibleUse.map((rule) => <li class="leading-relaxed">{rule}</li>)}
+    </ul>
+
+    <h2>How I use AI</h2>
+    <div class="space-y-8">
+      {
+        myUses.map((use) => (
+          <article>
+            <h3>{use.title}</h3>
+            <p class="mt-2 leading-relaxed">{use.body}</p>
+            <div class="mt-4 rounded-brand border border-soft-stone bg-white p-5">
+              <p class="label text-midnight">Try this prompt</p>
+              <p class="mt-2 leading-relaxed">{use.prompt}</p>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+
+    <h2>Ideas to try, by art form</h2>
+    <p class="leading-relaxed">{ideasIntro}</p>
+    <nav aria-label="Art forms on this page">
+      <ul class="flex flex-wrap gap-x-6 gap-y-2">
+        {
+          artForms.map((art) => (
+            <li>
+              <a href={`#${art.id}`}>{art.name} ideas</a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    {
+      artForms.map((art) => (
+        <section class="space-y-6" aria-labelledby={art.id}>
+          <h2 id={art.id} class="scroll-mt-24">{art.name}</h2>
+          <p class="leading-relaxed">{art.intro}</p>
+          <div class="space-y-8">
+            {art.ideas.map((idea) => (
+              <article>
+                <h3>{idea.title}</h3>
+                <p class="mt-2 leading-relaxed">{idea.body}</p>
+                <div class="mt-4 rounded-brand border border-soft-stone bg-white p-5">
+                  <p class="label text-midnight">Prompt</p>
+                  <p class="mt-2 leading-relaxed">{idea.prompt}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+          <article class="surface-dark rounded-brand p-6">
+            <p class="label">Build this assistant</p>
+            <h3 class="mt-2">{art.assistant.name}</h3>
+            <p class="mt-2 leading-relaxed">{art.assistant.purpose}</p>
+            <p class="mt-4 font-bold">Instructions to paste</p>
+            <p class="mt-1 leading-relaxed">{art.assistant.instructions}</p>
+          </article>
+        </section>
+      ))
+    }
+
+    <h2 id="department" class="scroll-mt-24">For department leads</h2>
+    <p class="leading-relaxed">Ideas that serve all four arts at once.</p>
+    <div class="space-y-8">
+      {
+        departmentIdeas.map((idea) => (
+          <article>
+            <h3>{idea.title}</h3>
+            <p class="mt-2 leading-relaxed">{idea.body}</p>
+            <div class="mt-4 rounded-brand border border-soft-stone bg-white p-5">
+              <p class="label text-midnight">Prompt</p>
+              <p class="mt-2 leading-relaxed">{idea.prompt}</p>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+
+    <h2 id="build-an-assistant" class="scroll-mt-24">Build your own assistant</h2>
+    <p class="leading-relaxed">
+      An assistant is a saved set of instructions you set up once and reuse. {assistantPlatformsNote}
+    </p>
+    <ol class="list-decimal space-y-2 pl-5">
+      {buildAnAssistantSteps.map((step) => <li class="leading-relaxed">{step}</li>)}
+    </ol>
+  </Prose>
+</BaseLayout>

@@ -11,4 +11,5 @@ export const nav: readonly NavItem[] = [
 /** Public pages that live under a nav section rather than in the nav itself. */
 export const subpages: readonly NavItem[] = [
   { href: '/leadership-and-impact/dance-for-every-body', label: 'Dance for Every Body' },
+  { href: '/leadership-and-impact/ai-in-the-arts', label: 'AI in the Arts Classroom' },
 ];

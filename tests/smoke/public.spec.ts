@@ -48,6 +48,11 @@ test.describe('public smoke', () => {
     expect(inclusive).toContain('id="learning-ladder"');
   });
 
+  test('Leadership links to AI in the Arts Classroom', async ({ request }) => {
+    const leadership = await (await waitForRequestOk(request, '/leadership-and-impact')).text();
+    expect(leadership).toContain('href="/leadership-and-impact/ai-in-the-arts"');
+  });
+
   test('moved V1 URLs redirect permanently', async ({ request }) => {
     test.skip(!isStaticWebAppHost(), 'Redirects come from staticwebapp.config.json on deployed SWA hosts');
     for (const [from, to] of Object.entries(MOVED_ROUTES)) {

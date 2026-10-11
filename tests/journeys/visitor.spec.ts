@@ -3,6 +3,7 @@ import { nav } from '../../src/lib/nav';
 import { BRAND, HERO_HEADLINE_PHRASE } from '../helpers/content';
 import { waitForRequestOk } from '../helpers/propagation';
 import { presentationPdf } from '../../src/lib/content/inclusive';
+import { aiPageTitle, artForms } from '../../src/lib/content/ai';
 
 test.describe('visitor journeys', () => {
   test('VISIT-01 landing greets visitors', async ({ request }) => {
@@ -43,5 +44,15 @@ test.describe('visitor journeys', () => {
     await page.getByRole('link', { name: /get in touch/i }).click();
     await expect(page).toHaveURL(/\/contact\/?$/);
     await expect(page.locator('main a[href^="mailto:"]')).toHaveCount(1);
+  });
+
+  test('VISIT-06 leadership leads to AI in the Arts Classroom', async ({ page }) => {
+    await page.goto('/leadership-and-impact');
+    await page.getByRole('link', { name: /how i use ai in the arts/i }).click();
+    await expect(page).toHaveURL(/\/leadership-and-impact\/ai-in-the-arts\/?$/);
+    await expect(page.getByRole('heading', { level: 1 })).toHaveText(aiPageTitle);
+    for (const art of artForms) {
+      await expect(page.getByRole('heading', { level: 2, name: art.name, exact: true })).toBeVisible();
+    }
   });
 });
