@@ -52,7 +52,17 @@ test.describe('visitor journeys', () => {
     await expect(page).toHaveURL(/\/leadership-and-impact\/ai-in-the-arts\/?$/);
     await expect(page.getByRole('heading', { level: 1 })).toHaveText(aiPageTitle);
     for (const art of artForms) {
-      await expect(page.getByRole('heading', { level: 2, name: art.name, exact: true })).toBeVisible();
+      await page.getByRole('tab', { name: art.name, exact: true }).click();
+      await expect(page.getByRole('tab', { name: art.name, exact: true })).toHaveAttribute('aria-selected', 'true');
+      await expect(page.getByRole('tabpanel')).toHaveCount(1);
+      await expect(page.getByRole('tabpanel')).toContainText(art.assistant.name);
     }
+  });
+
+  test('VISIT-07 an art-form link opens its tab', async ({ page }) => {
+    const art = artForms[artForms.length - 1];
+    await page.goto(`/leadership-and-impact/ai-in-the-arts#${art.id}`);
+    await expect(page.getByRole('tab', { name: art.name, exact: true })).toHaveAttribute('aria-selected', 'true');
+    await expect(page.getByRole('tabpanel')).toContainText(art.assistant.name);
   });
 });

@@ -162,12 +162,12 @@ V2 moves the site to the [style guide's](../brand/style-guide.md) structure, wit
 | About | `/about` | My Story + Teaching Philosophy (`#teaching-philosophy`; the Home gold button links there) | 🟡 My Story is a draft |
 | Leadership and Impact | `/leadership-and-impact` | Department leadership, Standards & Leadership, The Program (framed as principles proven in three schools across Cobb and Bartow), Dance for Every Body summary | 🟡 Program copy needs review |
 | ↳ Dance for Every Body | `/leadership-and-impact/dance-for-every-body` | V1 page, moved unchanged | 🟡 Releases pending (see Phase 2) |
-| ↳ AI in the Arts Classroom | `/leadership-and-impact/ai-in-the-arts` | Responsible use; Tiffany's three uses (show collateral, leveled lessons, grant writing); prompts and a reusable assistant for dance, theatre, music, and visual art; department ideas | 🟡 Tiffany to review prompts and wording |
+| ↳ AI in the Arts Classroom | `/leadership-and-impact/ai-in-the-arts` | Tiffany's three uses (show collateral, leveled lessons, grant writing); a responsible-use callout; tabbed prompts and a reusable assistant for dance, theatre, music, and visual art; department ideas | 🟡 Tiffany to review prompts and wording |
 | Speaking and Workshops | `/speaking-and-workshops` | NDEO 2025 session + slides, CAN 2024–25 action research, invitation to speak | ✅ |
 | Experience | `/experience` | Every CV item: experience, Teacher of the Year honors, standards and national service, professional learning, education, community leadership | 🟡 Facts to confirm |
 | Contact | `/contact` | Email and LinkedIn only, plus a link to Experience | ✅ |
 
-Moved V1 URLs 301 in both `staticwebapp.config.json` files (see Phase 2). Nav is `src/lib/nav.ts`; the Dance for Every Body and AI in the Arts Classroom subpages are in `subpages` there so tests cover them. Smoke checks every route, the redirects (on SWA hosts), and the slides link; journeys `VISIT-02`–`VISIT-06` cover the new flows.
+Moved V1 URLs 301 in both `staticwebapp.config.json` files (see Phase 2). Nav is `src/lib/nav.ts`; the Dance for Every Body and AI in the Arts Classroom subpages are in `subpages` there so tests cover them. Smoke checks every route, the redirects (on SWA hosts), and the slides link; journeys `VISIT-02`–`VISIT-07` cover the new flows.
 
 ### Content sources and what's still missing
 
