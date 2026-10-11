@@ -1,25 +1,33 @@
 ---
 import Icon from './Icon.astro';
 
-interface Props {
+interface VideoSource {
   src: string;
+  type: string;
+  media?: string;
+}
+
+interface Props {
+  /** Browsers play the first source whose `media` and `type` they support, so list small and AV1 files first. */
+  sources: VideoSource[];
   poster: string;
   label: string;
 }
-const { src, poster, label } = Astro.props;
+const { sources, poster, label } = Astro.props;
 ---
 
 <div class="hero-video relative overflow-hidden rounded-brand bg-midnight" data-hero-video>
   <video
     class="aspect-video w-full object-cover"
-    src={src}
     poster={poster}
     muted
     loop
     playsinline
     preload="metadata"
     aria-label={label}
-  ></video>
+  >
+    {sources.map(({ src, type, media }) => <source src={src} type={type} media={media} />)}
+  </video>
   <button
     type="button"
     class="absolute right-3 bottom-3 inline-flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-brand bg-midnight/70 px-3 font-semibold sm:px-4 text-ivory [--focus-ring:var(--color-spotlight)] transition hover:bg-midnight"

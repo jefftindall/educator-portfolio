@@ -24,6 +24,14 @@ import {
 const jsonLd = buildPersonJsonLd();
 const ogImage = await getImage({ src: grayDressCircle, width: 1200, format: 'jpg' });
 
+const mobile = '(max-width: 767px)';
+const heroReelSources = [
+  { media: mobile, src: '/media/video/highlight-reel-480.av1.mp4', type: 'video/mp4; codecs="av01.0.04M.08"' },
+  { media: mobile, src: '/media/video/highlight-reel-480.mp4', type: 'video/mp4; codecs="avc1.64001F"' },
+  { src: '/media/video/highlight-reel-720.av1.mp4', type: 'video/mp4; codecs="av01.0.05M.08"' },
+  { src: '/media/video/highlight-reel-720.mp4', type: 'video/mp4; codecs="avc1.64001F"' },
+];
+
 const explore = [
   {
     href: '/about',
@@ -87,7 +95,7 @@ const explore = [
 
   <section class="mx-auto max-w-5xl px-6 pb-12 md:pb-16">
     <HeroVideo
-      src="/media/video/highlight-reel.mp4"
+      sources={heroReelSources}
       poster="/media/video/highlight-reel-poster.jpg"
       label="Highlight reel of student dance ensembles performing together on stage"
     />
