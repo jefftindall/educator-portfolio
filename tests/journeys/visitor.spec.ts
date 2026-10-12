@@ -65,4 +65,25 @@ test.describe('visitor journeys', () => {
     await expect(page.getByRole('tab', { name: art.name, exact: true })).toHaveAttribute('aria-selected', 'true');
     await expect(page.getByRole('tabpanel')).toContainText(art.assistant.name);
   });
+
+  test('VISIT-08 header menu reaches every nested page', async ({ page }) => {
+    const header = page.locator('header');
+    for (const section of nav.filter((item) => item.children?.length)) {
+      for (const child of section.children ?? []) {
+        await page.setViewportSize({ width: 1280, height: 800 });
+        await page.goto('/');
+        await header.locator('summary:visible', { hasText: `${section.label} pages` }).click();
+        await header.getByRole('link', { name: child.label, exact: true }).click();
+        await expect(page).toHaveURL(new RegExp(`${child.href}/?$`));
+
+        await page.setViewportSize({ width: 390, height: 844 });
+        await page.goto('/');
+        await header.locator('summary:visible', { hasText: 'Menu' }).click();
+        await header.locator('summary:visible', { hasText: section.label }).click();
+        await header.getByRole('link', { name: child.label, exact: true }).click();
+        await expect(page).toHaveURL(new RegExp(`${child.href}/?$`));
+      }
+    }
+  });
+
 });

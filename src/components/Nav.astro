@@ -2,8 +2,10 @@
 import Icon from './Icon.astro';
 import Wordmark from './Wordmark.astro';
 import { nav } from '../lib/site';
-const pathname = Astro.url.pathname;
+const pathname = Astro.url.pathname.replace(/\/$/, '') || '/';
 const isActive = (href: string) => pathname === href || pathname.startsWith(href + '/');
+const isCurrent = (href: string) => pathname === href;
+const subLinkClass = 'block min-h-11 rounded-brand px-3 py-2 text-base no-underline hover:underline';
 ---
 
 <header class="surface-dark sticky top-0 z-40">
@@ -16,17 +18,42 @@ const isActive = (href: string) => pathname === href || pathname.startsWith(href
         <nav class="hidden items-center gap-7 md:flex" aria-label="Primary">
           {nav.map((item) => {
             const active = isActive(item.href);
-            return (
+            const link = (
               <a
                 href={item.href}
                 class:list={[
                   'text-base underline-offset-8 transition',
                   active ? 'font-semibold underline decoration-2' : 'no-underline hover:underline',
                 ]}
-                aria-current={active ? 'page' : undefined}
+                aria-current={isCurrent(item.href) ? 'page' : undefined}
               >
                 {item.label}
               </a>
+            );
+            if (!item.children?.length) return link;
+            return (
+              <div class="relative flex items-center gap-1">
+                {link}
+                <details class="group" data-nav-popover>
+                  <summary class="flex h-11 w-8 cursor-pointer list-none items-center justify-center rounded-brand hover:bg-ivory/10 [&::-webkit-details-marker]:hidden">
+                    <Icon name="chevron-down" class="h-4 w-4 transition group-open:rotate-180" />
+                    <span class="sr-only">{item.label} pages</span>
+                  </summary>
+                  <ul class="absolute top-full right-0 mt-1 w-64 rounded-brand border border-ivory/20 bg-midnight p-2">
+                    {item.children.map((child) => (
+                      <li>
+                        <a
+                          href={child.href}
+                          class:list={[subLinkClass, isCurrent(child.href) && 'font-semibold underline']}
+                          aria-current={isCurrent(child.href) ? 'page' : undefined}
+                        >
+                          {child.label}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </details>
+              </div>
             );
           })}
         </nav>
@@ -34,28 +61,74 @@ const isActive = (href: string) => pathname === href || pathname.startsWith(href
     }
     {
       nav.length > 0 && (
-        <details class="group relative md:hidden">
+        <details class="group relative md:hidden" data-nav-popover>
           <summary class="flex min-h-11 cursor-pointer list-none items-center gap-2 rounded-brand border border-ivory/40 px-3 [&::-webkit-details-marker]:hidden">
             <Icon name="menu" class="h-6 w-6 group-open:hidden" />
             <Icon name="x" class="hidden h-6 w-6 group-open:block" />
             <span class="sr-only">Menu</span>
           </summary>
-          <div class="absolute right-0 mt-2 w-60 rounded-brand border border-ivory/20 bg-midnight p-2">
-            {nav.map((item) => (
-              <a
-                href={item.href}
-                class:list={[
-                  'block min-h-11 rounded-brand px-3 py-2 text-base no-underline hover:underline',
-                  isActive(item.href) && 'font-semibold underline',
-                ]}
-                aria-current={isActive(item.href) ? 'page' : undefined}
-              >
-                {item.label}
-              </a>
-            ))}
-          </div>
+          <nav
+            class="absolute right-0 mt-2 max-h-[80vh] w-64 overflow-y-auto rounded-brand border border-ivory/20 bg-midnight p-2"
+            aria-label="Primary"
+          >
+            {nav.map((item) =>
+              item.children?.length ? (
+                <details class="group/section" open={isActive(item.href)}>
+                  <summary
+                    class:list={[
+                      'flex min-h-11 cursor-pointer list-none items-center justify-between rounded-brand px-3 py-2 text-base hover:underline [&::-webkit-details-marker]:hidden',
+                      isActive(item.href) && 'font-semibold',
+                    ]}
+                  >
+                    {item.label}
+                    <Icon name="chevron-down" class="h-4 w-4 transition group-open/section:rotate-180" />
+                  </summary>
+                  <ul class="ml-3 border-l border-ivory/20 pl-2">
+                    {[{ href: item.href, label: 'Overview' }, ...item.children].map((child) => (
+                      <li>
+                        <a
+                          href={child.href}
+                          class:list={[subLinkClass, isCurrent(child.href) && 'font-semibold underline']}
+                          aria-current={isCurrent(child.href) ? 'page' : undefined}
+                        >
+                          {child.label}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </details>
+              ) : (
+                <a
+                  href={item.href}
+                  class:list={[subLinkClass, isActive(item.href) && 'font-semibold underline']}
+                  aria-current={isCurrent(item.href) ? 'page' : undefined}
+                >
+                  {item.label}
+                </a>
+              ),
+            )}
+          </nav>
         </details>
       )
     }
   </div>
 </header>
+
+<script>
+  const popovers = [...document.querySelectorAll<HTMLDetailsElement>('[data-nav-popover]')];
+
+  document.addEventListener('click', (event) => {
+    for (const popover of popovers) {
+      if (popover.open && !popover.contains(event.target as Node)) popover.open = false;
+    }
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key !== 'Escape') return;
+    for (const popover of popovers) {
+      if (!popover.open) continue;
+      popover.open = false;
+      popover.querySelector('summary')?.focus();
+    }
+  });
+</script>

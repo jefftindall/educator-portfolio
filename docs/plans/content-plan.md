@@ -167,7 +167,7 @@ V2 moves the site to the [style guide's](../brand/style-guide.md) structure, wit
 | Experience | `/experience` | Every CV item: experience, Teacher of the Year honors, standards and national service, professional learning, education, community leadership | 🟡 Facts to confirm |
 | Contact | `/contact` | Email and LinkedIn only, plus a link to Experience | ✅ |
 
-Moved V1 URLs 301 in both `staticwebapp.config.json` files (see Phase 2). Nav is `src/lib/nav.ts`; the Dance for Every Body and AI in the Arts Classroom subpages are in `subpages` there so tests cover them. Smoke checks every route, the redirects (on SWA hosts), and the slides link; journeys `VISIT-02`–`VISIT-07` cover the new flows.
+Moved V1 URLs 301 in both `staticwebapp.config.json` files (see Phase 2). Nav is `src/lib/nav.ts`; the Dance for Every Body and AI in the Arts Classroom subpages are `children` of Leadership there, so the header menu lists them (desktop dropdown, mobile expandable section) and `subpages` feeds the tests. Smoke checks every route, the redirects (on SWA hosts), and the slides link; journeys `VISIT-02`–`VISIT-08` cover the new flows.
 
 ### Content sources and what's still missing
 

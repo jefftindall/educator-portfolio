@@ -11,6 +11,7 @@ import fieldTrip from '../../assets/photos/field-trip-performance.jpg';
 import classInStudio from '../../assets/photos/inclusive-class-studio.jpg';
 import { departmentLeadership, programIntro, programPoints } from '../../lib/content/program';
 import { ndeoSessionDescription } from '../../lib/content/inclusive';
+import { aiPageLede, aiPageTitle } from '../../lib/content/ai';
 import {
   artisticProcesses,
   assessmentPhilosophy,
@@ -159,9 +160,16 @@ import {
         ))
       }
     </ol>
-    <p class="leading-relaxed">
-      <a href="/leadership-and-impact/ai-in-the-arts">See how I use AI in the arts, with prompts for your classroom</a>.
-    </p>
+    <div class="space-y-4 rounded-brand border border-soft-stone bg-white p-6">
+      <p class="label text-midnight">{aiPageTitle}</p>
+      <p class="leading-relaxed">{aiPageLede}</p>
+      <p>
+        <a href="/leadership-and-impact/ai-in-the-arts" class="btn-secondary">
+          See how I use AI in the arts
+          <Icon name="arrow-right" class="h-5 w-5" />
+        </a>
+      </p>
+    </div>
 
     <h2>Commitment to service</h2>
     <p class="leading-relaxed">{whyServe}</p>
