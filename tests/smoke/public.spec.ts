@@ -36,19 +36,24 @@ test.describe('public smoke', () => {
   });
 
   test('Dance for Every Body shows the clapping dance video', async ({ request }) => {
-    const html = await (await waitForRequestOk(request, '/leadership-and-impact/dance-for-every-body')).text();
+    const html = await (await waitForRequestOk(request, '/speaking-and-workshops/dance-for-every-body')).text();
     expect(html).toContain(`src="${clappingDanceVideo}"`);
     expect(html).toContain(`poster="${clappingDancePoster}"`);
   });
 
   test('Leadership links to the Dance I learning ladder', async ({ request }) => {
     const leadership = await (await waitForRequestOk(request, '/leadership-and-impact')).text();
-    expect(leadership).toContain('href="/leadership-and-impact/dance-for-every-body#learning-ladder"');
-    const inclusive = await (await waitForRequestOk(request, '/leadership-and-impact/dance-for-every-body')).text();
+    expect(leadership).toContain('href="/speaking-and-workshops/dance-for-every-body#learning-ladder"');
+    const inclusive = await (await waitForRequestOk(request, '/speaking-and-workshops/dance-for-every-body')).text();
     expect(inclusive).toContain('id="learning-ladder"');
   });
 
-  test('moved V1 URLs redirect permanently', async ({ request }) => {
+  test('Leadership links to AI in the Arts Classroom', async ({ request }) => {
+    const leadership = await (await waitForRequestOk(request, '/leadership-and-impact')).text();
+    expect(leadership).toContain('href="/leadership-and-impact/ai-in-the-arts"');
+  });
+
+  test('moved URLs redirect permanently', async ({ request }) => {
     test.skip(!isStaticWebAppHost(), 'Redirects come from staticwebapp.config.json on deployed SWA hosts');
     for (const [from, to] of Object.entries(MOVED_ROUTES)) {
       for (const path of [from, `${from}/`]) {
@@ -61,7 +66,7 @@ test.describe('public smoke', () => {
   });
 
   test('NDEO presentation PDF is linked and served', async ({ request }) => {
-    for (const path of ['/leadership-and-impact/dance-for-every-body', '/speaking-and-workshops']) {
+    for (const path of ['/speaking-and-workshops/dance-for-every-body', '/speaking-and-workshops']) {
       const html = await (await waitForRequestOk(request, path)).text();
       expect(html, `${path} links the slides`).toContain(`href="${presentationPdf}"`);
     }

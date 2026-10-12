@@ -11,5 +11,6 @@ export const PUBLIC_ROUTES = ['/', ...nav.map((item) => item.href), ...subpages.
 export const MOVED_ROUTES: Readonly<Record<string, string>> = {
   '/standards-and-leadership': '/leadership-and-impact',
   '/teaching-philosophy': '/about',
-  '/dance-for-every-body': '/leadership-and-impact/dance-for-every-body',
+  '/dance-for-every-body': '/speaking-and-workshops/dance-for-every-body',
+  '/leadership-and-impact/dance-for-every-body': '/speaking-and-workshops/dance-for-every-body',
 };

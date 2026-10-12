@@ -24,7 +24,7 @@ tests/
   smoke/
     public.spec.ts   # Home, public routes, moved-URL 301s, media, slides PDF, robots/sitemap, contact, API health
   journeys/
-    visitor.spec.ts  # VISIT-01 … VISIT-05
+    visitor.spec.ts  # VISIT-01 … VISIT-08
     seo.spec.ts      # J-SEO-01 sitemap routes + home head tags
 
 playwright.smoke.config.ts
@@ -33,7 +33,7 @@ playwright.journey.config.ts
 
 ### Smoke (`npm run test:smoke`)
 
-Home shows **Tiffany Tindall** and the hero headline; every public route (nav plus subpages) responds; the moved V1 URLs return 301 to their new homes (SWA hosts only, since redirects live in `staticwebapp.config.json`); page videos and posters are served; the NDEO slides PDF is linked and served; `robots.txt` + sitemap; contact page has a `mailto:` link; `/api/health` on SWA hosts. Desktop + mobile.
+Home shows **Tiffany Tindall** and the hero headline; every public route (nav plus subpages) responds; the moved URLs return 301 to their new homes (SWA hosts only, since redirects live in `staticwebapp.config.json`); page videos and posters are served; the NDEO slides PDF is linked and served; `robots.txt` + sitemap; contact page has a `mailto:` link; `/api/health` on SWA hosts. Desktop + mobile.
 
 ### Journeys (`npm run test:journey`)
 
@@ -42,8 +42,11 @@ Home shows **Tiffany Tindall** and the hero headline; every public route (nav pl
 | `VISIT-01` | Home greeting |
 | `VISIT-02` | Home → About, teaching philosophy section |
 | `VISIT-03` | Home Explore cards → About, Leadership and Impact, Speaking and Workshops, Experience |
-| `VISIT-04` | Leadership and Impact → Dance for Every Body → slides link |
+| `VISIT-04` | Speaking and Workshops → Dance for Every Body → slides link |
 | `VISIT-05` | Experience (CV) → Contact `mailto:` |
+| `VISIT-06` | Leadership and Impact → AI in the Arts Classroom; each art-form tab shows only its own panel |
+| `VISIT-07` | An art-form link (`#visual-art`) opens that tab |
+| `VISIT-08` | Header menu (desktop dropdown and mobile expandable section) reaches every nested page in `nav.ts` |
 | `J-SEO-01` | Sitemap lists public routes; title/canonical/description on `/` |
 
 When you add pages or flows, extend these suites in the same PR ([`.cursor/rules/post-deploy-tests.mdc`](../../.cursor/rules/post-deploy-tests.mdc)).

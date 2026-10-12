@@ -12,7 +12,12 @@
     },
     {
       "route": "/dance-for-every-body*",
-      "redirect": "/leadership-and-impact/dance-for-every-body",
+      "redirect": "/speaking-and-workshops/dance-for-every-body",
+      "statusCode": 301
+    },
+    {
+      "route": "/leadership-and-impact/dance-for-every-body*",
+      "redirect": "/speaking-and-workshops/dance-for-every-body",
       "statusCode": 301
     },
     {
