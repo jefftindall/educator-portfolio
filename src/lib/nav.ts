@@ -6,12 +6,13 @@ export const nav: readonly NavSection[] = [
   {
     href: '/leadership-and-impact',
     label: 'Leadership',
-    children: [
-      { href: '/leadership-and-impact/dance-for-every-body', label: 'Dance for Every Body' },
-      { href: '/leadership-and-impact/ai-in-the-arts', label: 'AI in the Arts Classroom' },
-    ],
+    children: [{ href: '/leadership-and-impact/ai-in-the-arts', label: 'AI in the Arts Classroom' }],
   },
-  { href: '/speaking-and-workshops', label: 'Speaking' },
+  {
+    href: '/speaking-and-workshops',
+    label: 'Speaking',
+    children: [{ href: '/speaking-and-workshops/dance-for-every-body', label: 'Dance for Every Body' }],
+  },
   { href: '/experience', label: 'Experience' },
   { href: '/contact', label: 'Contact' },
 ];

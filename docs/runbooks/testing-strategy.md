@@ -33,7 +33,7 @@ playwright.journey.config.ts
 
 ### Smoke (`npm run test:smoke`)
 
-Home shows **Tiffany Tindall** and the hero headline; every public route (nav plus subpages) responds; the moved V1 URLs return 301 to their new homes (SWA hosts only, since redirects live in `staticwebapp.config.json`); page videos and posters are served; the NDEO slides PDF is linked and served; `robots.txt` + sitemap; contact page has a `mailto:` link; `/api/health` on SWA hosts. Desktop + mobile.
+Home shows **Tiffany Tindall** and the hero headline; every public route (nav plus subpages) responds; the moved URLs return 301 to their new homes (SWA hosts only, since redirects live in `staticwebapp.config.json`); page videos and posters are served; the NDEO slides PDF is linked and served; `robots.txt` + sitemap; contact page has a `mailto:` link; `/api/health` on SWA hosts. Desktop + mobile.
 
 ### Journeys (`npm run test:journey`)
 
@@ -42,7 +42,7 @@ Home shows **Tiffany Tindall** and the hero headline; every public route (nav pl
 | `VISIT-01` | Home greeting |
 | `VISIT-02` | Home → About, teaching philosophy section |
 | `VISIT-03` | Home Explore cards → About, Leadership and Impact, Speaking and Workshops, Experience |
-| `VISIT-04` | Leadership and Impact → Dance for Every Body → slides link |
+| `VISIT-04` | Speaking and Workshops → Dance for Every Body → slides link |
 | `VISIT-05` | Experience (CV) → Contact `mailto:` |
 | `VISIT-06` | Leadership and Impact → AI in the Arts Classroom; each art-form tab shows only its own panel |
 | `VISIT-07` | An art-form link (`#visual-art`) opens that tab |

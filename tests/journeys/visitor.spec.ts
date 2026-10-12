@@ -29,10 +29,10 @@ test.describe('visitor journeys', () => {
     }
   });
 
-  test('VISIT-04 leadership leads to Dance for Every Body and its slides', async ({ page }) => {
-    await page.goto('/leadership-and-impact');
-    await page.getByRole('link', { name: /read about inclusive dance/i }).click();
-    await expect(page).toHaveURL(/\/leadership-and-impact\/dance-for-every-body\/?$/);
+  test('VISIT-04 speaking leads to Dance for Every Body and its slides', async ({ page }) => {
+    await page.goto('/speaking-and-workshops');
+    await page.getByRole('link', { name: /read the strategies and stories/i }).click();
+    await expect(page).toHaveURL(/\/speaking-and-workshops\/dance-for-every-body\/?$/);
     await expect(page.getByRole('heading', { level: 1 })).toContainText(/dance for every body/i);
     await expect(page.getByRole('link', { name: /download the slides/i })).toHaveAttribute('href', presentationPdf);
   });

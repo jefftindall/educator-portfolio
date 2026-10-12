@@ -1,11 +1,11 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import PageHeader from '../components/PageHeader.astro';
-import Prose from '../components/Prose.astro';
-import Icon from '../components/Icon.astro';
-import { site } from '../lib/site';
-import { ndeoSessionDescription, ndeoSessionTitle, presentationPdf } from '../lib/content/inclusive';
-import { actionResearch } from '../lib/content/speaking';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import Prose from '../../components/Prose.astro';
+import Icon from '../../components/Icon.astro';
+import { site } from '../../lib/site';
+import { ndeoSessionDescription, ndeoSessionTitle, presentationPdf } from '../../lib/content/inclusive';
+import { actionResearch } from '../../lib/content/speaking';
 ---
 
 <BaseLayout
@@ -26,7 +26,7 @@ import { actionResearch } from '../lib/content/speaking';
       <p class="mt-1 text-base">Disability and Pedagogy track</p>
       <p class="mt-4 leading-relaxed">{ndeoSessionDescription}</p>
       <p class="mt-5 flex flex-wrap items-center gap-3">
-        <a href="/leadership-and-impact/dance-for-every-body" class="btn-primary">
+        <a href="/speaking-and-workshops/dance-for-every-body" class="btn-primary">
           Read the strategies and stories
           <Icon name="arrow-right" class="h-5 w-5" />
         </a>

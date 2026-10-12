@@ -82,7 +82,7 @@ Still open:
 - ✅ Three group photos and "Explore" cards to About, Leadership and Impact, Speaking and Workshops, and Experience (Phase 3)
 - ⬜ Principal quote (Melinda Wilder) once received
 
-V1 URLs that moved in Phase 3 301 to their new homes: `/standards-and-leadership` → `/leadership-and-impact`, `/teaching-philosophy` → `/about`, `/dance-for-every-body` → `/leadership-and-impact/dance-for-every-body`. Use the new URLs on the NCAS application.
+V1 URLs that moved in Phase 3 301 to their new homes: `/standards-and-leadership` → `/leadership-and-impact`, `/teaching-philosophy` → `/about`, `/dance-for-every-body` → `/speaking-and-workshops/dance-for-every-body`. In Oct 2026 Dance for Every Body moved again, from Leadership to Speaking, so `/leadership-and-impact/dance-for-every-body` also 301s there. Use the new URLs on the NCAS application.
 
 #### 2. Standards & Leadership (now part of `/leadership-and-impact`) — ✅ built, 🟡 verify facts
 
@@ -104,7 +104,7 @@ V1 URLs that moved in Phase 3 301 to their new homes: `/standards-and-leadership
 - ✅ "My story" is her professional biography, in first person
 - ✅ Confirmed by Tiffany (Oct 2026): standards committee 2005, M.S.Ed. and Ed.S. in Educational Leadership, 30+ years of experience
 
-#### 4. Dance for Every Body (`/leadership-and-impact/dance-for-every-body`) — 🟡 built, releases pending
+#### 4. Dance for Every Body (`/speaking-and-workshops/dance-for-every-body`) — 🟡 built, releases pending
 
 - ✅ NDEO 2025 session title, description, Disability and Pedagogy track context
 - ✅ Three strategies, each with one story
@@ -161,13 +161,13 @@ V2 moves the site to the [style guide's](../brand/style-guide.md) structure, wit
 | Home | `/` | V1 Home; Explore cards now point to the four new sections | ✅ |
 | About | `/about` | My Story + Teaching Philosophy (`#teaching-philosophy`; the Home gold button links there) | 🟡 My Story is a draft |
 | Leadership and Impact | `/leadership-and-impact` | Department leadership, Standards & Leadership, The Program (framed as principles proven in three schools across Cobb and Bartow), Dance for Every Body summary | 🟡 Program copy needs review |
-| ↳ Dance for Every Body | `/leadership-and-impact/dance-for-every-body` | V1 page, moved unchanged | 🟡 Releases pending (see Phase 2) |
 | ↳ AI in the Arts Classroom | `/leadership-and-impact/ai-in-the-arts` | Tiffany's three uses (show collateral, leveled lessons, grant writing); a responsible-use callout; tabbed prompts and a reusable assistant for dance, theatre, music, and visual art; department ideas | 🟡 Tiffany to review prompts and wording |
 | Speaking and Workshops | `/speaking-and-workshops` | NDEO 2025 session + slides, CAN 2024–25 action research, invitation to speak | ✅ |
+| ↳ Dance for Every Body | `/speaking-and-workshops/dance-for-every-body` | V1 page, unchanged; moved from Leadership in Oct 2026 (old URL 301s) | 🟡 Releases pending (see Phase 2) |
 | Experience | `/experience` | Every CV item: experience, Teacher of the Year honors, standards and national service, professional learning, education, community leadership | 🟡 Facts to confirm |
 | Contact | `/contact` | Email and LinkedIn only, plus a link to Experience | ✅ |
 
-Moved V1 URLs 301 in both `staticwebapp.config.json` files (see Phase 2). Nav is `src/lib/nav.ts`; the Dance for Every Body and AI in the Arts Classroom subpages are `children` of Leadership there, so the header menu lists them (desktop dropdown, mobile expandable section) and `subpages` feeds the tests. Smoke checks every route, the redirects (on SWA hosts), and the slides link; journeys `VISIT-02`–`VISIT-08` cover the new flows.
+Moved URLs 301 in both `staticwebapp.config.json` files (see Phase 2). Nav is `src/lib/nav.ts`; subpages are `children` of their section there (AI in the Arts Classroom under Leadership, Dance for Every Body under Speaking), so the header menu lists them (desktop dropdown, mobile expandable section) and `subpages` feeds the tests. Smoke checks every route, the redirects (on SWA hosts), and the slides link; journeys `VISIT-02`–`VISIT-08` cover the new flows.
 
 ### Content sources and what's still missing
 
