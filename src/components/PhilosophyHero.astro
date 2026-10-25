@@ -1,0 +1,27 @@
+---
+import ShareGraphic from './ShareGraphic.astro';
+
+interface Props {
+  src: string;
+  alt: string;
+  topic: string;
+  filename: string;
+}
+
+const { src, alt, topic, filename } = Astro.props;
+---
+
+<figure class="relative my-4">
+  <img
+    src={src}
+    alt={alt}
+    width="1200"
+    height="630"
+    loading="lazy"
+    decoding="async"
+    class="h-auto w-full rounded-brand border border-soft-stone bg-soft-stone"
+  />
+  <div class="absolute right-3 bottom-3 z-10">
+    <ShareGraphic src={src} filename={filename} topic={topic} />
+  </div>
+</figure>

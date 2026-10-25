@@ -1,0 +1,121 @@
+---
+import Icon from './Icon.astro';
+
+interface Props {
+  /** Public path to the PNG to share or download. */
+  src: string;
+  /** Download / File name, e.g. pedagogical-priorities.png */
+  filename: string;
+  /** Short topic for aria-label and share title. */
+  topic: string;
+  /** Optional share message; defaults to attribution copy. */
+  text?: string;
+}
+
+const {
+  src,
+  filename,
+  topic,
+  text = `Graphic by Tiffany Tindall, Arts Education Leader. Credit Tiffany when you share.`,
+} = Astro.props;
+const ariaLabel = `Share ${topic} graphic`;
+---
+
+<div
+  class="share-graphic flex flex-col items-end gap-2"
+  data-share-graphic
+  data-src={src}
+  data-filename={filename}
+  data-topic={topic}
+  data-text={text}
+>
+  <p
+    class="max-w-[14rem] rounded-brand bg-white/95 px-2 py-1 text-right text-sm text-studio empty:hidden"
+    data-share-status
+    role="status"
+    aria-live="polite"
+  ></p>
+  <button
+    type="button"
+    class="inline-flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-brand border border-studio bg-white px-3 font-semibold text-studio no-underline transition hover:bg-ivory sm:px-4"
+    data-share-button
+    aria-label={ariaLabel}
+  >
+    <Icon name="share-2" class="h-5 w-5 shrink-0" />
+    <span class="hidden sm:inline" aria-hidden="true">Share</span>
+  </button>
+</div>
+
+<script>
+  function downloadBlob(blob: Blob, filename: string) {
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = filename;
+    link.rel = 'noopener';
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    URL.revokeObjectURL(url);
+  }
+
+  async function shareGraphic(root: HTMLElement) {
+    const src = root.dataset.src;
+    const filename = root.dataset.filename ?? 'graphic.png';
+    const topic = root.dataset.topic ?? 'graphic';
+    const text = root.dataset.text ?? '';
+    const status = root.querySelector<HTMLElement>('[data-share-status]');
+    const button = root.querySelector<HTMLButtonElement>('[data-share-button]');
+    if (!src || !status || !button) return;
+
+    button.disabled = true;
+    status.textContent = '';
+
+    try {
+      const response = await fetch(src);
+      if (!response.ok) throw new Error('fetch failed');
+      const blob = await response.blob();
+      const file = new File([blob], filename, { type: blob.type || 'image/png' });
+      const payload: ShareData = {
+        files: [file],
+        title: `${topic} — Tiffany Tindall`,
+        text,
+      };
+
+      if (typeof navigator.canShare === 'function' && navigator.canShare({ files: [file] })) {
+        try {
+          await navigator.share(payload);
+          status.textContent = 'Shared.';
+          return;
+        } catch (error) {
+          if (error instanceof DOMException && error.name === 'AbortError') {
+            status.textContent = '';
+            return;
+          }
+          // Fall through to download when share fails for other reasons.
+        }
+      }
+
+      downloadBlob(blob, filename);
+      status.textContent = 'Image downloaded — ready to share.';
+    } catch {
+      status.textContent = 'Could not share the image. Try again.';
+    } finally {
+      button.disabled = false;
+    }
+  }
+
+  function bind(root: HTMLElement) {
+    const button = root.querySelector<HTMLButtonElement>('[data-share-button]');
+    if (!button || button.dataset.bound === 'true') return;
+    button.dataset.bound = 'true';
+    button.addEventListener('click', () => {
+      void shareGraphic(root);
+    });
+  }
+
+  document.querySelectorAll<HTMLElement>('[data-share-graphic]').forEach(bind);
+  document.addEventListener('astro:page-load', () => {
+    document.querySelectorAll<HTMLElement>('[data-share-graphic]').forEach(bind);
+  });
+</script>
