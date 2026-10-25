@@ -50,11 +50,11 @@ import {
     <h2>Ideas to try, by art form</h2>
     <p class="leading-relaxed">{ideasIntro}</p>
 
-    <div data-art-tabs class="group space-y-6">
+    <div data-art-tabs class="group">
       <div
         role="tablist"
         aria-label="Art forms"
-        class="hidden overflow-x-auto overflow-y-hidden shadow-[inset_0_-1px_0_var(--color-soft-stone)] group-data-ready:flex"
+        class="relative z-10 hidden gap-1 overflow-x-auto overflow-y-hidden px-1 group-data-ready:flex"
       >
         {
           artForms.map((art, index) => (
@@ -66,7 +66,7 @@ import {
               aria-selected={index === 0 ? 'true' : 'false'}
               tabindex={index === 0 ? 0 : -1}
               data-art-id={art.id}
-              class="min-h-11 shrink-0 focus-visible:-outline-offset-4 border-b-4 border-transparent px-4 font-semibold whitespace-nowrap text-charcoal hover:text-midnight aria-selected:border-studio aria-selected:text-midnight"
+              class="inline-flex min-h-11 shrink-0 items-center rounded-t-brand border border-transparent bg-soft-stone/60 px-4 font-semibold whitespace-nowrap text-charcoal transition hover:bg-soft-stone hover:text-midnight aria-selected:relative aria-selected:z-10 aria-selected:-mb-px aria-selected:border-soft-stone aria-selected:border-t-studio aria-selected:border-b-white aria-selected:bg-white aria-selected:text-midnight"
             >
               {art.name}
             </button>
@@ -75,8 +75,15 @@ import {
       </div>
 
       {
-        artForms.map((art) => (
-          <section id={`panel-${art.id}`} class="space-y-6" aria-labelledby={art.id}>
+        artForms.map((art, index) => (
+          <section
+            id={`panel-${art.id}`}
+            class:list={[
+              'space-y-6 group-data-ready:mt-0! group-data-ready:rounded-brand group-data-ready:border group-data-ready:border-soft-stone group-data-ready:bg-white group-data-ready:p-5 group-data-ready:pt-6 md:group-data-ready:p-6',
+              index > 0 && 'mt-6',
+            ]}
+            aria-labelledby={art.id}
+          >
             <h2 id={art.id} class="scroll-mt-24 group-data-ready:sr-only group-data-ready:scroll-mt-48">{art.name}</h2>
             <p class="leading-relaxed">{art.intro}</p>
             <div class="space-y-8">
