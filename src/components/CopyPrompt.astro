@@ -11,21 +11,20 @@ interface Props {
 const { label, prompt } = Astro.props;
 ---
 
-<div
-  class="relative mt-4 rounded-brand border border-soft-stone bg-white p-5 pt-14 sm:pt-5 sm:pr-28"
-  data-copy-prompt
->
-  <button
-    type="button"
-    class="absolute top-3 right-3 inline-flex min-h-11 items-center justify-center gap-2 rounded-brand border border-studio bg-white px-3 font-semibold text-studio no-underline transition hover:bg-ivory sm:px-4"
-    data-copy-button
-    aria-label="Copy prompt"
-  >
-    <Icon name="copy" class="h-5 w-5 shrink-0" data-icon-copy />
-    <Icon name="check" class="hidden h-5 w-5 shrink-0" data-icon-check />
-    <span class="hidden sm:inline" data-copy-label aria-hidden="true">Copy</span>
-  </button>
-  <p class="label text-midnight">{label}</p>
+<div class="mt-4 rounded-brand border border-soft-stone bg-white p-5" data-copy-prompt>
+  <div class="flex items-start justify-between gap-3">
+    <p class="label text-midnight">{label}</p>
+    <button
+      type="button"
+      class="inline-flex min-h-11 shrink-0 items-center justify-center gap-2 rounded-brand border border-studio bg-white px-3 font-semibold text-studio no-underline transition hover:bg-ivory sm:px-4"
+      data-copy-button
+      aria-label="Copy prompt"
+    >
+      <Icon name="copy" class="h-5 w-5 shrink-0" data-icon-copy />
+      <Icon name="check" class="hidden h-5 w-5 shrink-0" data-icon-check />
+      <span class="hidden sm:inline" data-copy-label aria-hidden="true">Copy</span>
+    </button>
+  </div>
   <p class="mt-2 leading-relaxed" data-copy-text>{prompt}</p>
 </div>
 
