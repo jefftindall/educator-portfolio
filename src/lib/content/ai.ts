@@ -22,6 +22,7 @@ export const homeAiPromoBody =
   'I put tools to work on the planning that piles up: concert materials, one lesson shaped for every level in the room, and grant drafts built from my own program documents. Prompts and reusable assistants are ready for dance, theatre, music, and visual art.';
 
 export const homeAiPromoCta = 'Read the prompts and assistants';
+
 export const responsibleUse: readonly string[] = [
   'Never put student names, photos, grades, or IEP and 504 details into a prompt.',
   'Check your district’s AI policy and use the tools it approves.',

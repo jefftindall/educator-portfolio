@@ -59,14 +59,6 @@ test.describe('visitor journeys', () => {
     }
   });
 
-  test('VISIT-09 home thought-leadership card reaches AI in the Arts Classroom', async ({ page }) => {
-    test.skip(!showHomeAiPromo, 'Home AI promo retired');
-    await page.goto('/');
-    await page.getByRole('link', { name: homeAiPromoCta, exact: true }).click();
-    await expect(page).toHaveURL(/\/leadership-and-impact\/ai-in-the-arts\/?$/);
-    await expect(page.getByRole('heading', { level: 1 })).toHaveText(aiPageTitle);
-  });
-
   test('VISIT-07 an art-form link opens its tab', async ({ page }) => {
     const art = artForms[artForms.length - 1];
     await page.goto(`/leadership-and-impact/ai-in-the-arts#${art.id}`);
@@ -94,4 +86,11 @@ test.describe('visitor journeys', () => {
     }
   });
 
+  test('VISIT-09 home thought-leadership card reaches AI in the Arts Classroom', async ({ page }) => {
+    test.skip(!showHomeAiPromo, 'Home AI promo retired');
+    await page.goto('/');
+    await page.getByRole('link', { name: homeAiPromoCta, exact: true }).click();
+    await expect(page).toHaveURL(/\/leadership-and-impact\/ai-in-the-arts\/?$/);
+    await expect(page.getByRole('heading', { level: 1 })).toHaveText(aiPageTitle);
+  });
 });
