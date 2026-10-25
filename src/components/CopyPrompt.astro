@@ -1,0 +1,92 @@
+---
+import Icon from './Icon.astro';
+
+interface Props {
+  /** Uppercase label above the prompt, e.g. "Try this prompt". */
+  label: string;
+  /** Prompt text to show and copy. */
+  prompt: string;
+}
+
+const { label, prompt } = Astro.props;
+---
+
+<div
+  class="relative mt-4 rounded-brand border border-soft-stone bg-white p-5 pt-14 sm:pt-5 sm:pr-28"
+  data-copy-prompt
+>
+  <button
+    type="button"
+    class="absolute top-3 right-3 inline-flex min-h-11 items-center justify-center gap-2 rounded-brand border border-studio bg-white px-3 font-semibold text-studio no-underline transition hover:bg-ivory sm:px-4"
+    data-copy-button
+    aria-label="Copy prompt"
+  >
+    <Icon name="copy" class="h-5 w-5 shrink-0" data-icon-copy />
+    <Icon name="check" class="hidden h-5 w-5 shrink-0" data-icon-check />
+    <span class="hidden sm:inline" data-copy-label aria-hidden="true">Copy</span>
+  </button>
+  <p class="label text-midnight">{label}</p>
+  <p class="mt-2 leading-relaxed" data-copy-text>{prompt}</p>
+</div>
+
+<script>
+  async function writeClipboard(text: string) {
+    if (navigator.clipboard?.writeText) {
+      await navigator.clipboard.writeText(text);
+      return;
+    }
+
+    const area = document.createElement('textarea');
+    area.value = text;
+    area.setAttribute('readonly', '');
+    area.style.position = 'fixed';
+    area.style.left = '-9999px';
+    document.body.appendChild(area);
+    area.select();
+    document.execCommand('copy');
+    area.remove();
+  }
+
+  function setCopied(button: HTMLButtonElement, copied: boolean) {
+    const copyIcon = button.querySelector('[data-icon-copy]');
+    const checkIcon = button.querySelector('[data-icon-check]');
+    const label = button.querySelector('[data-copy-label]');
+    copyIcon?.classList.toggle('hidden', copied);
+    checkIcon?.classList.toggle('hidden', !copied);
+    if (label) label.textContent = copied ? 'Copied' : 'Copy';
+    button.setAttribute('aria-label', copied ? 'Prompt copied' : 'Copy prompt');
+  }
+
+  async function copyPrompt(root: HTMLElement) {
+    const button = root.querySelector<HTMLButtonElement>('[data-copy-button]');
+    const textEl = root.querySelector<HTMLElement>('[data-copy-text]');
+    const text = textEl?.textContent?.trim() ?? '';
+    if (!button || !text) return;
+
+    button.disabled = true;
+    try {
+      await writeClipboard(text);
+      setCopied(button, true);
+      window.setTimeout(() => setCopied(button, false), 2000);
+    } catch {
+      button.setAttribute('aria-label', 'Could not copy prompt');
+      window.setTimeout(() => setCopied(button, false), 2000);
+    } finally {
+      button.disabled = false;
+    }
+  }
+
+  function bind(root: HTMLElement) {
+    const button = root.querySelector<HTMLButtonElement>('[data-copy-button]');
+    if (!button || button.dataset.bound === 'true') return;
+    button.dataset.bound = 'true';
+    button.addEventListener('click', () => {
+      void copyPrompt(root);
+    });
+  }
+
+  document.querySelectorAll<HTMLElement>('[data-copy-prompt]').forEach(bind);
+  document.addEventListener('astro:page-load', () => {
+    document.querySelectorAll<HTMLElement>('[data-copy-prompt]').forEach(bind);
+  });
+</script>
