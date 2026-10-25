@@ -1,9 +1,9 @@
 import { expect, test } from '@playwright/test';
+import { aiPageTitle, artForms, homeAiPromoCta, showHomeAiPromo } from '../../src/lib/content/ai';
+import { presentationPdf } from '../../src/lib/content/inclusive';
 import { nav } from '../../src/lib/nav';
 import { BRAND, HERO_HEADLINE_PHRASE } from '../helpers/content';
 import { waitForRequestOk } from '../helpers/propagation';
-import { presentationPdf } from '../../src/lib/content/inclusive';
-import { aiPageTitle, artForms } from '../../src/lib/content/ai';
 
 test.describe('visitor journeys', () => {
   test('VISIT-01 landing greets visitors', async ({ request }) => {
@@ -57,6 +57,14 @@ test.describe('visitor journeys', () => {
       await expect(page.getByRole('tabpanel')).toHaveCount(1);
       await expect(page.getByRole('tabpanel')).toContainText(art.assistant.name);
     }
+  });
+
+  test('VISIT-09 home thought-leadership card reaches AI in the Arts Classroom', async ({ page }) => {
+    test.skip(!showHomeAiPromo, 'Home AI promo retired');
+    await page.goto('/');
+    await page.getByRole('link', { name: homeAiPromoCta, exact: true }).click();
+    await expect(page).toHaveURL(/\/leadership-and-impact\/ai-in-the-arts\/?$/);
+    await expect(page.getByRole('heading', { level: 1 })).toHaveText(aiPageTitle);
   });
 
   test('VISIT-07 an art-form link opens its tab', async ({ page }) => {

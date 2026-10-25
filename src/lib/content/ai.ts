@@ -13,6 +13,15 @@ export const aiPageTitle = 'AI in the Arts Classroom';
 export const aiPageLede =
   'How I use AI to save planning time, and prompts any arts teacher can try in dance, theatre, music, and visual art.';
 
+/** Temporary home card under Leadership and recognition. Retire ~Oct 2027. */
+export const showHomeAiPromo = true;
+
+export const homeAiPromoLabel = 'Thought leadership';
+
+export const homeAiPromoBody =
+  'I put tools to work on the planning that piles up: concert materials, one lesson shaped for every level in the room, and grant drafts built from my own program documents. Prompts and reusable assistants are ready for dance, theatre, music, and visual art.';
+
+export const homeAiPromoCta = 'Read the prompts and assistants';
 export const responsibleUse: readonly string[] = [
   'Never put student names, photos, grades, or IEP and 504 details into a prompt.',
   'Check your district’s AI policy and use the tools it approves.',
