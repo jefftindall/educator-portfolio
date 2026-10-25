@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import CopyPrompt from '../../components/CopyPrompt.astro';
 import PageHeader from '../../components/PageHeader.astro';
 import Prose from '../../components/Prose.astro';
 import {
@@ -30,10 +31,7 @@ import {
           <article>
             <h3>{use.title}</h3>
             <p class="mt-2 leading-relaxed">{use.body}</p>
-            <div class="mt-4 rounded-brand border border-soft-stone bg-white p-5">
-              <p class="label text-midnight">Try this prompt</p>
-              <p class="mt-2 leading-relaxed">{use.prompt}</p>
-            </div>
+            <CopyPrompt label="Try this prompt" prompt={use.prompt} />
           </article>
         ))
       }
@@ -86,10 +84,7 @@ import {
                 <article>
                   <h3>{idea.title}</h3>
                   <p class="mt-2 leading-relaxed">{idea.body}</p>
-                  <div class="mt-4 rounded-brand border border-soft-stone bg-white p-5">
-                    <p class="label text-midnight">Prompt</p>
-                    <p class="mt-2 leading-relaxed">{idea.prompt}</p>
-                  </div>
+                  <CopyPrompt label="Prompt" prompt={idea.prompt} />
                 </article>
               ))}
             </div>
@@ -113,10 +108,7 @@ import {
           <article>
             <h3>{idea.title}</h3>
             <p class="mt-2 leading-relaxed">{idea.body}</p>
-            <div class="mt-4 rounded-brand border border-soft-stone bg-white p-5">
-              <p class="label text-midnight">Prompt</p>
-              <p class="mt-2 leading-relaxed">{idea.prompt}</p>
-            </div>
+            <CopyPrompt label="Prompt" prompt={idea.prompt} />
           </article>
         ))
       }
