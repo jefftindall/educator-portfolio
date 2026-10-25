@@ -14,6 +14,13 @@ import ndeoPortrait from '../assets/photos/ndeo-2025-headshot.jpg';
 import circleHoldingHands from '../assets/photos/stage-circle-holding-hands.jpg';
 import stageWarmUp from '../assets/photos/stage-warm-up.jpg';
 import {
+  aiPageTitle,
+  homeAiPromoBody,
+  homeAiPromoCta,
+  homeAiPromoLabel,
+  showHomeAiPromo,
+} from '../lib/content/ai';
+import {
   credibilityBadges,
   firstScreenHonors,
   heroHeadline,
@@ -116,6 +123,21 @@ const explore = [
     <div class="mt-6">
       <BadgeList items={credibilityBadges} />
     </div>
+    {
+      showHomeAiPromo && (
+        <div class="mt-8 space-y-4 rounded-brand border border-soft-stone bg-white p-6">
+          <p class="label text-studio">{homeAiPromoLabel}</p>
+          <h3>{aiPageTitle}</h3>
+          <p class="leading-relaxed">{homeAiPromoBody}</p>
+          <p>
+            <a href="/leadership-and-impact/ai-in-the-arts" class="btn-primary">
+              {homeAiPromoCta}
+              <Icon name="arrow-right" class="h-5 w-5" />
+            </a>
+          </p>
+        </div>
+      )
+    }
   </section>
 
   <ArcDivider />

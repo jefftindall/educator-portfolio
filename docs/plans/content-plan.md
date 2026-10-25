@@ -79,6 +79,7 @@ Still open:
 - ✅ Hero video loop: 33-second highlight reel of student ensembles, in AV1 and H.264 at 720p, plus 480p versions for phones (`public/media/video/highlight-reel-*`)
 - ✅ Pull quote band: "Don't change the standard. Change the instructional method."
 - ✅ Leadership and recognition, newest first: Bartow County HS Teacher of the Year (2026–27), NDEO Presenter (2025), CAN National PLC (2024–present), Fine Arts Department Lead (2021–present), Barber MS Teacher of the Year (2007–08), GA Dance Power Standards Writing Committee (2005)
+- ✅ Temporary thought-leadership card under those badges linking to AI in the Arts Classroom (`showHomeAiPromo`; retire ~Oct 2027)
 - ✅ Three group photos and "Explore" cards to About, Leadership and Impact, Speaking and Workshops, and Experience (Phase 3)
 - ⬜ Principal quote (Melinda Wilder) once received
 
@@ -161,13 +162,13 @@ V2 moves the site to the [style guide's](../brand/style-guide.md) structure, wit
 | Home | `/` | V1 Home; Explore cards now point to the four new sections | ✅ |
 | About | `/about` | My Story + Teaching Philosophy (`#teaching-philosophy`; the Home gold button links there) | 🟡 My Story is a draft |
 | Leadership and Impact | `/leadership-and-impact` | Department leadership, Standards & Leadership, The Program (framed as principles proven in three schools across Cobb and Bartow), Dance for Every Body summary | 🟡 Program copy needs review |
-| ↳ AI in the Arts Classroom | `/leadership-and-impact/ai-in-the-arts` | Tiffany's three uses (show collateral, leveled lessons, grant writing); a responsible-use callout; tabbed prompts and a reusable assistant for dance, theatre, music, and visual art; department ideas | 🟡 Tiffany to review prompts and wording |
+| ↳ AI in the Arts Classroom | `/leadership-and-impact/ai-in-the-arts` | Tiffany's three uses (show collateral, leveled lessons, grant writing); a responsible-use callout; tabbed prompts and a reusable assistant for dance, theatre, music, and visual art; department ideas. **Temporary** Home thought-leadership card under Leadership and recognition (`showHomeAiPromo` in `ai.ts`); retire ~Oct 2027 when nav + Leadership callout are enough | 🟡 Tiffany to review prompts and wording |
 | Speaking and Workshops | `/speaking-and-workshops` | NDEO 2025 session + slides, CAN 2024–25 action research, invitation to speak | ✅ |
 | ↳ Dance for Every Body | `/speaking-and-workshops/dance-for-every-body` | V1 page, unchanged; moved from Leadership in Oct 2026 (old URL 301s) | 🟡 Releases pending (see Phase 2) |
 | Experience | `/experience` | Every CV item: experience, Teacher of the Year honors, standards and national service, professional learning, education, community leadership | 🟡 Facts to confirm |
 | Contact | `/contact` | Email and LinkedIn only, plus a link to Experience | ✅ |
 
-Moved URLs 301 in both `staticwebapp.config.json` files (see Phase 2). Nav is `src/lib/nav.ts`; subpages are `children` of their section there (AI in the Arts Classroom under Leadership, Dance for Every Body under Speaking), so the header menu lists them (desktop dropdown, mobile expandable section) and `subpages` feeds the tests. Smoke checks every route, the redirects (on SWA hosts), and the slides link; journeys `VISIT-02`–`VISIT-08` cover the new flows.
+Moved URLs 301 in both `staticwebapp.config.json` files (see Phase 2). Nav is `src/lib/nav.ts`; subpages are `children` of their section there (AI in the Arts Classroom under Leadership, Dance for Every Body under Speaking), so the header menu lists them (desktop dropdown, mobile expandable section) and `subpages` feeds the tests. Smoke checks every route, the redirects (on SWA hosts), and the slides link; journeys `VISIT-02`–`VISIT-09` cover the new flows.
 
 ### Content sources and what's still missing
 

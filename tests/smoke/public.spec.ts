@@ -1,7 +1,11 @@
 import { expect, test } from '@playwright/test';
+import { showHomeAiPromo } from '../../src/lib/content/ai';
+import { clappingDancePoster, clappingDanceVideo, presentationPdf } from '../../src/lib/content/inclusive';
+import { subpages } from '../../src/lib/nav';
 import { BRAND, HERO_HEADLINE_PHRASE, MOVED_ROUTES, PUBLIC_ROUTES } from '../helpers/content';
 import { isStaticWebAppHost, waitForRequestOk } from '../helpers/propagation';
-import { clappingDancePoster, clappingDanceVideo, presentationPdf } from '../../src/lib/content/inclusive';
+
+const aiInTheArtsHref = subpages.find((page) => page.href.endsWith('/ai-in-the-arts'))?.href;
 
 test.describe('public smoke', () => {
   test('home shows brand and hero headline', async ({ request }) => {
@@ -49,8 +53,18 @@ test.describe('public smoke', () => {
   });
 
   test('Leadership links to AI in the Arts Classroom', async ({ request }) => {
+    expect(aiInTheArtsHref).toBeTruthy();
     const leadership = await (await waitForRequestOk(request, '/leadership-and-impact')).text();
-    expect(leadership).toContain('href="/leadership-and-impact/ai-in-the-arts"');
+    expect(leadership).toContain(`href="${aiInTheArtsHref}"`);
+  });
+
+  test('home thought-leadership card links to AI in the Arts Classroom when promo is on', async ({
+    request,
+  }) => {
+    test.skip(!showHomeAiPromo, 'Home AI promo retired');
+    expect(aiInTheArtsHref).toBeTruthy();
+    const home = await (await waitForRequestOk(request, '/')).text();
+    expect(home).toContain(`href="${aiInTheArtsHref}"`);
   });
 
   test('moved URLs redirect permanently', async ({ request }) => {

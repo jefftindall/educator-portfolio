@@ -24,7 +24,7 @@ tests/
   smoke/
     public.spec.ts   # Home, public routes, moved-URL 301s, media, slides PDF, robots/sitemap, contact, API health
   journeys/
-    visitor.spec.ts  # VISIT-01 … VISIT-08
+    visitor.spec.ts  # VISIT-01 … VISIT-09
     seo.spec.ts      # J-SEO-01 sitemap routes + home head tags
 
 playwright.smoke.config.ts
@@ -47,6 +47,7 @@ Home shows **Tiffany Tindall** and the hero headline; every public route (nav pl
 | `VISIT-06` | Leadership and Impact → AI in the Arts Classroom; each art-form tab shows only its own panel |
 | `VISIT-07` | An art-form link (`#visual-art`) opens that tab |
 | `VISIT-08` | Header menu (desktop dropdown and mobile expandable section) reaches every nested page in `nav.ts` |
+| `VISIT-09` | Home thought-leadership card → AI in the Arts Classroom (skipped when `showHomeAiPromo` is false) |
 | `J-SEO-01` | Sitemap lists public routes; title/canonical/description on `/` |
 
 When you add pages or flows, extend these suites in the same PR ([`.cursor/rules/post-deploy-tests.mdc`](../../.cursor/rules/post-deploy-tests.mdc)).
