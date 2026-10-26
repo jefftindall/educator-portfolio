@@ -54,7 +54,7 @@ import {
       <div
         role="tablist"
         aria-label="Art forms"
-        class="relative z-10 hidden gap-1 overflow-x-auto overflow-y-hidden px-1 group-data-ready:flex"
+        class="relative z-10 hidden gap-1 px-1 group-data-ready:grid group-data-ready:grid-cols-2 sm:group-data-ready:flex"
       >
         {
           artForms.map((art, index) => (
@@ -66,7 +66,7 @@ import {
               aria-selected={index === 0 ? 'true' : 'false'}
               tabindex={index === 0 ? 0 : -1}
               data-art-id={art.id}
-              class="inline-flex min-h-11 shrink-0 items-center rounded-t-brand border border-transparent bg-soft-stone/60 px-4 font-semibold whitespace-nowrap text-charcoal transition hover:bg-soft-stone hover:text-midnight aria-selected:relative aria-selected:z-10 aria-selected:-mb-px aria-selected:border-soft-stone aria-selected:border-t-studio aria-selected:border-b-white aria-selected:bg-white aria-selected:text-midnight"
+              class="inline-flex min-h-11 w-full items-center justify-center rounded-brand border border-transparent bg-soft-stone/60 px-3 text-center font-semibold text-charcoal transition hover:bg-soft-stone hover:text-midnight sm:w-auto sm:shrink-0 sm:justify-start sm:rounded-b-none sm:rounded-t-brand sm:px-4 sm:whitespace-nowrap aria-selected:relative aria-selected:z-10 aria-selected:border-soft-stone aria-selected:border-t-studio aria-selected:bg-white aria-selected:text-midnight sm:aria-selected:-mb-px sm:aria-selected:border-b-white"
             >
               {art.name}
             </button>
